@@ -19,7 +19,7 @@ const connectDatabase = (uri) => __awaiter(void 0, void 0, void 0, function* () 
         const client = new mongodb_1.MongoClient(uri);
         yield client.connect();
         console.log("Connected to the database");
-        exports.db = client.db("pool");
+        exports.db = client.db("pool"); // Connects to the pool database
     }
     catch (error) {
         console.error("Error connecting to the database", error);

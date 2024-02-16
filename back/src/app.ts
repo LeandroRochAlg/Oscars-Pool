@@ -4,6 +4,7 @@ import express, { Application, Request, Response } from 'express';
 import { connectDatabase } from './db/dbOperations';
 import dotenv from 'dotenv';
 import newTokenRouter from './routes/newToken';
+import registerRouter from './routes/register';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // newToken router
 app.use('/newToken', newTokenRouter);
+app.use('/register', registerRouter);
 
 // Open the server on the specified port
 (async () => {
