@@ -1,41 +1,34 @@
+// src/app.ts
+
 import express, { Application, Request, Response } from 'express';
-import { MongoClient } from 'mongodb';
+import { connectDatabase } from './db/dbOperations';
 import dotenv from 'dotenv';
+import newTokenRouter from './routes/newToken';
 
 dotenv.config();
 
-const uri = process.env.MONGODB_URI || '';
 const port = process.env.PORT || 3000;
-
 const app: Application = express();
 
-const connectDatabase = async () => {
-  try {
-    const client = new MongoClient(uri);
-    await client.connect();
-    console.log("Connected to the database");
-    return client.db(); // Returns the connected database instance
-  } catch (error) {
-    console.error("Error connecting to the database", error);
-    throw error; // Throws the error to be handled at the higher level
-  }
-};
+app.use(express.json());
 
+// newToken router
+app.use('/newToken', newTokenRouter);
+
+// Open the server on the specified port
 (async () => {
   try {
-    await connectDatabase(); // Connects to the database when the server starts
+    await connectDatabase(process.env.MONGODB_URI || '');
     app.listen(port, () => {
-      console.log(`Server is running at http://localhost:${port}`);
+      console.log(`Server is running on port ${port}`);
     });
   } catch (error) {
-    console.error("Error starting the server", error);
-    process.exit(1); // Exits the process if there is an error starting the server
+    console.error('Error connecting to the database', error);
   }
 })();
 
 app.get('/', async (req: Request, res: Response) => {
   try {
-    // Here you can use the database connection to perform operations
     res.send('Hello World!');
   } catch (error) {
     res.status(500).send('Internal Server Error');
