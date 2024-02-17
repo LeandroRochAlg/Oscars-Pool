@@ -3,9 +3,7 @@
 import express, { Application, Request, Response } from 'express';
 import { connectDatabase } from './db/dbOperations';
 import dotenv from 'dotenv';
-import newTokenRouter from './routes/newToken';
-import registerRouter from './routes/register';
-import loginRouter from './routes/login';
+import { routes } from './routes/index';
 
 dotenv.config();
 
@@ -14,10 +12,7 @@ const app: Application = express();
 
 app.use(express.json());
 
-// Routers
-app.use('/newToken', newTokenRouter);
-app.use('/register', registerRouter);
-app.use('/login', loginRouter);
+app.use(routes);
 
 // Open the server on the specified port
 (async () => {

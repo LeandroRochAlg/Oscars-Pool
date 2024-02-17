@@ -16,17 +16,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dbOperations_1 = require("./db/dbOperations");
 const dotenv_1 = __importDefault(require("dotenv"));
-const newToken_1 = __importDefault(require("./routes/newToken"));
-const register_1 = __importDefault(require("./routes/register"));
-const login_1 = __importDefault(require("./routes/login"));
+const index_1 = require("./routes/index");
 dotenv_1.default.config();
 const port = process.env.PORT || 3000;
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-// Routers
-app.use('/newToken', newToken_1.default);
-app.use('/register', register_1.default);
-app.use('/login', login_1.default);
+app.use(index_1.routes);
 // Open the server on the specified port
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
