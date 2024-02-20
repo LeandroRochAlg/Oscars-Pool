@@ -23,10 +23,10 @@ time, mark, audio, video {
 
 /* CSS Variables */
 :root {
-  --light-color: #FFF7D4;
-  --dark-color: #4C3D3D;
-  --primary-color: #FFD95A;
-  --secondary-color: #C07F00;
+  --light-color: #d9f6fc;
+  --dark-color: #0f2339;
+  --primary-color: #e9b60d;
+  --secondary-color: #c10002;
 }
 
 /* Base styles */

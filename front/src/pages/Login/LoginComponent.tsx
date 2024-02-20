@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import InputField from '../../components/common/InputField';
 import Button from '../../components/common/Button';
 import Title from '../../components/ui/Title';
-import RedCarpetBackground from '../../components/ui/RedCarpetBackground';
 import Account from '../../components/common/Account';
 import FormCard from '../../components/common/FormCard';
-import './loginStyles.module.css';
+import '../../styles/auth.css';
 
 const LoginPage: React.FC = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
@@ -22,7 +21,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <RedCarpetBackground>
+    <div>
         <FormCard onSubmit={handleSubmit}>
         <Title title="Login" className='log'/>
         <InputField
@@ -42,7 +41,7 @@ const LoginPage: React.FC = () => {
         <Button type="submit">LOGIN</Button>
         <Account message="Don't have an account yet?" linkText='Create one now.' link='/register'/>
         </FormCard>
-    </RedCarpetBackground>
+    </div>
   );
 };
 

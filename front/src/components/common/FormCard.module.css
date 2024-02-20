@@ -2,16 +2,11 @@ form{
     background-color: var(--dark-color);
     padding: 10px;
     border-radius: 5px;
-    max-width: 350px;
-    margin: auto auto;
+    max-width: 400px;
+    min-width: 380px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-body{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
 }
