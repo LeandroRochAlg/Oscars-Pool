@@ -17,9 +17,11 @@ const express_1 = __importDefault(require("express"));
 const dbOperations_1 = require("./db/dbOperations");
 const dotenv_1 = __importDefault(require("dotenv"));
 const index_1 = require("./routes/index");
+const cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
 const port = process.env.PORT || 3000;
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(index_1.routes);
 // Open the server on the specified port
