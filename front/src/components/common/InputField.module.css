@@ -1,0 +1,17 @@
+input{
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--light-color);
+    padding: 0 5px;
+    width: 100%;
+    width: 350px;
+    margin: 5px;
+}
+
+input::placeholder, input[type="text"], input[type="password"]{
+    color: var(--dark-color);
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}

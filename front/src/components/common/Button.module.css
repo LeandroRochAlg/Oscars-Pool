@@ -1,0 +1,17 @@
+button{
+    background-color: var(--secondary-color);
+    height: 25px;
+    width: 175px;
+    border: none;
+    border-radius: 5px;
+    color: var(--light-color);
+    font-weight: 600;
+    margin: 5px auto;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+}
