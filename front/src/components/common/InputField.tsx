@@ -4,28 +4,27 @@ import './InputField.module.css';
 interface InputFieldProps {
     type: string;
     name: string;
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     placeholder: string;
     className?: string;
-    required?: boolean;
+    error?: string;
     children?: React.ReactNode;
 }
 
-const InputField: React.FC<InputFieldProps> = ({type, name, value, onChange, placeholder, className, required, children}) => {
-    return (
-        <input
-            type={type}
-            name={name}
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
-            className={className}
-            required={required}
-        >
-            {children}
-        </input>
-    );
-};
+const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
+    ({ type, name, placeholder, className, error, ...rest }, ref) => {
+        return (
+            <div>
+                <input
+                    ref={ref}
+                    type={type}
+                    name={name}
+                    placeholder={error ? error : placeholder}
+                    className={`${className} ${error ? 'error' : ''}`} // Apply error styling conditionally
+                    {...rest} // Spread the remaining props
+                />
+            </div>
+        );
+    }
+  );
 
 export default InputField;

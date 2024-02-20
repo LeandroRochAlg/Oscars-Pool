@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import InputField from '../../components/common/InputField';
 import Button from '../../components/common/Button';
 import Title from '../../components/ui/Title';
@@ -8,63 +11,52 @@ import '../../styles/auth.css';
 import api from '../../libs/api';
 import { AxiosError } from 'axios';
 
-const LoginPage: React.FC = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+// Define the validation schema using Yup
+const schema = yup.object({
+  username: yup.string().required('Username is required'),
+  password: yup.string().required('Password is required'),
+}).required();
 
+const LoginPage: React.FC = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema)
+  });
+  
   const [msg, setMsg] = useState<string>('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log('Login FormData:', formData);
-
+  const onSubmit = async (data: any) => {
+    console.log('Login data:', data);
     try {
-      const response = await api.post<string>('/login', formData);
-  
+      const response = await api.post<string>('/login', data);
       console.log('Login successful:', response.data);
-      localStorage.setItem('token', response?.data);
+      localStorage.setItem('token', response.data);
     } catch (error) {
       const axiosError = error as AxiosError;
       console.error('Login Error:', axiosError.response?.data);
-
-      // Verifying if axiosError.response exists avoids the error "Object is possibly 'null'"
-      if (axiosError.response?.status) {
-        setMsg(axiosError.response.data as string);
-      } else {
-        setMsg('An unexpected error occurred.');
-      }  
+      setMsg(axiosError.response?.data as string || 'An unexpected error occurred.');
     }
   };
 
-  return (document.title = 'Login'), (
+  return (
     <div>
-        <FormCard onSubmit={handleSubmit}>
-        <Title title="Login" className='log'/>
+      <FormCard onSubmit={handleSubmit(onSubmit)}>
+        <Title title="Login" />
         <InputField
-            placeholder="Username"
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
+          type="text"
+          placeholder="Username"
+          {...register('username')}
+          error={errors.username?.message}
         />
         <InputField
-            placeholder="Password"
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
+          type="password"
+          placeholder="Password"
+          {...register('password')}
+          error={errors.password?.message}
         />
-
-        {/* Display the error message */}
         {msg && (<p className='error-message'>{msg}</p>)}
-
         <Button type="submit">LOGIN</Button>
         <Account message="Don't have an account yet?" linkText='Create one now.' link='/register'/>
-        </FormCard>
+      </FormCard>
     </div>
   );
 };
