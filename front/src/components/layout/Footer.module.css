@@ -1,0 +1,12 @@
+footer{
+    background-color: var(--dark-color);
+    height: 50px;
+}
+
+footer p{
+    color: var(--light-color);
+    text-align: center;
+    padding: 15px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+}
