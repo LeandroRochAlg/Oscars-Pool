@@ -1,9 +1,22 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    display: inline;
+}
+
 header{
     background-color: var(--dark-color);
     color: var(--light-color);
     padding: 1rem 0;
     text-align: center;
-    display: inline;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 header h1{

@@ -3,7 +3,7 @@
 .sidebar {
   width: 250px;
   background-color: #f1f1f1;
-  padding: 20px;
+  padding: 20px;;
 }
 
 .sidebar ul {
@@ -23,4 +23,18 @@
 
 .sidebar a:hover {
   color: #555;
+}
+
+.sidebar .active {
+  color: #fff;
+  background-color: #333;
+}
+
+.sidebar .active:hover {
+  color: #fff;
+}
+
+/* Hide the bar */
+.sidebar-open{
+    display: none;
 }
