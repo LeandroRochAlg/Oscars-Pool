@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './Sidebar.module.css';
 import Button from '../common/Button';
 import { FaBars, FaClipboardList, FaTrophy, FaUser } from 'react-icons/fa';
@@ -14,6 +14,8 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     // Handle logout logic here
+    localStorage.removeItem('token');
+    window.location.href = '/login';
   };
 
   return (

@@ -5,7 +5,7 @@ import Footer from '../../components/layout/Footer';
 import "../../styles/system.css"
 
 const HomePage: React.FC = () => {
-  return (
+  return (document.title = 'Home',
     <div className='system-body'>
       <Header />
       <Sidebar />
