@@ -38,7 +38,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='auth-body'>
       <FormCard onSubmit={handleSubmit(onSubmit)}>
         <Title title="Login" />
         <InputField

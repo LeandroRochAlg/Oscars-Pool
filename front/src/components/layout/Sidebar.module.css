@@ -1,40 +1,75 @@
-/* FILEPATH: /c:/Users/rocha/Documents/Oscar/Oscars-Pool/front/src/components/layout/Sidebar.module.css */
+.menuButton {
+  position: fixed;
+  left: 1.5rem;
+  top: .8rem;
+  z-index: 1000; /* Button must be above the sidebar */
+  cursor: pointer;
+  border: none;
+  font-size: 1.2rem;
+}
 
 .sidebar {
+  background-color: var(--light-color);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
   width: 250px;
-  background-color: #f1f1f1;
-  padding: 20px;;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 999; /* The sidebar must be under menu button */
 }
 
-.sidebar ul {
+.open {
+  transform: translateX(0);
+}
+
+.sidebarMenu {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 5rem 0 0 1.5rem;
 }
 
-.sidebar li {
-  margin-bottom: 10px;
-}
-
-.sidebar a {
+.sidebarMenu li a, .menuButton {
   text-decoration: none;
-  color: #333;
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--dark-color);
+  background-color: var(--light-color);
 }
 
-.sidebar a:hover {
-  color: #555;
+.sidebarMenu li a {
+  display: block;
+  text-align: left;
+  margin-right: 1.5rem;
+  font-size: 1rem;
 }
 
-.sidebar .active {
-  color: #fff;
-  background-color: #333;
+.sidebarMenu li a:hover, .menuButton:hover {
+  filter: brightness(0.75);
 }
 
-.sidebar .active:hover {
-  color: #fff;
+.sidebar button{
+  position: fixed;
+  bottom: 1.5rem;
+  left: 2.1rem;
 }
 
-/* Hide the bar */
-.sidebar-open{
-    display: none;
+.menuButton svg {
+  vertical-align: -.15rem;
+}
+
+.sidebarMenu li a svg {
+  vertical-align: -.1rem;
+}
+
+.sidebar button svg {
+  vertical-align: -.14rem;
+}
+
+/* Media query to avoid overwrite on mobile */
+@media screen and (max-width: 400px){
+  .menuButton{
+    left: .7rem;
+  }
 }

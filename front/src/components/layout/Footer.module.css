@@ -1,6 +1,5 @@
 footer{
     background-color: var(--dark-color);
-    height: 50px;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -12,7 +11,7 @@ footer p, footer a{
     text-align: center;
     padding: 15px 0;
     font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
+    font-size: 1rem;
     font-weight: 200;
     margin: 0;
 }
