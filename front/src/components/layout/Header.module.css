@@ -1,0 +1,30 @@
+header{
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: .7rem 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+header h1{
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header img{
+    width: 50px;
+    height: 50px;
+}
+
+/* Media query to avoid overwrite */
+@media screen and (max-width: 768px) {
+    header h1{
+        font-size: 1.3rem;
+    }
+    header{
+        padding-left: 6rem;
+    }
+}

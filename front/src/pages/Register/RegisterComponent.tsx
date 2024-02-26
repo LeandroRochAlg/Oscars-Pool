@@ -38,7 +38,7 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='auth-body'>
       <FormCard onSubmit={handleSubmit(onSubmit)}>
         <Title title="Register" />
         <InputField

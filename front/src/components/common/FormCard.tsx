@@ -1,20 +1,20 @@
 import React from "react";
-import "./FormCard.module.css";
+import styles from "./FormCard.module.css";
 
 interface FormCardProps {
     children: React.ReactNode;
     onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-    className?: string;
 }
 
-const FormCard: React.FC<FormCardProps> = ({ children, onSubmit, className }) => {
+const FormCard: React.FC<FormCardProps> = ({ children, onSubmit }) => {
     return (
-        <form
-            className={className}
-            onSubmit={onSubmit}
-        >
-            {children}
-        </form>
+        <div className={styles.container}>
+            <form
+                onSubmit={onSubmit}
+            >
+                {children}
+            </form>
+        </div>
     );
 };
 

@@ -30,6 +30,9 @@ const LoginPage: React.FC = () => {
       const response = await api.post<string>('/login', data);
       console.log('Login successful:', response.data);
       localStorage.setItem('token', response.data);
+      
+      // Redirect to the home page
+      window.location.href = '/';
     } catch (error) {
       const axiosError = error as AxiosError;
       console.error('Login Error:', axiosError.response?.data);
@@ -38,7 +41,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='auth-body'>
       <FormCard onSubmit={handleSubmit(onSubmit)}>
         <Title title="Login" />
         <InputField

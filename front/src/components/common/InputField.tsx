@@ -13,7 +13,7 @@ interface InputFieldProps {
 const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
     ({ type, name, placeholder, className, error, ...rest }, ref) => {
         return (
-            <div>
+            <div className="input-field">
                 <input
                     ref={ref}
                     type={type}

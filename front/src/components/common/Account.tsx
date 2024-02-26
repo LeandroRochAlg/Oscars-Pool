@@ -10,9 +10,9 @@ interface AccountProps {
 
 const Account: React.FC<AccountProps> = ({ message, link, linkText }) => {
     return (
-        <div>
-            <p>{message}</p>
-            <p><a href={link}>{linkText}</a></p>
+        <div className="account-info-container">
+            <p className="account-text">{message}</p>
+            <p className="account-text"><a className="account-link" href={link}>{linkText}</a></p>
         </div>
     );
 }
