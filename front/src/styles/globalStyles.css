@@ -1,0 +1,25 @@
+/* Font Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+/* CSS Variables */
+:root {
+  --light-color: #d9f6fc;
+  --dark-color: #0f2339;
+  --primary-color: #e9b60d;
+  --secondary-color: #c10002;
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  z-index: 0;
+}

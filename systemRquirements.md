@@ -80,7 +80,7 @@ The system consists of the following components:
   - `password`
   - `confirm password`
   - `invite token`
-- **Home:** General informations and nav bar with buttons to the pages listed above.
+- **Home:** General informations and nav bar with buttons to the pages listed below.
 - **Make Predictions:** Create predictions to all the categories.
   - Users can make preditions more than once;
   - There's no need to make predictions to all categories;
