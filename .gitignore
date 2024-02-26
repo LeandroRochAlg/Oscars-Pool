@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 # Typescript build
-/build/
+back/build/
