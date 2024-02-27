@@ -19,8 +19,6 @@ export const authMiddleware = async (req: Request, res: Response, next: any) => 
         const verified = jwt.verify(token, process.env.JWT_SECRET || "");
         req.user = verified;
 
-        console.log(verified);
-
         next();
     } catch (err) {
         res.status(400).send("Invalid Token");

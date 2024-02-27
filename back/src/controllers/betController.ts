@@ -2,6 +2,7 @@
 
 import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
+import { ObjectId } from 'mongodb';
 
 class BetController {
     async getNominees(req: Request, res: Response) {
@@ -43,6 +44,46 @@ class BetController {
             const result = await categories.aggregate(pipeline).toArray();
 
             res.status(200).send(result);
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async makeBet(req: Request, res: Response) {
+        try {
+            const { categoryId, nomineeId } = req.body;
+            const bets = db.collection('bets');
+
+            const username = req.user.username;
+
+            const users = db.collection('users');
+            const userdb = await users.findOne({ username });
+
+            if (!userdb) {
+                res.status(404).send('User not found');
+                return;
+            }
+
+            const userId = userdb._id;
+
+            // Check if the user has already made a bet for this category
+            const existingBet = await bets.findOne({ userId, categoryId: new ObjectId(categoryId) });
+
+            if (existingBet) {  // Change the bet if it already exists
+                await bets.updateOne({ userId, categoryId: new ObjectId(categoryId) }, { $set: { nomineeId } });
+                res.status(200).send('Bet updated');
+                return;
+            }else{
+                const bet = {
+                    userId,
+                    categoryId: new ObjectId(categoryId),
+                    nomineeId
+                };
+    
+                await bets.insertOne(bet);
+    
+                res.status(201).send('Bet created');
+            }
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }

@@ -9,3 +9,6 @@ export const betRouter = express.Router();
 
 // Get nominees
 betRouter.get('/nominees', authMiddleware, BetController.getNominees);
+
+// Make a bet
+betRouter.post('/bet', authMiddleware, BetController.makeBet);
