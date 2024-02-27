@@ -3,31 +3,46 @@
 import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { ObjectId } from 'mongodb';
+import { Nominee } from '../models/nominee';
+import { Category } from '../models/category';
 
 class BetController {
     async getNominees(req: Request, res: Response) {
         try {
-            const categories = db.collection('nominees');
+            const users = db.collection('users');
+            const user = await users.findOne({ username: req.user.username });
 
-            // Rules to aggregate the nominees
+            if (!user) {
+                res.status(404).send('User not found');
+                return;
+            }
+
+            const userId = user._id;
+
+            const categoriesCollection = db.collection('nominees');
+
+            // Convert userId to ObjectId if stored as ObjectId in the bets collection
+            const userObjectId: ObjectId = new ObjectId(userId);
+    
+            // Define the aggregation pipeline to retrieve nominees and their movie details
             const pipeline = [
                 { $unwind: "$nominees" },
                 {
                     $lookup: {
-                        from: "movies",                             // Join with the movies collection
-                        localField: "nominees.movieId",             // Join on the movieId field
-                        foreignField: "_id",                        // Join on the _id field
-                        as: "movieDetails"                          // Store the joined data in the movieDetails field
+                        from: "movies",
+                        localField: "nominees.movieId",
+                        foreignField: "_id",
+                        as: "movieDetails"
                     }
                 },
                 { $unwind: "$movieDetails" },
                 {
                     $addFields: {
-                        "nominees.movieTitle": "$movieDetails.name"  // Add the movieTitle field to the nominees
+                        "nominees.movieTitle": "$movieDetails.name",
                     }
                 },
                 {
-                    $group: {                                        // Group the nominees by category
+                    $group: {
                         _id: "$_id",
                         category: { $first: "$category" },
                         nominees: { $push: "$nominees" },
@@ -36,14 +51,34 @@ class BetController {
                 },
                 {
                     $project: {
-                        "nominees.movieId": 0                        // Remove movieId from the response
+                        "nominees.movieId": 0
                     }
                 }
             ];
-
-            const result = await categories.aggregate(pipeline).toArray();
-
-            res.status(200).send(result);
+    
+            const categoriesWithMovies = await categoriesCollection.aggregate(pipeline).toArray();
+    
+            // Additional step to merge user's bets with the nominees
+            // This requires fetching the user's bets and adjusting the result accordingly
+            const betsCollection = db.collection('bets');
+            const userBets = await betsCollection.find({ userId: userObjectId }).toArray();
+    
+            // Map user's bets for easier lookup
+            const userBetsMap = userBets.reduce((acc: any, bet: any) => {
+                acc[bet.categoryId.toString()] = bet.nomineeId;
+                return acc;
+            }, {});
+    
+            // Adjust the result to include information about the user's bets
+            const adjustedResult = categoriesWithMovies.map(category => {
+                category.nominees.forEach((nominee: Nominee) => {
+                    // Check if the user has placed a bet on this nominee
+                    nominee.userBet = userBetsMap[category._id.toString()] === nominee.id;
+                });
+                return category;
+            });
+    
+            res.status(200).json(adjustedResult);
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }

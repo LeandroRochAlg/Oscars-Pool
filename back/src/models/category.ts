@@ -1,8 +1,8 @@
-import { Int32 } from "mongodb";
+import { Int32, ObjectId } from "mongodb";
 import { Nominee } from "./nominee";
 
 export interface Category {
-    _id?: string;
+    _id?: ObjectId;
     category: string;
     nominees: Nominee[];
     winner?: Int32;
