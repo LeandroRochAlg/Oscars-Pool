@@ -1,170 +1,203 @@
 [
     {
+        "_id": "65dd20fd0ead21a4cd5feb7f",
         "name": "Maestro",
         "director": "Bradley Cooper",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb80",
         "name": "Rustin",
         "director": "George C. Wolfe",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb81",
         "name": "The Holdovers",
         "director": "Alexander Payne",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb82",
         "name": "Oppenheimer",
         "director": "Christopher Nolan",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb83",
         "name": "American Fiction",
         "director": "Cord Jefferson",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb84",
         "name": "Anatomy of a Fall",
         "originalName": "Anatomie d'une chute",
         "director": "Justine Triet",
         "country": "France"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb85",
         "name": "Barbie",
         "director": "Greta Gerwig",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb86",
         "name": "Killers of the Flower Moon",
         "director": "Martin Scorsese",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb87",
         "name": "Past Lives",
         "director": "Celine Song",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb88",
         "name": "Poor Things",
         "director": "Yorgos Lanthimos",
         "country": "UK"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb89",
         "name": "The Zone of Interest",
         "director": "Jonathan Glazer",
         "country": "UK"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb8a",
         "name": "The Teachers' Lounge",
         "originalName": "Das Lehrerzimmer",
-        "director": "İlker Çatak",
+        "director": "\u00c4\u00b0lker \u00c3\u2021atak",
         "country": "Germany"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb8b",
         "name": "Io Capitano",
         "director": "Mateo Garrone",
         "country": "Italy"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb8c",
         "name": "Perfect Days",
         "director": "Wim Wenders",
         "country": "Japan"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb8d",
         "name": "Society of the Snow",
         "originalName": "La sociedad de la nieve",
         "director": "Juan Antonio Bayona",
         "country": "Spain"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb8e",
         "name": "Nyad",
         "director": "Jimmy Chin, Elizabeth Chai Vasarhelyi",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb8f",
         "name": "The Color Purple",
         "director": "Blitz the Ambassador",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb90",
         "name": "The Boy and the Heron",
-        "originalName": "",
+        "originalName": "\u541b\u305f\u3061\u306f\u3069\u3046\u751f\u304d\u308b\u304b",
         "director": "Hayao Miyazaki",
         "country": "Japan"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb91",
         "name": "Elemental",
         "director": "Peter Sohn",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb92",
         "name": "Nimona",
         "director": "Troy Quane, Nick Bruno",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb93",
         "name": "Robot Dreams",
         "director": "Paulo Berger",
         "country": "Spain, France"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb94",
         "name": "Spider-Man: Across the Spider-Verse",
         "director": "Joaquim Dos Santos, Kemp Powers, Justin K. Thompson",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb95",
         "name": "El Conde",
-        "director": "Pablo Larraín",
+        "director": "Pablo Larra\u00c3\u00adn",
         "country": "Chile"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb96",
         "name": "Napoleon",
         "director": "Ridley Scott",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb97",
         "name": "Golda",
         "director": "Guy Nattiv",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb98",
         "name": "Indiana Jones and the Dial of Destiny",
         "director": "James Mangold",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb99",
         "name": "Flamin' Hot",
         "director": "Eva Longoria",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb9a",
         "name": "American Simphony",
         "director": "Mathew Heineman",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb9b",
         "name": "The Creator",
         "director": "Gareth Edwards",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb9c",
         "name": "Mission: Impossible - Dead Reckoning Part One",
         "director": "Christopher McQuarrie",
         "country": "USA"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb9d",
         "name": "Godzilla Minus One",
-        "originalName": "",
+        "originalName": "\u30b4\u30b8\u30e9-1.0",
         "director": "Takashi Yamazaki",
         "country": "Japan"
     },
     {
+        "_id": "65dd20fe0ead21a4cd5feb9e",
         "name": "Guardians of the Galaxy Vol. 3",
         "director": "James Gunn",
         "country": "USA"
     },
     {
+        "_id": "65dd20ff0ead21a4cd5feb9f",
         "name": "May Decemer",
         "director": "Todd Haynes",
         "country": "USA"
