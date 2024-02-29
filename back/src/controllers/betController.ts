@@ -78,6 +78,7 @@ class BetController {
                 return category;
             });
     
+            console.log('Answer sent!');
             res.status(200).json(adjustedResult);
         } catch (error) {
             res.status(500).send('Internal Server Error');

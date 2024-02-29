@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const authMiddleware = async (req: Request, res: Response, next: any) => {
-    const authorization = req.header("authorization");
+    const authorization = req.header("Authorization");
 
     if (!authorization) {
         return res.status(401).send("Access Denied");
@@ -19,8 +19,10 @@ export const authMiddleware = async (req: Request, res: Response, next: any) => 
         const verified = jwt.verify(token, process.env.JWT_SECRET || "");
         req.user = verified;
 
+        console.log("User:", req.user.username);
         next();
     } catch (err) {
+        console.error(err);
         res.status(400).send("Invalid Token");
     }
 };
