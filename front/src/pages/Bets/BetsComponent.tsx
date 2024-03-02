@@ -1,45 +1,63 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/layout/Header';
 import Sidebar from '../../components/layout/Sidebar';
 import Footer from '../../components/layout/Footer';
 import NomineesCard from '../../components/common/NomineesCard';
 import "../../styles/system.css"
+import styles from './BetsComponent.module.css';
 import api from '../../libs/api';
+import { Category } from '../../types/Category';
 
 const BetsPage: React.FC = () => {
-  const [nominees, setNominees] = useState([]);
-  const alreadyRunned = useRef(false);
+  const [categories, setCategories] = useState([]);
+  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0); // Controls the current category index
+  const [currentCategory, setCurrentCategory] = useState<Category>({} as Category); // Controls the current category
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // Fetch nominees from the API
-    const fetchNominees = async () => {
-      // Prevents the function to run more than once
-      if (alreadyRunned.current == false) {
-        alreadyRunned.current = true;
-        try {
-          const response = await api.get('/nominees');
-          setNominees(response.data);
-          console.log('Nominees:', response.data);
-        } catch (error) {
-          console.error('Nominees Error:', error);
+    // Fetch categories from the API
+    const fetchCategories= async () => {
+      try {
+        const response = await api.get('/nominees');
+        setCategories(response.data);
+        setCurrentCategory(response.data[currentCategoryIndex]);
+        setLoaded(true);
+        // console.log('Nominees:', response.data);
+      } catch (error) {
+        console.error('Categories Error:', error);
 
-          // Case token expired or invalid
-          if ((error as any).response?.status === 401 || (error as any).response?.status === 400) {
-            // Redirect to login and clear the token
-            localStorage.removeItem('token');
-            window.location.href = '/login';
-          }
+        // Case token expired or invalid
+        if ((error as any).response?.status === 401 || (error as any).response?.status === 400) {
+          // Redirect to login and clear the token
+          localStorage.removeItem('token');
+          window.location.href = '/login';
         }
       }
     };
-    fetchNominees();
+    fetchCategories();
   }, []);
+
+  const navigateToNextCategory = () => {
+    const nextIndex = currentCategoryIndex + 1 < categories.length ? currentCategoryIndex + 1 : 0;
+    setCurrentCategoryIndex(nextIndex);
+    setCurrentCategory(categories[nextIndex]);
+  };
+
+  const navigateToPreviousCategory = () => {
+    const prevIndex = currentCategoryIndex - 1 >= 0 ? currentCategoryIndex - 1 : categories.length - 1;
+    setCurrentCategoryIndex(prevIndex);
+    setCurrentCategory(categories[prevIndex]);
+  };
 
   return (document.title = 'Bets',
     <div className='system-body'>
       <Header />
       <Sidebar />
-      <NomineesCard categories={nominees} />
+      <div className={styles.card}>
+        <button onClick={navigateToPreviousCategory}>Previous</button>
+        {loaded && <NomineesCard category={currentCategory} />} {/* If available, pass the current category to the NomineesCard component */}
+        <button onClick={navigateToNextCategory}>Next</button>
+      </div>
       <Footer />
     </div>
   );

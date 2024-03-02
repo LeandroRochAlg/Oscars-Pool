@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./NomineesCard.module.css";
 import api from "../../libs/api";
 import { AxiosError } from "axios";
@@ -7,30 +7,14 @@ import Button from "./Button";
 import { Nominee } from "../../types/Nominee";
 
 interface NomineesCardProps {
-  categories: Category[];
+  category: Category;
   sendRoute?: string;
 }
 
-const NomineesCard: React.FC<NomineesCardProps> = ({ categories, sendRoute }) => {
-  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0); // Controls the current category index
+const NomineesCard = (CardProps: NomineesCardProps) => {
   const [msg, setMsg] = useState<string>("");
   const [selectedNominee, setSelectedNominee] = useState<number | null>(null);
-
-  const currentCategory = categories[currentCategoryIndex]; // Gets the current category
-
-  console.log(categories);
-
-  const navigateToNextCategory = () => {
-    const nextIndex = currentCategoryIndex + 1 < categories.length ? currentCategoryIndex + 1 : 0;
-    setCurrentCategoryIndex(nextIndex);
-    setSelectedNominee(null); // Reset the selection when changing categories
-  };
-
-  const navigateToPreviousCategory = () => {
-    const prevIndex = currentCategoryIndex - 1 >= 0 ? currentCategoryIndex - 1 : categories.length - 1;
-    setCurrentCategoryIndex(prevIndex);
-    setSelectedNominee(null); // Reset the selection when changing categories
-  };
+  const { category, sendRoute } = CardProps;
 
   const sendNominee = async () => {
     if (selectedNominee === null) {
@@ -41,32 +25,39 @@ const NomineesCard: React.FC<NomineesCardProps> = ({ categories, sendRoute }) =>
     try {
       const response = await api.post<string>(sendRoute || "/bet", {
         nomineeId: selectedNominee,
-        categoryId: currentCategory._id,
+        categoryId: category._id,
       });
       setMsg("Nominee sent successfully.");
     } catch (error) {
       const axiosError = error as AxiosError;
       setMsg(axiosError.response?.data as string || "An unexpected error occurred.");
+      if (axiosError.response?.status === 401 || axiosError.response?.status === 400) {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }
     }
   };
 
   return (
     <div className={styles.container}>
-      <h3>{currentCategory.category}</h3>
-      <div className={styles.navigation}>
-        <Button onClick={navigateToPreviousCategory}>{"<"}</Button>
-        <Button onClick={navigateToNextCategory}>{">"}</Button>
-      </div>
+      <h3 className={styles.category}>{category.category}</h3>
       <div className={styles.nominees}>
-        {currentCategory.nominees.map((nominee: Nominee) => (
+        {category.nominees.map((nominee: Nominee) => (
           <div key={nominee.id} className={styles.nominee}>
-            <p>{nominee.name} - {nominee.movieTitle}</p>
-            <Button onClick={() => setSelectedNominee(nominee.id)}>Select</Button>
+            <button
+              onClick={() => setSelectedNominee(nominee.id)}
+              className={`${styles.nomineeButton} ${selectedNominee === nominee.id ? styles.selected : ""} ${nominee.userBet ? styles.userBet : ""}`}
+            >
+              <p className={styles.nomineeMovie}>{nominee.movieTitle}</p>
+              <p className={styles.nomineeName}>{nominee.name}</p>
+            </button>
           </div>
         ))}
       </div>
-      <Button onClick={sendNominee}>Send Nominee</Button>
-      <p>{msg}</p>
+      <div className={styles.send}>
+        <Button onClick={sendNominee}>Send Nominee</Button>
+        <p>{msg}</p>
+      </div>
     </div>
   );
 };
