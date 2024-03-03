@@ -1,8 +1,9 @@
 .category{
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 300;
     color: white;
     text-align: center;
+    width: 300px;
 }
 
 .nominees{
@@ -34,7 +35,7 @@
 }
 
 .nomineeMovie{
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: white;
     text-transform: uppercase;
@@ -43,7 +44,7 @@
 }
 
 .nomineeName{
-    font-size: 12px;
+    font-size: 11px;
     color: white;
     text-align: left;
     font-style: italic;
@@ -54,4 +55,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 4px;
+}
+
+@media screen and (min-width: 600px) and (max-height: 700px){
+    .category{
+        width: 500px;
+    }
+
+    .nomineeButton{
+        width: 500px;
+    }
+
+    .nominees{
+        width: 500px;
+    }
+    
+}
+
+@media screen and (max-height: 700px) and (max-width: 600px){
+    .category{
+        font-size: 18px;
+    }
+
+    .nomineeMovie{
+        font-size: 12px;
+    }
+
+    .nomineeName{
+        font-size: 10px;
+    }
 }

@@ -7,6 +7,7 @@ import "../../styles/system.css"
 import styles from './BetsComponent.module.css';
 import api from '../../libs/api';
 import { Category } from '../../types/Category';
+import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 
 const BetsPage: React.FC = () => {
   const [categories, setCategories] = useState([]);
@@ -54,9 +55,9 @@ const BetsPage: React.FC = () => {
       <Header />
       <Sidebar />
       <div className={styles.card}>
-        <button onClick={navigateToPreviousCategory}>Previous</button>
+        <button onClick={navigateToPreviousCategory} className={styles.arrow}><GoArrowLeft /></button>
         {loaded && <NomineesCard category={currentCategory} />} {/* If available, pass the current category to the NomineesCard component */}
-        <button onClick={navigateToNextCategory}>Next</button>
+        <button onClick={navigateToNextCategory} className={styles.arrow}><GoArrowRight /></button>
       </div>
       <Footer />
     </div>
