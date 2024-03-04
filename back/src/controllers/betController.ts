@@ -169,6 +169,7 @@ class BetController {
                 username: string;
                 userId: ObjectId;
                 points: number;
+                hits: number
             }
 
             const userBets: userBet[] = [];
@@ -177,7 +178,8 @@ class BetController {
                 const newUser = {
                     username: user.username,
                     userId: user._id,
-                    points: 0
+                    points: 0,
+                    hits: 0
                 };
 
                 userBets.push(newUser);
@@ -191,6 +193,7 @@ class BetController {
                         const user = userBets.find(user => user.userId.toString() === bet.userId.toString());
                         if (user) {
                             user.points += category.value;
+                            user.hits++;
                         }
                     }
                 }
