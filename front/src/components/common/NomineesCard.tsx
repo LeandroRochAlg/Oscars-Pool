@@ -27,10 +27,22 @@ const NomineesCard = (CardProps: NomineesCardProps) => {
         nomineeId: selectedNominee,
         categoryId: category._id,
       });
-      setMsg("Nominee sent successfully.");
+
+      if(response.status === 201 || response.status === 200){
+        setMsg("Nominee sent successfully.");
+
+        // Send back to the page so the user can see the updated bets
+        window.location.href = "/bets";
+        
+        // Reset the selected nominee
+        setSelectedNominee(null);
+      }else{
+        setMsg("An unexpected error occurred.");
+      }
     } catch (error) {
       const axiosError = error as AxiosError;
       setMsg(axiosError.response?.data as string || "An unexpected error occurred.");
+
       if (axiosError.response?.status === 401 || axiosError.response?.status === 400) {
         localStorage.removeItem("token");
         window.location.href = "/login";

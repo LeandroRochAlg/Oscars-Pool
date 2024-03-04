@@ -11,8 +11,12 @@ import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 
 const BetsPage: React.FC = () => {
   const [categories, setCategories] = useState([]);
-  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0); // Controls the current category index
-  const [currentCategory, setCurrentCategory] = useState<Category>({} as Category); // Controls the current category
+  const [currentCategoryIndex, setCurrentCategoryIndex] = useState<number>(() => {
+    // Get the current category index from the local storage
+    const savedIndex = localStorage.getItem('currentCategoryIndex');
+    return savedIndex ? parseInt(savedIndex, 10) : 0;
+  });
+  const [currentCategory, setCurrentCategory] = useState<Category>();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -42,12 +46,14 @@ const BetsPage: React.FC = () => {
     const nextIndex = currentCategoryIndex + 1 < categories.length ? currentCategoryIndex + 1 : 0;
     setCurrentCategoryIndex(nextIndex);
     setCurrentCategory(categories[nextIndex]);
+    localStorage.setItem('currentCategoryIndex', nextIndex.toString());
   };
 
   const navigateToPreviousCategory = () => {
     const prevIndex = currentCategoryIndex - 1 >= 0 ? currentCategoryIndex - 1 : categories.length - 1;
     setCurrentCategoryIndex(prevIndex);
     setCurrentCategory(categories[prevIndex]);
+    localStorage.setItem('currentCategoryIndex', prevIndex.toString());
   };
 
   return (document.title = 'Bets',
@@ -56,7 +62,7 @@ const BetsPage: React.FC = () => {
       <Sidebar />
       <div className={styles.card}>
         <button onClick={navigateToPreviousCategory} className={styles.arrow}><GoArrowLeft /></button>
-        {loaded && <NomineesCard category={currentCategory} />} {/* If available, pass the current category to the NomineesCard component */}
+        {loaded && <NomineesCard category={currentCategory as Category} />} {/* If available, pass the current category to the NomineesCard component */}
         <button onClick={navigateToNextCategory} className={styles.arrow}><GoArrowRight /></button>
       </div>
       <Footer />

@@ -53,6 +53,9 @@ class BetController {
                     $project: {
                         "nominees.movieId": 0
                     }
+                },
+                {
+                    $sort: { category: 1 }
                 }
             ];
     
