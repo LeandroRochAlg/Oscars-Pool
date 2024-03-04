@@ -42,11 +42,12 @@
   display: block;
   text-align: left;
   margin-right: 1.5rem;
+  margin-top: 1px;
   font-size: 1rem;
 }
 
-.sidebarMenu li a:hover, .menuButton:hover {
-  filter: brightness(0.75);
+.sidebarMenu li a:hover, .menuButton:hover, .active {
+  filter: brightness(0.85);
 }
 
 .sidebar button{

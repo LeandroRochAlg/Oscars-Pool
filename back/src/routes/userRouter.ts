@@ -1,6 +1,6 @@
 // src/routes/userRouter.ts
 
-import express, { Request, Response } from 'express';
+import express from 'express';
 import LoginController from '../controllers/loginController';
 import userController from '../controllers/userController';
 
