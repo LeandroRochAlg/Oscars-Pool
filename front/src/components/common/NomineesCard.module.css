@@ -35,11 +35,19 @@
 }
 
 .userBet{
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
 }
 
 .selected{
-    background-color: var(--secondary-color);
+    background-color: var(--light-color);
+}
+
+.selected p{
+    color: var(--dark-color);
+}
+
+.winner{
+    background-color: var(--primary-color);
 }
 
 .nomineeMovie{

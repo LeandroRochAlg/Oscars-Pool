@@ -28,7 +28,7 @@ const NomineesCard = (CardProps: NomineesCardProps) => {
           <div key={nominee.id} className={styles.nominee}>
             <button
               onClick={() => setSelectedNominee(nominee.id)}
-              className={`${styles.nomineeButton} ${selectedNominee === nominee.id ? styles.selected : ""} ${nominee.userBet ? styles.userBet : ""}`}
+              className={`${styles.nomineeButton} ${selectedNominee === nominee.id ? styles.selected : ""} ${nominee.userBet ? styles.userBet : ""} ${category.winner === nominee.id ? styles.winner : ""}`}
             >
               <p className={styles.nomineeMovie}>{nominee.movieTitle}</p>
               <p className={styles.nomineeName}>{nominee.name}</p>

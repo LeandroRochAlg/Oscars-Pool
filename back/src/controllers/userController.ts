@@ -65,6 +65,12 @@ class UserController {
             res.status(500).send('Internal Server Error');
         }
     }
+
+    async admin(req: Request, res: Response) {
+        const isAdmin = req.user.admin;
+
+        res.status(200).send({isAdmin});
+    }
 }
 
 export default new UserController();
