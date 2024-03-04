@@ -71,6 +71,12 @@ class UserController {
 
         res.status(200).send({isAdmin});
     }
+
+    async username(req: Request, res: Response) {
+        const username = req.user.username;
+
+        res.status(200).send({username});
+    }
 }
 
 export default new UserController();

@@ -1,0 +1,42 @@
+.messageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 81vh;
+    background-color: rgba(0, 0, 0, 50%);
+    width: 300px;
+    height: fit-content;
+    color: white;
+    border-radius: 5px;
+    margin: 25vh auto;
+    padding: 10px;
+}
+
+.messageTitle{
+    font-size: 1.5rem;
+    font-weight: 200;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.messageTitle span{
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.message{
+    font-size: 1rem;
+    font-weight: 200;
+    text-align: left;
+    color: white;
+}
+
+.message a{
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.message a:hover{
+    text-decoration: underline;
+}

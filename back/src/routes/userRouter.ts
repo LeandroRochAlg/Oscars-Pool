@@ -15,3 +15,6 @@ userRouter.post('/register', userController.register);
 
 // Admin check 
 userRouter.get('/admin', authMiddleware, userController.admin);
+
+// Get username
+userRouter.get('/username', authMiddleware, userController.username);
