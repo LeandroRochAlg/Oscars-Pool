@@ -152,6 +152,57 @@ class BetController {
             res.status(500).send('Internal Server Error');
         }
     }
+    
+    async getLeaderboard(req: Request, res: Response) {
+        // Get all users and their total points based on their bets and the winners
+
+        try {
+            const usersCollection = db.collection('users');
+            const betsCollection = db.collection('bets');
+            const categoriesCollection = db.collection('nominees');
+
+            const users = await usersCollection.find().toArray();
+            const bets = await betsCollection.find().toArray();
+            const categories = await categoriesCollection.find().toArray();
+
+            interface userBet {
+                username: string;
+                userId: ObjectId;
+                points: number;
+            }
+
+            const userBets: userBet[] = [];
+
+            users.forEach(user => {
+                const newUser = {
+                    username: user.username,
+                    userId: user._id,
+                    points: 0
+                };
+
+                userBets.push(newUser);
+            });
+
+            bets.forEach(bet => {
+                const category = categories.find(category => category._id.toString() === bet.categoryId.toString());
+
+                if (category) {
+                    if (category.winner === bet.nomineeId) {
+                        const user = userBets.find(user => user.userId.toString() === bet.userId.toString());
+                        if (user) {
+                            user.points += category.value;
+                        }
+                    }
+                }
+            });
+
+            userBets.sort((a, b) => b.points - a.points);
+
+            res.status(200).json(userBets);
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    }
 }
 
 export default new BetController();
