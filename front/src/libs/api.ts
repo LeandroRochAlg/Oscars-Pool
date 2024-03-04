@@ -1,5 +1,7 @@
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,   // Import the API URL from the .env file using Vite's import.meta.env
 });
