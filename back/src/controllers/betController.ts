@@ -128,6 +128,30 @@ class BetController {
             res.status(500).send('Internal Server Error');
         }
     }
+
+    async registerWinner(req: Request, res: Response) {
+        try {
+            const { categoryId, nomineeId } = req.body;
+            const categories = db.collection('nominees');
+            const category = await categories.findOne({ _id: new ObjectId(categoryId) });
+
+            if (!category) {
+                res.status(404).send('Category not found');
+                return;
+            }
+
+            const updatedCategory = {
+                ...category,
+                winner: nomineeId
+            };
+
+            await categories.updateOne({ _id: new ObjectId(categoryId) }, { $set: updatedCategory });
+
+            res.status(200).send('Winner registered');
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    }
 }
 
 export default new BetController();

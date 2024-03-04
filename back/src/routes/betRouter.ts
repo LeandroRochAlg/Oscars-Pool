@@ -12,3 +12,6 @@ betRouter.get('/nominees', authMiddleware, BetController.getNominees);
 
 // Make a bet
 betRouter.post('/bet', authMiddleware, BetController.makeBet);
+
+// Register a winner
+betRouter.post('/winner', adminMiddleware, BetController.registerWinner);
