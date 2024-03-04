@@ -46,6 +46,7 @@ class BetController {
                         _id: "$_id",
                         category: { $first: "$category" },
                         nominees: { $push: "$nominees" },
+                        value: { $first: "$value" },
                         winner: { $first: "$winner" }
                     }
                 },

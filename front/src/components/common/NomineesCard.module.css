@@ -6,6 +6,14 @@
     width: 300px;
 }
 
+.category span{
+    font-weight: bold;
+    margin-left: 10px;
+    background-color: var(--secondary-color);
+    padding: 2px 7px;
+    border-radius: 5px;
+}
+
 .nominees{
     width: 300px;
     align-items: center;

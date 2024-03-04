@@ -52,7 +52,7 @@ const NomineesCard = (CardProps: NomineesCardProps) => {
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.category}>{category.category}</h3>
+      <h3 className={styles.category}>{category.category}<span>{category.value}</span></h3>
       <div className={styles.nominees}>
         {category.nominees.map((nominee: Nominee) => (
           <div key={nominee.id} className={styles.nominee}>
