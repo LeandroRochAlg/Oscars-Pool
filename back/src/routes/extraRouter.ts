@@ -1,9 +1,10 @@
 // src/routes/extraRouter.ts
 
-import express, { Request, Response } from 'express';
+import express from 'express';
 import ExtraController from '../controllers/extraController';
+import { adminMiddleware } from '../middlewares/adminMiddleware';
 
 export const extraRouter = express.Router();
 
 // New Invite Token
-extraRouter.post('/newToken', ExtraController.newToken);
+extraRouter.post('/newToken', adminMiddleware, ExtraController.newToken);
