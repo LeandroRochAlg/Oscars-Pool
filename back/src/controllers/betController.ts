@@ -4,7 +4,6 @@ import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { ObjectId } from 'mongodb';
 import { Nominee } from '../models/nominee';
-import { Category } from '../models/category';
 
 class BetController {
     async getNominees(req: Request, res: Response) {
@@ -90,6 +89,15 @@ class BetController {
     }
 
     async makeBet(req: Request, res: Response) {
+        // If the date is past the Oscars, return error
+        const currentDate = new Date();
+        const oscarsDate = new Date('2024-10-04T20:00:00.000Z');
+
+        if (currentDate > oscarsDate) {
+            res.status(400).send('The Oscars have already happened');
+            return;
+        }
+                
         try {
             const { categoryId, nomineeId } = req.body;
             const bets = db.collection('bets');
