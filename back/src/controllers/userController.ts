@@ -77,6 +77,97 @@ class UserController {
 
         res.status(200).send({username});
     }
+
+    async getUser(req: Request, res: Response) {
+        const username = req.user.username;
+
+        interface UserResponse {
+            username: string;
+            admin: boolean;
+            betNumber: number;
+        }
+
+        try {
+            const user = await db.collection<User>('users').findOne({
+                username
+            });
+
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+
+            const userId = user._id;
+
+            const betNumber = await db.collection('bets').countDocuments({
+                userId
+            });
+
+            const response: UserResponse = {
+                username: user.username,
+                admin: user.admin,
+                betNumber
+            };
+
+            res.status(200).send(response);
+        } catch (error) {
+            console.error("Error getting user:", error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async changeUsername(req: Request, res: Response) {
+        const username = req.user.username;
+        const newUsername = req.body.username;
+
+        console.log('Changing username:', username, 'to', newUsername);
+
+        try {
+            const existingUser = await db.collection<User>('users').findOne({
+                username: newUsername
+            });
+
+            if (existingUser) {
+                return res.status(400).send('Username already taken');
+            }
+
+            await db.collection<User>('users').updateOne({
+                username
+            }, {
+                $set: {
+                    username: newUsername
+                }
+            });
+
+            const newToken = jwt.sign({ username: newUsername, admin: req.user.admin }, process.env.JWT_SECRET || '', { expiresIn: '1h' });
+
+            res.status(200).send(newToken);
+        } catch (error) {
+            console.error("Error changing username:", error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async changePassword(req: Request, res: Response) {
+        const username = req.user.username;
+        const password = req.body.password;
+
+        try {
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            await db.collection<User>('users').updateOne({
+                username
+            }, {
+                $set: {
+                    password: hashedPassword
+                }
+            });
+
+            res.status(200).send('Password updated');
+        } catch (error) {
+            console.error("Error changing password:", error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
 }
 
 export default new UserController();

@@ -40,7 +40,7 @@ const LoginPage: React.FC = () => {
     }
   };
 
-  return (
+  return (document.title = 'Login',
     <div className='auth-body'>
       <FormCard onSubmit={handleSubmit(onSubmit)}>
         <Title title="Login" />
