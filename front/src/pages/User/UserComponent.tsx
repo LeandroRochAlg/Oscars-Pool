@@ -11,10 +11,13 @@ import styles from "./UserComponent.module.css";
 import { FaRegCopy } from "react-icons/fa";
 import "../../styles/system.css";
 
-const schema = yup.object({
-    username: yup.string(),
-    password: yup.string(),
-  }).required();
+const usernameSchema = yup.object({
+    username: yup.string().min(4, 'Username must be at least 4 characters').required(),
+});
+
+const passwordSchema = yup.object({
+    password: yup.string().min(6, 'Password must be at least 6 characters').required(),
+});
 
 const UserPage = () => {
     const [user, setUser] = useState<any>({});
@@ -24,8 +27,12 @@ const UserPage = () => {
     const [msgCopy, setMsgCopy] = useState<string>('');
     const [inviteToken, setInviteToken] = useState<string>('');
     const [admin, setAdmin] = useState<boolean>(false);
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema)
+    const { register: registerUsername, handleSubmit: handleSubmitUsername, formState: { errors: errorsUsername } } = useForm({
+        resolver: yupResolver(usernameSchema)
+    });
+
+    const { register: registerPassword, handleSubmit: handleSubmitPassword, formState: { errors: errorsPassword } } = useForm({
+        resolver: yupResolver(passwordSchema)
     });
 
     useEffect(() => {
@@ -102,16 +109,16 @@ const UserPage = () => {
                 <div className={styles.profileContainer}>
                     <h2 className={styles.title}>Profile{user.admin && <span className={styles.admin}>ADMIN</span>}</h2>
                     <div className={styles.changesContainer}>
-                        <form onSubmit={handleSubmit(changeUsername)}>
-                            <input type="text" {...register('username')} placeholder={user.username} />
-                            {errors.username && <p>{errors.username.message}</p>}
+                        <form onSubmit={handleSubmitUsername(changeUsername)}>
+                            <input type="text" {...registerUsername('username')} placeholder={user.username} />
                             <button type="submit">Change</button>
+                            {errorsUsername.username && <p>{errorsUsername.username.message}</p>}
                             {msgUsername && <p>{msgUsername}</p>}
                         </form>
-                        <form onSubmit={handleSubmit(changePassword)}>
-                            <input type="password" {...register('password')} placeholder="New Password" />
-                            {errors.password && <p>{errors.password.message}</p>}
+                        <form onSubmit={handleSubmitPassword(changePassword)}>
+                            <input type="password" {...registerPassword('password')} placeholder="New Password" />
                             <button type="submit">Change</button>
+                            {errorsPassword.password && <p>{errorsPassword.password.message}</p>}
                             {msgPassword && <p>{msgPassword}</p>}
                         </form>
                     </div>
