@@ -91,7 +91,7 @@ class BetController {
     async makeBet(req: Request, res: Response) {
         // If the date is past the Oscars, return error
         const currentDate = new Date();
-        const oscarsDate = new Date('2024-10-04T20:00:00.000Z');
+        const oscarsDate = new Date('2024-03-10T20:00:00.000Z');
 
         if (currentDate > oscarsDate) {
             res.status(400).send('The Oscars have already happened');
