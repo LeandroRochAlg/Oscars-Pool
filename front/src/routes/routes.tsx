@@ -1,21 +1,52 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import PrivateRoute from "../components/PrivateRoute";
 import LoginPage from "../pages/Login/LoginComponent";
 import RegisterPage from "../pages/Register/RegisterComponent";
 import HomePage from "../pages/Home/HomeComponent";
-import PrivateRoute from "../components/PrivateRoute";
+import BetsPage from "../pages/Bets/BetsComponent";
+import WinnersPage from "../pages/Winners/WinnersComponent";
+import LeaderboardPage from "../pages/Leaderboard/LeaderboardComponent";
+import UserPage from "../pages/User/UserComponent";
+import NotFoundPage from "../pages/NotFound/NotFoundComponent";
 
 const AppRoutes: React.FC = () => {
     return (
         <Router>
             <Routes>
+                {/* Public Routes */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+
+                {/* Private Routes */}
                 <Route path="/" element={
                     <PrivateRoute>
                         <HomePage />
                     </PrivateRoute>
                 } />
+                <Route path="/bets" element={
+                    <PrivateRoute>
+                        <BetsPage />
+                    </PrivateRoute>
+                } />
+                <Route path="/winners" element={
+                    <PrivateRoute>
+                        <WinnersPage />
+                    </PrivateRoute>
+                } />
+                <Route path="/leaderboard" element={
+                    <PrivateRoute>
+                        <LeaderboardPage />
+                    </PrivateRoute>
+                } />
+                <Route path="/user" element={
+                    <PrivateRoute>
+                        <UserPage />
+                    </PrivateRoute>
+                } />
+
+                {/* 404 */}
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Router>
     );
