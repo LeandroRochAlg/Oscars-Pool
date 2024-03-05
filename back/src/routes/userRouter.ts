@@ -21,3 +21,9 @@ userRouter.get('/username', authMiddleware, userController.username);
 
 // Get user
 userRouter.get('/user', authMiddleware, userController.getUser);
+
+// Change username
+userRouter.post('/username', authMiddleware, userController.changeUsername);
+
+// Change password
+userRouter.post('/password', authMiddleware, userController.changePassword);

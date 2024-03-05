@@ -12,10 +12,8 @@ import { FaRegCopy } from "react-icons/fa";
 import "../../styles/system.css";
 
 const schema = yup.object({
-    username: yup.string().required('Username is required'),
-    password: yup.string().required('Password is required'),
-    confirmPassword: yup.string().oneOf([yup.ref('password'), undefined], 'Passwords must match'),
-    token: yup.string().required('Invite Token is required'),
+    username: yup.string(),
+    password: yup.string(),
   }).required();
 
 const UserPage = () => {
@@ -52,8 +50,8 @@ const UserPage = () => {
         try {
             const response = await api.post<string>('/username', data);
             console.log('User updated:', response.data);
+            localStorage.setItem('token', response.data);
             setMsgUsername('Username updated successfully.');
-            window.location.href = "/user";
         } catch (error) {
             const axiosError = error as AxiosError;
             setMsgUsername(axiosError.response?.data as string || 'An unexpected error occurred.');
@@ -107,14 +105,14 @@ const UserPage = () => {
                         <form onSubmit={handleSubmit(changeUsername)}>
                             <input type="text" {...register('username')} placeholder={user.username} />
                             {errors.username && <p>{errors.username.message}</p>}
-                            {msgUsername && <p>{msgUsername}</p>}
                             <button type="submit">Change</button>
+                            {msgUsername && <p>{msgUsername}</p>}
                         </form>
                         <form onSubmit={handleSubmit(changePassword)}>
                             <input type="password" {...register('password')} placeholder="New Password" />
                             {errors.password && <p>{errors.password.message}</p>}
-                            {msgPassword && <p>{msgPassword}</p>}
                             <button type="submit">Change</button>
+                            {msgPassword && <p>{msgPassword}</p>}
                         </form>
                     </div>
                 </div>
