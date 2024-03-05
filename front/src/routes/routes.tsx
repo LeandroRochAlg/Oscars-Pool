@@ -8,6 +8,7 @@ import BetsPage from "../pages/Bets/BetsComponent";
 import WinnersPage from "../pages/Winners/WinnersComponent";
 import LeaderboardPage from "../pages/Leaderboard/LeaderboardComponent";
 import UserPage from "../pages/User/UserComponent";
+import NotFoundPage from "../pages/NotFound/NotFoundComponent";
 
 const AppRoutes: React.FC = () => {
     return (
@@ -43,6 +44,9 @@ const AppRoutes: React.FC = () => {
                         <UserPage />
                     </PrivateRoute>
                 } />
+
+                {/* 404 */}
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </Router>
     );
