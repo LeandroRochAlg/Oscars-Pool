@@ -77,6 +77,43 @@ class UserController {
 
         res.status(200).send({username});
     }
+
+    async getUser(req: Request, res: Response) {
+        const username = req.user.username;
+
+        interface UserResponse {
+            username: string;
+            admin: boolean;
+            betNumber: number;
+        }
+
+        try {
+            const user = await db.collection<User>('users').findOne({
+                username
+            });
+
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+
+            const userId = user._id;
+
+            const betNumber = await db.collection('bets').countDocuments({
+                userId
+            });
+
+            const response: UserResponse = {
+                username: user.username,
+                admin: user.admin,
+                betNumber
+            };
+
+            res.status(200).send(response);
+        } catch (error) {
+            console.error("Error getting user:", error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
 }
 
 export default new UserController();
