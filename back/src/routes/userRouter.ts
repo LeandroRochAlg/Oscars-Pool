@@ -3,6 +3,7 @@
 import express from 'express';
 import LoginController from '../controllers/loginController';
 import userController from '../controllers/userController';
+import { authMiddleware } from '../middlewares/authMiddleware';
 
 export const userRouter = express.Router();
 
@@ -11,3 +12,9 @@ userRouter.post('/login', LoginController.login);
 
 // Register
 userRouter.post('/register', userController.register);
+
+// Admin check 
+userRouter.get('/admin', authMiddleware, userController.admin);
+
+// Get username
+userRouter.get('/username', authMiddleware, userController.username);

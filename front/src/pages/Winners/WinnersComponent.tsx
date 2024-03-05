@@ -4,13 +4,13 @@ import Sidebar from '../../components/layout/Sidebar';
 import Footer from '../../components/layout/Footer';
 import NomineesCard from '../../components/common/NomineesCard';
 import "../../styles/system.css"
-import styles from './BetsComponent.module.css';
+import styles from '../Bets/BetsComponent.module.css';
 import api from '../../libs/api';
 import { AxiosError } from 'axios';
 import { Category } from '../../types/Category';
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 
-const BetsPage: React.FC = () => {
+const WinnersPage: React.FC = () => {
   const [categories, setCategories] = useState([]);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState<number>(() => {
     // Get the current category index from the local storage
@@ -20,6 +20,7 @@ const BetsPage: React.FC = () => {
   const [currentCategory, setCurrentCategory] = useState<Category>();
   const [loaded, setLoaded] = useState(false);
   const [msg, setMsg] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const sendNominee = async (selectedNominee: Number) => {
     if (selectedNominee === null) {
@@ -30,7 +31,7 @@ const BetsPage: React.FC = () => {
     const category = currentCategory as Category;
 
     try {
-      const response = await api.post<string>("/bet", {
+      const response = await api.post<string>("/winner", {
         nomineeId: selectedNominee,
         categoryId: category._id,
       });
@@ -39,7 +40,7 @@ const BetsPage: React.FC = () => {
         setMsg("Nominee sent successfully.");
 
         // Send back to the page so the user can see the updated bets
-        window.location.href = "/bets";
+        window.location.href = "/winners";
       }else{
         setMsg("An unexpected error occurred.");
       }
@@ -62,7 +63,6 @@ const BetsPage: React.FC = () => {
         setCategories(response.data);
         setCurrentCategory(response.data[currentCategoryIndex]);
         setLoaded(true);
-        // console.log('Nominees:', response.data);
       } catch (error) {
         console.error('Categories Error:', error);
 
@@ -75,6 +75,16 @@ const BetsPage: React.FC = () => {
       }
     };
     fetchCategories();
+
+    const fetchUser = async () => {
+        try {
+          const response = await api.get('/admin');
+          setIsAdmin(response.data.isAdmin);
+        } catch (error) {
+          console.error('User Error:', error);
+        }
+    };
+    fetchUser();
   }, []);
 
   const navigateToNextCategory = () => {
@@ -97,7 +107,7 @@ const BetsPage: React.FC = () => {
       <Sidebar />
       <div className={styles.card}>
         <button onClick={navigateToPreviousCategory} className={styles.arrow}><GoArrowLeft /></button>
-        {loaded && <NomineesCard category={currentCategory as Category} msg={msg} onClick={sendNominee} showBtn={true}/>} {/* If available, pass the current category to the NomineesCard component */}
+        {loaded && <NomineesCard category={currentCategory as Category} msg={msg} onClick={sendNominee} showBtn={isAdmin}/>} {/* If available, pass the current category to the NomineesCard component */}
         <button onClick={navigateToNextCategory} className={styles.arrow}><GoArrowRight /></button>
       </div>
       <Footer />
@@ -105,4 +115,4 @@ const BetsPage: React.FC = () => {
   );
 };
 
-export default BetsPage;
+export default WinnersPage;

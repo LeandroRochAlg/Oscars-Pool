@@ -46,6 +46,7 @@ class BetController {
                         _id: "$_id",
                         category: { $first: "$category" },
                         nominees: { $push: "$nominees" },
+                        value: { $first: "$value" },
                         winner: { $first: "$winner" }
                     }
                 },
@@ -123,6 +124,84 @@ class BetController {
     
                 res.status(201).send('Bet created');
             }
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async registerWinner(req: Request, res: Response) {
+        try {
+            const { categoryId, nomineeId } = req.body;
+            const categories = db.collection('nominees');
+            const category = await categories.findOne({ _id: new ObjectId(categoryId) });
+
+            if (!category) {
+                res.status(404).send('Category not found');
+                return;
+            }
+
+            const updatedCategory = {
+                ...category,
+                winner: nomineeId
+            };
+
+            await categories.updateOne({ _id: new ObjectId(categoryId) }, { $set: updatedCategory });
+
+            res.status(200).send('Winner registered');
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    }
+    
+    async getLeaderboard(req: Request, res: Response) {
+        // Get all users and their total points based on their bets and the winners
+
+        try {
+            const usersCollection = db.collection('users');
+            const betsCollection = db.collection('bets');
+            const categoriesCollection = db.collection('nominees');
+
+            const users = await usersCollection.find().toArray();
+            const bets = await betsCollection.find().toArray();
+            const categories = await categoriesCollection.find().toArray();
+
+            interface userBet {
+                username: string;
+                userId: ObjectId;
+                points: number;
+                hits: number
+            }
+
+            const userBets: userBet[] = [];
+
+            users.forEach(user => {
+                const newUser = {
+                    username: user.username,
+                    userId: user._id,
+                    points: 0,
+                    hits: 0
+                };
+
+                userBets.push(newUser);
+            });
+
+            bets.forEach(bet => {
+                const category = categories.find(category => category._id.toString() === bet.categoryId.toString());
+
+                if (category) {
+                    if (category.winner === bet.nomineeId) {
+                        const user = userBets.find(user => user.userId.toString() === bet.userId.toString());
+                        if (user) {
+                            user.points += category.value;
+                            user.hits++;
+                        }
+                    }
+                }
+            });
+
+            userBets.sort((a, b) => b.points - a.points);
+
+            res.status(200).json(userBets);
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }
