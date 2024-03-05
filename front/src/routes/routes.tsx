@@ -7,6 +7,7 @@ import HomePage from "../pages/Home/HomeComponent";
 import BetsPage from "../pages/Bets/BetsComponent";
 import WinnersPage from "../pages/Winners/WinnersComponent";
 import LeaderboardPage from "../pages/Leaderboard/LeaderboardComponent";
+import UserPage from "../pages/User/UserComponent";
 
 const AppRoutes: React.FC = () => {
     return (
@@ -35,6 +36,11 @@ const AppRoutes: React.FC = () => {
                 <Route path="/leaderboard" element={
                     <PrivateRoute>
                         <LeaderboardPage />
+                    </PrivateRoute>
+                } />
+                <Route path="/user" element={
+                    <PrivateRoute>
+                        <UserPage />
                     </PrivateRoute>
                 } />
             </Routes>
