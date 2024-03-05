@@ -6,6 +6,7 @@ import RegisterPage from "../pages/Register/RegisterComponent";
 import HomePage from "../pages/Home/HomeComponent";
 import BetsPage from "../pages/Bets/BetsComponent";
 import WinnersPage from "../pages/Winners/WinnersComponent";
+import LeaderboardPage from "../pages/Leaderboard/LeaderboardComponent";
 
 const AppRoutes: React.FC = () => {
     return (
@@ -29,6 +30,11 @@ const AppRoutes: React.FC = () => {
                 <Route path="/winners" element={
                     <PrivateRoute>
                         <WinnersPage />
+                    </PrivateRoute>
+                } />
+                <Route path="/leaderboard" element={
+                    <PrivateRoute>
+                        <LeaderboardPage />
                     </PrivateRoute>
                 } />
             </Routes>
