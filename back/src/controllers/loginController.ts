@@ -29,7 +29,9 @@ class LoginController {
                 return res.status(401).send('Invalid username or password');
             }
 
-            const token = jwt.sign({ username, admin: user.admin }, process.env.JWT_SECRET || '', { expiresIn: '1h' });
+            const token = jwt.sign({ username, admin: user.admin }, process.env.JWT_SECRET || '', { expiresIn: '7d' });
+
+            console.log('User logged in at:', new Date().toLocaleString());
 
             res.status(200).send(token);
         } catch (error) {
