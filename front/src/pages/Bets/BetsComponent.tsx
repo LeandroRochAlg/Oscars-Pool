@@ -47,7 +47,7 @@ const BetsPage: React.FC = () => {
       const axiosError = error as AxiosError;
       setMsg(axiosError.response?.data as string || "An unexpected error occurred.");
 
-      if (axiosError.response?.status === 401 || (axiosError.response?.status === 400 && axiosError.response?.data !== "The Oscars have already happened")) {
+      if (axiosError.response?.status === 401 || axiosError.response?.status === 400) {
         localStorage.removeItem("token");
         window.location.href = "/login";
       }

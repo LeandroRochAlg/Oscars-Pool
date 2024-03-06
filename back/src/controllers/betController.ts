@@ -94,7 +94,7 @@ class BetController {
         const oscarsDate = new Date('2024-03-10T23:00:00.000Z');
 
         if (currentDate > oscarsDate) {
-            res.status(400).send('The Oscars have already happened');
+            res.status(403).send('The Oscars have already happened');
             return;
         }
                 
@@ -143,10 +143,10 @@ class BetController {
         const oscarsDate = new Date('2024-03-10T23:00:00.000Z');
 
         if (currentDate < oscarsDate) {
-            res.status(400).send('The Oscars have not happened yet');
+            res.status(403).send('The Oscars have not happened yet');
             return;
         }
-        
+
         try {
             const { categoryId, nomineeId } = req.body;
             const categories = db.collection('nominees');

@@ -68,7 +68,7 @@ const WinnersPage: React.FC = () => {
         setMsg((error as AxiosError).response?.data as string || "An unexpected error occurred.");
 
         // Case token expired or invalid
-        if ((error as any).response?.status === 401 || ((error as any).response?.status === 400 && (error as any).response?.data !== "The Oscars have not happened yet")) {
+        if ((error as any).response?.status === 401 || (error as any).response?.status === 400) {
           // Redirect to login and clear the token
           localStorage.removeItem('token');
           window.location.href = '/login';
