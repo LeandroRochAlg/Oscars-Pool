@@ -11,7 +11,13 @@ dotenv.config();
 const port = process.env.PORT || 3100;
 const app: Application = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: 'https://oscars-pool.vercel.app',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
