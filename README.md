@@ -14,6 +14,11 @@ Welcome to the Oscar Winners' Pool 2024! This web application allows you to part
 ## Features
 
 - **Make a Bet**: Choose your winners for each Oscar category. A category will turn red to indicate your bet has been successfully registered. Bets can be placed until Oscars night, 23:00 GMT.
+<p align="center">
+  <img src="screenshots/bets.png" height="300" style="max-width: 100%; margin-right: 10px;" />
+  <img src="screenshots/betsMobile.png" height="300" style="max-width: 100%;" />
+</p>
+
 - **Admin Privileges**: After the betting deadline, only administrators will be able to register the official winners. If you are an admin, your status will be visible on the 'User' page.
 - **Betting Status**: On the 'User' page, track how many categories you've bet on (e.g., 3/19 if you've placed bets on 3 out of 19 categories).
 - **Category Weights**: The importance of each category is highlighted in red next to its name on the 'Bets' or 'Winners' page.
