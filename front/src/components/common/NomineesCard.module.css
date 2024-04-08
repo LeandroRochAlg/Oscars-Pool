@@ -74,7 +74,7 @@
     margin: 4px;
 }
 
-@media screen and (min-width: 600px) and (max-height: 700px){
+@media screen and (min-width: 600px){
     .category{
         width: 500px;
     }
