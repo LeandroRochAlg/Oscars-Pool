@@ -12,7 +12,7 @@ const port = process.env.PORT || 3100;
 const app: Application = express();
 
 const corsOptions = {
-  origin: 'https://oscars-pool.vercel.app',
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 };
