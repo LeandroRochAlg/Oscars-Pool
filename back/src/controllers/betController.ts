@@ -121,17 +121,17 @@ class BetController {
                 await bets.updateOne({ userId, categoryId: new ObjectId(categoryId) }, { $set: { nomineeId } });
                 res.status(200).send('Bet updated');
                 return;
-            }else{
-                const bet = {
-                    userId,
-                    categoryId: new ObjectId(categoryId),
-                    nomineeId
-                };
-    
-                await bets.insertOne(bet);
-    
-                res.status(201).send('Bet created');
             }
+
+            const bet = {
+                userId,
+                categoryId: new ObjectId(categoryId),
+                nomineeId
+            };
+
+            await bets.insertOne(bet);
+
+            res.status(201).send('Bet created');
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }
