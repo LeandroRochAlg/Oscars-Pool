@@ -13,7 +13,7 @@ export default {
   daisyui: {
     themes: [
       {
-        mytheme: {
+        mythemedark: {
           "primary": "#eab308",
           "secondary": "#fef9c3",
           "accent": "#713f12",
@@ -25,9 +25,22 @@ export default {
           "error": "#b91c1c",
         },
       },
+      {
+        mythemelight: {
+          "primary": "#eab308",
+          "secondary": "#fef9c3",
+          "accent": "#713f12",
+          "neutral": "#eab308",
+          "base-100": "#fef3c7",
+          "info": "#713f12",
+          "success": "#3f6212",
+          "warning": "#ea580c",
+          "error": "#b91c1c",
+        },
+      },
       "black",
     ],
-    darkTheme: "dark",
+    darkTheme: "mythemedark",
     base: true,
     styled: true,
     utils: true,
