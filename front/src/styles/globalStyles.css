@@ -1,6 +1,11 @@
 /* Font Montserrat */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
+/* Tailwind CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 /* CSS Variables */
 :root {
   --light-color: #d9f6fc;
