@@ -1,8 +1,7 @@
-// src/controller/userController.ts
-
 import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { User } from '../models/user';
+import admin from '../configs/firebase';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -12,27 +11,18 @@ dotenv.config();
 class UserController {
     async register(req: Request, res: Response) {
         try {
-            const username = req.body.username;
-            const password = req.body.password;
-            const token = req.body.token;
-            let admin = false;
+            type UserRegister = Pick<User, 'username' | 'email' | 'password'>;
+
+            const user: UserRegister = req.body;
+
+            const { username, email, password } = user;
     
-            // Check the token
-            const tokenDoc = await db.collection('tokens').findOne({
-                token
-            });
-    
-            if (!tokenDoc) {
-                return res.status(401).send('Invalid token');
-            }else if (tokenDoc.isUsed) {
-                return res.status(401).send('Token already used');
-            }else if (tokenDoc.isAdmin) {
-                admin = true;
-            }
-    
-            // Check if the username is already taken
+            // Check if the username or email are already taken
             const existingUser = await db.collection<User>('users').findOne({
-                username
+                $or: [
+                    { username },
+                    { email }
+                ]
             });
     
             if (existingUser) {
@@ -41,22 +31,25 @@ class UserController {
     
             // Hash the password
             const hashedPassword = await bcrypt.hash(password, 10);
-    
+            user.password = hashedPassword;
+
             const newUser: User = {
-                username,
-                password: hashedPassword,
-                admin: admin
+                ...user,
+                admin: false,
+                emailVerified: false,
+                createdAt: new Date(),
+                updatedAt: new Date()
             };
     
+            // Insert the new user into the database
             await db.collection<User>('users').insertOne(newUser);
-    
-            // Mark the token as used
-            await db.collection('tokens').updateOne({
-                token
-            }, {
-                $set: {
-                    isUsed: true
-                }
+
+            // Insert the new user into Firebase Authentication
+            admin.auth().createUser({   // Don't wait for the promise to resolve to send the response for better performance
+                email,
+                emailVerified: false,
+                password,
+                displayName: username
             });
     
             res.status(201).send('User registered');
