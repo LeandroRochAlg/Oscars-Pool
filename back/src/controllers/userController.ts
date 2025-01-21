@@ -11,7 +11,7 @@ dotenv.config();
 class UserController {
     async register(req: Request, res: Response) {
         try {
-            type UserRegister = Pick<User, 'username' | 'email' | 'password'>;
+            type UserRegister = Pick<User, 'username' | 'email' | 'password' | 'googleId'>;
 
             const user: UserRegister = req.body;
 
@@ -33,10 +33,12 @@ class UserController {
             const hashedPassword = await bcrypt.hash(password, 10);
             user.password = hashedPassword;
 
+            const emailVerified = user.googleId ? true : false;
+
             const newUser: User = {
                 ...user,
                 admin: false,
-                emailVerified: false,
+                emailVerified,
                 createdAt: new Date(),
                 updatedAt: new Date()
             };
@@ -47,7 +49,7 @@ class UserController {
             // Insert the new user into Firebase Authentication
             admin.auth().createUser({   // Don't wait for the promise to resolve to send the response for better performance
                 email,
-                emailVerified: false,
+                emailVerified,
                 password,
                 displayName: username
             });
