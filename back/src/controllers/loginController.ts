@@ -3,13 +3,12 @@ import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { User } from '../models/user';
+import UserService from '../services/userService';
 
 class LoginController {
     async login(req: Request, res: Response) {
         try {
             type UserLogin = Pick<User, 'password'> & { emailOrUsername: string };
-            type UserToken = Pick<User, 'username' | 'email' | 'admin' | 'emailVerified'>;
-            type UserPayload = UserToken & { token: string };
 
             const userToLogin: UserLogin = req.body;
 
@@ -32,21 +31,33 @@ class LoginController {
                 return res.status(401).send('Invalid username or password');
             }
 
-            const userToken: UserToken = {
-                username: user.username,
-                email: user.email,
-                admin: user.admin,
-                emailVerified: user.emailVerified
-            };
-
-            const token = jwt.sign(userToken, process.env.JWT_SECRET || '', { expiresIn: '7d' });
+            const userPayload = await UserService.getUserPayload(user);
 
             console.log('User logged in at:', new Date().toLocaleString());
 
-            const userPayload: UserPayload = {
-                ...userToken,
-                token
-            };
+            res.status(200).send(userPayload);
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async loginWithGoogle(req: Request, res: Response) {
+        try {
+            type GoogleUser = Pick<User, 'googleId'>;
+
+            const googleUser: GoogleUser = req.body;
+
+            const user = await db.collection<User>('users').findOne({
+                googleId: googleUser.googleId
+            });
+
+            if (!user) {
+                return res.status(401).send('Invalid user');
+            }
+
+            const userPayload = await UserService.getUserPayload(user);
+
+            console.log('User logged in at:', new Date().toLocaleString());
 
             res.status(200).send(userPayload);
         } catch (error) {

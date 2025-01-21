@@ -10,6 +10,9 @@ export const userRouter = express.Router();
 // Login
 userRouter.post('/login', LoginController.login);
 
+// Login with Google
+userRouter.post('/login-google', LoginController.loginWithGoogle);
+
 // Register
 userRouter.post('/register', userController.register);
 
