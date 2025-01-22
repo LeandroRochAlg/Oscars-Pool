@@ -5,6 +5,7 @@
     "password": "Password",
     "confirmPassword": "Confirm Password",
     "email": "Email",
+    "usernameOrEmail": "Username or Email",
     "rememberMe": "remember me?",
     "dontHaveAnAccount": "don't have an account yet?",
     "createAccount": "create one now",
@@ -23,7 +24,8 @@
         "passwordLowercase": "Password must contain at least one lowercase letter",
         "passwordUppercase": "Password must contain at least one uppercase letter",
         "passwordNonAlphanumeric": "Password must contain at least one non-alphanumeric character",
-        "passwordsDontMatch": "Passwords do not match"
+        "passwordsDontMatch": "Passwords do not match",
+        "usernameOrEmailRequired": "Username or email is required"
     },
     "signInWithGoogle": "Sign in with Google",
     "whyConnectWithGoogle": "why do we ask you to connect with Google?",

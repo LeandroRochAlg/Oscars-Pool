@@ -5,6 +5,7 @@
     "password": "Senha",
     "confirmPassword": "Confirmar Senha",
     "email": "Email",
+    "usernameOrEmail": "Usuário ou Email",
     "rememberMe": "manter conectado?",
     "dontHaveAnAccount": "ainda não tem uma conta?",
     "createAccount": "crie uma agora",
@@ -23,7 +24,8 @@
         "passwordLowercase": "Senha deve conter pelo menos uma letra minúscula",
         "passwordUppercase": "Senha deve conter pelo menos uma letra maiúscula",
         "passwordNonAlphanumeric": "Senha deve conter pelo menos um caractere não alfanumérico",
-        "passwordsDontMatch": "As senhas não coincidem"
+        "passwordsDontMatch": "As senhas não coincidem",
+        "usernameOrEmailRequired": "Nome de usuário ou email é obrigatório"
     },
     "signInWithGoogle": "Entrar com o Google",
     "whyConnectWithGoogle": "por que pedimos para você se conectar com o Google?",

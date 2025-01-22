@@ -4,60 +4,77 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import InputField from '../../components/common/InputField';
 import Button from '../../components/common/Button';
-import Title from '../../components/ui/Title';
 import Account from '../../components/common/Account';
 import FormCard from '../../components/common/FormCard';
+import ErrorMessage from '../../components/common/ErrorMessage';
+import WarningMessage from '../../components/common/WarningMessage';
 import api from '../../libs/api';
 import { AxiosError } from 'axios';
-
-// Define the validation schema using Yup
-const schema = yup.object({
-  username: yup.string().required('Username is required'),
-  password: yup.string().required('Password is required'),
-}).required();
+import { useTranslation } from 'react-i18next';
 
 const LoginPage: React.FC = () => {
+  const [msg, setMsg] = useState<string>('');
+  const { t } = useTranslation();
+
+  // Define the validation schema using Yup
+  const schema = yup.object({
+    emailOrUsername: yup.string().required(t('validation.usernameOrEmailRequired')),
+    password: yup.string().required(t('validation.passwordRequired')),
+  }).required();
+  
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
-  
-  const [msg, setMsg] = useState<string>('');
 
   const onSubmit = async (data: any) => {
     console.log('Login data:', data);
     try {
       const response = await api.post<string>('/login', data);
       console.log('Login successful:', response.data);
-      localStorage.setItem('token', response.data);
+      localStorage.setItem('user', response.data);
       
       // Redirect to the home page
       window.location.href = '/';
     } catch (error) {
       const axiosError = error as AxiosError;
       console.error('Login Error:', axiosError.response?.data);
-      setMsg(axiosError.response?.data as string || 'An unexpected error occurred.');
+      
+      // Display an error message
+      if (axiosError.response?.status === 401) {
+        setMsg(t('apiResults.login.invalidCredentials'));
+      }
+      if (axiosError.response?.status === 500) {
+        setMsg(t('apiResults.login.error'));
+      }
     }
   };
 
-  return (document.title = 'Login',
+  return (document.title = t('login'),
     <div className='auth-body'>
       <FormCard onSubmit={handleSubmit(onSubmit)}>
-        <Title title="Login" />
+        <h1 className='text-3xl text-base-100 mb-2'>{t('login')}</h1>
+
         <InputField
           type="text"
-          placeholder="Username"
-          {...register('username')}
-          error={errors.username?.message}
+          placeholder={t('usernameOrEmail')}
+          {...register('emailOrUsername')}
         />
         <InputField
           type="password"
-          placeholder="Password"
+          placeholder={t('password')}
           {...register('password')}
-          error={errors.password?.message}
         />
-        {msg && (<p className='error-message'>{msg}</p>)}
-        <Button type="submit">LOGIN</Button>
-        <Account message="Don't have an account yet?" linkText='Create one now.' link='/register'/>
+
+        <div className='w-full flex justify-center'>
+          <Button type="submit">{t('login')}</Button>
+        </div>
+
+        <Account message={t('dontHaveAnAccount')} linkText={t('createAccount')} link='/register'/>
+
+        {errors.emailOrUsername && <WarningMessage error={errors.emailOrUsername.message as string} />}
+        {!errors.emailOrUsername && errors.password && <WarningMessage error={errors.password.message as string} />}
+
+        <ErrorMessage error={msg} />
       </FormCard>
     </div>
   );
