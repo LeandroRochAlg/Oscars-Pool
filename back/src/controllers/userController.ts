@@ -26,7 +26,7 @@ class UserController {
             });
     
             if (existingUser) {
-                return res.status(400).send('Username already taken');
+                return res.status(400).send('Username or email already taken');
             }
     
             // Hash the password
