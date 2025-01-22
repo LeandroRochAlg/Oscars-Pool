@@ -66,6 +66,7 @@ const RegisterPage = () => {
     <div className='auth-body'>
       <FormCard onSubmit={handleSubmit(onSubmit)}>
         <h1 className='text-3xl text-base-100 mb-2'>{t('register')}</h1>
+        
         <InputField
           type="text"
           placeholder={t('username')}
