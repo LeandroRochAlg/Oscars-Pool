@@ -14,7 +14,7 @@
     "register": "Registrar",
     "validation": {
         "usernameRequired": "Nome de usuário é obrigatório",
-        "usernameLength": "Nome de usuário deve ter pelo menos 3 caracteres",
+        "usernameLength": "Nome de usuário deve ter pelo menos 4 caracteres",
         "emailRequired": "Email é obrigatório",
         "emailInvalid": "Email é inválido",
         "passwordRequired": "Senha é obrigatória",
@@ -30,5 +30,17 @@
     "continueWithoutGoogle": "Continuar sem o Google",
     "connected": "conectado!",
     "connectWithAnother": "Conectar com outra conta?",
-    "home": "Início"
+    "home": "Início",
+    "apiResults": {
+        "register": {
+            "success": "Usuário registrado com sucesso",
+            "error": "Erro ao registrar usuário",
+            "usernameOrEmailTaken": "Nome de usuário ou email já em uso"
+        },
+        "login": {
+            "success": "Usuário logado com sucesso",
+            "error": "Erro ao fazer login",
+            "invalidCredentials": "Credenciais inválidas"
+        }
+    }
 }

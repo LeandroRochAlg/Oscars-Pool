@@ -14,7 +14,7 @@
     "register": "Register",
     "validation": {
         "usernameRequired": "Username is required",
-        "usernameLength": "Username must be at least 3 characters long",
+        "usernameLength": "Username must be at least 4 characters long",
         "emailRequired": "Email is required",
         "emailInvalid": "Email is invalid",
         "passwordRequired": "Password is required",
@@ -30,5 +30,17 @@
     "continueWithoutGoogle": "Continue without Google",
     "connected": "connected!",
     "connectWithAnother": "Connect with another account?",
-    "home": "Home"
+    "home": "Home",
+    "apiResults": {
+        "register": {
+            "success": "User registered successfully",
+            "error": "Error registering user",
+            "usernameOrEmailTaken": "Username or email already in use"
+        },
+        "login": {
+            "success": "User logged in successfully",
+            "error": "Error logging in",
+            "invalidCredentials": "Invalid credentials"
+        }
+    }
 }

@@ -1,77 +1,106 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import InputField from '../../components/common/InputField';
 import Button from '../../components/common/Button';
 import Title from '../../components/ui/Title';
 import Account from '../../components/common/Account';
 import FormCard from '../../components/common/FormCard';
-import '../../styles/auth.css';
+import ErrorMessage from '../../components/common/ErrorMessage';
+import WarningMessage from '../../components/common/WarningMessage';
+import SuccessMessage from '../../components/common/SuccessMessage';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import api from '../../libs/api';
 import { AxiosError } from 'axios';
+import { useTranslation } from 'react-i18next';
+import { User } from '../../models/user';
 
-const schema = yup.object({
-  username: yup.string().required('Username is required').min(4, 'Username must be at least 4 characters'),
-  password: yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
-  confirmPassword: yup.string().oneOf([yup.ref('password'), undefined], 'Passwords must match'),
-  token: yup.string().required('Invite Token is required'),
-}).required();
+const RegisterPage = () => {
+  type UserForm = Pick<User, 'username' | 'email' | 'password'> & { confirmPassword?: string }; // Confirm password needs to be optional for validation
+  const [msg, setMsg] = useState<string>('');
+  const [errorMsg, setErrorMsg] = useState<string>('');
 
-const RegisterPage: React.FC = () => {
+  const { t } = useTranslation();
+
+  const schema = yup.object({
+    username: yup.string()
+      .required(t('validation.usernameRequired'))
+      .min(4, t('validation.usernameLength'))
+      .matches(/^[a-zA-Z0-9_]+$/, t('validation.usernameInvalid')),
+    email: yup.string()
+      .required(t('validation.emailRequired'))
+      .email(t('validation.emailInvalid')),
+    password: yup.string()
+      .required(t('validation.passwordRequired'))
+      .min(6, t('validation.passwordLength')),
+    confirmPassword: yup.string()
+      .oneOf([yup.ref('password'), undefined], t('validation.passwordsDontMatch')),
+  }).required();
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
   });
 
-  const [msg, setMsg] = useState<string>('');
-
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: UserForm) => {
     try {
       const response = await api.post<string>('/register', data);
-      console.log('Registration successful:', response.data);
-      setMsg('Registration successful. You can now login.');
+      
+      if (response.status === 201) {
+        setMsg(t('apiResults.register.success'));
+      }
+
+      if (response.status === 400) {
+        setErrorMsg(t('apiResults.register.usernameOrEmailTaken'));
+      }
     } catch (error) {
       const axiosError = error as AxiosError;
-      console.error('Registration Error:', axiosError.response?.data);
-      setMsg(axiosError.response?.data as string || 'An unexpected error occurred.');
+      
+      if (axiosError.response?.status === 400) {
+        setErrorMsg(t('apiResults.register.usernameOrEmailTaken'));
+      } else {
+        setErrorMsg(t('apiResults.register.error'));
+      }
     }
   };
 
-  return (document.title = 'Register',
+  return (document.title = t('register'),
     <div className='auth-body'>
       <FormCard onSubmit={handleSubmit(onSubmit)}>
-        <Title title="Register" />
+        <Title title={t('register')} />
         <InputField
           type="text"
-          placeholder="Username"
+          placeholder={t('username')}
           {...register('username')}
           error={errors.username?.message}
         />
-        <p>{errors.username?.message}</p>
+        <InputField
+          type="email"
+          placeholder={t('email')}
+          {...register('email')}
+          error={errors.email?.message}
+        />
         <InputField
           type="password"
-          placeholder="Password"
+          placeholder={t('password')}
           {...register('password')}
           error={errors.password?.message}
         />
-        <p>{errors.password?.message}</p>
         <InputField
           type="password"
-          placeholder="Confirm Password"
+          placeholder={t('confirmPassword')}
           {...register('confirmPassword')}
           error={errors.confirmPassword?.message}
         />
-        <p>{errors.confirmPassword?.message}</p>
-        <InputField
-          type="text"
-          placeholder="Invite Token"
-          {...register('token')}
-          error={errors.token?.message}
-        />
-        <p>{errors.token?.message}</p>
-        {msg && (<p className='error-message'>{msg}</p>)}
-        <Button type="submit">REGISTER</Button>
-        <Account message="Already have an account?" linkText='Login now.' link='/login'/>
+        <Button type="submit">{t('register')}</Button>
+        <Account message={t('alreadyHaveAnAccount')} linkText={t('loginNow')} link='/login'/>
+
+        {errors.username && <WarningMessage error={errors.username.message as string} />}
+        {!errors.username && errors.email && <WarningMessage error={errors.email.message as string} />}
+        {!errors.username && !errors.email && errors.password && <WarningMessage error={errors.password.message as string} />}
+        {!errors.username && !errors.email && !errors.password && errors.confirmPassword && <WarningMessage error={errors.confirmPassword.message as string} />}
+
+        <ErrorMessage error={errorMsg} />
+        <SuccessMessage message={msg} />
       </FormCard>
     </div>
   );
