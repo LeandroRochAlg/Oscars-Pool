@@ -7,7 +7,6 @@ import Button from '../../components/common/Button';
 import Title from '../../components/ui/Title';
 import Account from '../../components/common/Account';
 import FormCard from '../../components/common/FormCard';
-import '../../styles/auth.css';
 import api from '../../libs/api';
 import { AxiosError } from 'axios';
 
