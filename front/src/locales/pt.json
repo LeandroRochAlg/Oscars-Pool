@@ -42,5 +42,10 @@
             "error": "Erro ao fazer login",
             "invalidCredentials": "Credenciais inválidas"
         }
+    },
+    "images": {
+        "alt": {
+            "AindaEstouAqui": "Uma cena do filme Eu Ainda Estou Aqui. Uma câmera dos anos 70 é mostrada pronta para tirar uma foto."
+        }
     }
 }

@@ -42,5 +42,10 @@
             "error": "Error logging in",
             "invalidCredentials": "Invalid credentials"
         }
+    },
+    "images": {
+        "alt": {
+            "AindaEstouAqui": "A still from the movie I'm Still Here. A 70's camera is shown set to take a picture."
+        }
     }
 }

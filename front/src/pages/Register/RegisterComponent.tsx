@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import InputField from '../../components/common/InputField';
 import Button from '../../components/common/Button';
-import Title from '../../components/ui/Title';
 import Account from '../../components/common/Account';
 import FormCard from '../../components/common/FormCard';
 import ErrorMessage from '../../components/common/ErrorMessage';
@@ -66,32 +65,32 @@ const RegisterPage = () => {
   return (document.title = t('register'),
     <div className='auth-body'>
       <FormCard onSubmit={handleSubmit(onSubmit)}>
-        <Title title={t('register')} />
+        <h1 className='text-3xl text-base-100 mb-2'>{t('register')}</h1>
         <InputField
           type="text"
           placeholder={t('username')}
           {...register('username')}
-          error={errors.username?.message}
         />
         <InputField
           type="email"
           placeholder={t('email')}
           {...register('email')}
-          error={errors.email?.message}
         />
         <InputField
           type="password"
           placeholder={t('password')}
           {...register('password')}
-          error={errors.password?.message}
         />
         <InputField
           type="password"
           placeholder={t('confirmPassword')}
           {...register('confirmPassword')}
-          error={errors.confirmPassword?.message}
         />
-        <Button type="submit">{t('register')}</Button>
+
+        <div className='w-full flex justify-center'>
+          <Button type="submit">{t('register')}</Button>
+        </div>
+
         <Account message={t('alreadyHaveAnAccount')} linkText={t('loginNow')} link='/login'/>
 
         {errors.username && <WarningMessage error={errors.username.message as string} />}
