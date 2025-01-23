@@ -13,7 +13,7 @@ class UserService {
             emailVerified: user.emailVerified
         };
 
-        const token = jwt.sign(userToken, process.env.JWT_SECRET || '', { expiresIn: '7d' });
+        const token = jwt.sign({_id: user._id, ...userToken}, process.env.JWT_SECRET || '', { expiresIn: '7d' });
 
         const userPayload: UserPayload = {
             ...userToken,
