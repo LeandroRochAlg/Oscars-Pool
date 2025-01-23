@@ -11,8 +11,10 @@ import WarningMessage from '../../components/common/WarningMessage';
 import api from '../../libs/api';
 import { AxiosError } from 'axios';
 import { useTranslation } from 'react-i18next';
+import { User } from '../../models/user';
 
 const LoginPage: React.FC = () => {
+  type UserResponse = Pick<User, 'username' | 'email' | 'admin' | 'emailVerified'> & { token: string };
   const [msg, setMsg] = useState<string>('');
   const { t } = useTranslation();
 
@@ -31,7 +33,10 @@ const LoginPage: React.FC = () => {
     try {
       const response = await api.post<string>('/login', data);
       console.log('Login successful:', response.data);
-      localStorage.setItem('user', response.data);
+
+      // Get the user data from the response and store it in local storage
+      const user: UserResponse = response.data as unknown as UserResponse;
+      localStorage.setItem('user', JSON.stringify(user));
       
       // Redirect to the home page
       window.location.href = '/';
