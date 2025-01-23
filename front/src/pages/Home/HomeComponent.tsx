@@ -12,21 +12,10 @@ const HomePage: React.FC = () => {
   const [available, setAvailable] = useState(false);
 
   useEffect(() => {
-    const fetchUsername = async () => {
-      try {
-        const response = await api.get<{username: string}>('/username');
-        setUsername(response.data.username);
-        setAvailable(true);
-      } catch (error) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response?.status === 401 || axiosError.response?.status === 400) {
-          localStorage.removeItem('token');
-          window.location.href = '/login';
-        }
-      }
-    };
-
-    fetchUsername();
+    console.log('User:', localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    setUsername(user.username || '');
+    setAvailable(true);
   }, []);
 
   return (document.title = 'Home',
