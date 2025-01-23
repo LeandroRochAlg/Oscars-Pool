@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
-import api from '../../libs/api';
 import Header from '../../components/layout/Header';
 import Sidebar from '../../components/layout/Sidebar';
 import Footer from '../../components/layout/Footer';
@@ -12,7 +10,6 @@ const HomePage: React.FC = () => {
   const [available, setAvailable] = useState(false);
 
   useEffect(() => {
-    console.log('User:', localStorage.getItem('user'));
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     setUsername(user.username || '');
     setAvailable(true);
