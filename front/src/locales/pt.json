@@ -49,5 +49,12 @@
         "alt": {
             "AindaEstouAqui": "Uma cena do filme Eu Ainda Estou Aqui. Uma câmera dos anos 70 é mostrada pronta para tirar uma foto."
         }
+    },
+    "confirmEmail": {
+        "title": "Confirme seu email",
+        "message": "Por favor, clique no link de confirmação para ativar sua conta.",
+        "sendEmail": "Enviar email de confirmação",
+        "success": "Email enviado com sucesso",
+        "error": "Erro ao enviar email"
     }
 }

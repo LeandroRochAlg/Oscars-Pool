@@ -49,5 +49,12 @@
         "alt": {
             "AindaEstouAqui": "A still from the movie I'm Still Here. A 70's camera is shown set to take a picture."
         }
+    },
+    "confirmEmail": {
+        "title": "Confirm your email",
+        "message": "Please click the confirmation link to activate your account.",
+        "sendEmail": "Send confirmation email",
+        "success": "Email sent successfully",
+        "error": "Error sending email"
     }
 }
