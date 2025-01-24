@@ -18,6 +18,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 const LoginPage: React.FC = () => {
   type UserResponse = Pick<User, 'username' | 'email' | 'admin' | 'emailVerified'> & { token: string };
   const [msg, setMsg] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+
   const { t } = useTranslation();
 
   // Define the validation schema using Yup
@@ -32,6 +34,7 @@ const LoginPage: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     try {
+      setLoading(true);
       const response = await api.post<string>('/login', data);
 
       // Get the user data from the response and store it in local storage
@@ -44,6 +47,7 @@ const LoginPage: React.FC = () => {
       // Redirect to the home page
       window.location.href = '/';
     } catch (error) {
+      setLoading(false);
       const axiosError = error as AxiosError;
       console.error('Login Error:', axiosError.response?.data);
       
@@ -55,6 +59,11 @@ const LoginPage: React.FC = () => {
         setMsg(t('apiResults.login.error'));
       }
     }
+
+    setLoading(false);
+    setTimeout(() => {
+      setMsg('');
+    }, 5000);
   };
 
   return (document.title = t('login'),
@@ -74,7 +83,7 @@ const LoginPage: React.FC = () => {
         />
 
         <div className='w-full flex justify-center'>
-          <Button type="submit">{t('login')}</Button>
+          <Button type="submit" loading={loading}>{t('login')}</Button>
         </div>
 
         <Account message={t('dontHaveAnAccount')} linkText={t('createAccount')} link='/register'/>

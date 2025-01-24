@@ -18,6 +18,7 @@ const RegisterPage = () => {
   type UserForm = Pick<User, 'username' | 'email' | 'password'> & { confirmPassword?: string }; // Confirm password needs to be optional for validation
   const [msg, setMsg] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { t } = useTranslation();
 
@@ -42,6 +43,7 @@ const RegisterPage = () => {
 
   const onSubmit = async (data: UserForm) => {
     try {
+      setLoading(true);
       const response = await api.post<string>('/register', data);
       
       if (response.status === 201) {
@@ -60,6 +62,12 @@ const RegisterPage = () => {
         setErrorMsg(t('apiResults.register.error'));
       }
     }
+    
+    setLoading(false);
+    setTimeout(() => {
+      setMsg('');
+      setErrorMsg('');
+    }, 5000);
   };
 
   return (document.title = t('register'),
@@ -89,7 +97,7 @@ const RegisterPage = () => {
         />
 
         <div className='w-full flex justify-center'>
-          <Button type="submit">{t('register')}</Button>
+          <Button type="submit" loading={loading}>{t('register')}</Button>
         </div>
 
         <Account message={t('alreadyHaveAnAccount')} linkText={t('loginNow')} link='/login'/>

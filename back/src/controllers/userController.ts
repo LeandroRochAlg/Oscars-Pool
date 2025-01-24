@@ -47,7 +47,7 @@ class UserController {
             await db.collection<User>('users').insertOne(newUser);
 
             // Insert the new user into Firebase Authentication
-            admin.auth().createUser({   // Don't wait for the promise to resolve to send the response for better performance
+            await admin.auth().createUser({   // Don't wait for the promise to resolve to send the response for better performance
                 email,
                 emailVerified,
                 password,
