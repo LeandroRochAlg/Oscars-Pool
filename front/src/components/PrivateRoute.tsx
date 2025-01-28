@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import ConfirmEmail from "./common/ConfirmEmail";
 
 interface PrivateRouteProps {
     children: JSX.Element;
@@ -13,7 +14,12 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
         return <Navigate to="/login" />;
     }
 
-    return children;
+    return (
+        <>
+            {children}
+            <ConfirmEmail />
+        </>
+    );
 }
 
 export default PrivateRoute;
