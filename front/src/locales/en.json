@@ -55,6 +55,10 @@
         "message": "Please click the confirmation link to activate your account.",
         "sendEmail": "Send confirmation email",
         "success": "Email sent successfully",
-        "error": "Error sending email"
+        "error": "Error sending email",
+        "confirmSuccess": "Email confirmed successfully",
+        "confirmError": "Error confirming email",
+        "confirmLoading": "Confirming email...",
+        "proceed": "Proceed"
     }
 }

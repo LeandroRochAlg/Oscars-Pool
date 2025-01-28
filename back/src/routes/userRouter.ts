@@ -16,6 +16,9 @@ userRouter.post('/login-google', LoginController.loginWithGoogle);
 // Register
 userRouter.post('/register', userController.register);
 
+// Confirm email
+userRouter.patch('/confirm-email', userController.confirmEmail);
+
 // Admin check 
 userRouter.get('/admin', authMiddleware, userController.admin);
 

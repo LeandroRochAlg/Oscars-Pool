@@ -9,6 +9,7 @@ import WinnersPage from "../pages/Winners/WinnersComponent";
 import LeaderboardPage from "../pages/Leaderboard/LeaderboardComponent";
 import UserPage from "../pages/User/UserComponent";
 import NotFoundPage from "../pages/NotFound/NotFoundComponent";
+import ConfirmEmailPage from "../pages/ConfirmEmail/ConfirmEmailPage";
 
 const AppRoutes: React.FC = () => {
     return (
@@ -44,6 +45,9 @@ const AppRoutes: React.FC = () => {
                         <UserPage />
                     </PrivateRoute>
                 } />
+                
+                {/* Confirm Email */}
+                <Route path="/confirm-email" element={<ConfirmEmailPage />} />
 
                 {/* 404 */}
                 <Route path="*" element={<NotFoundPage />} />

@@ -61,6 +61,32 @@ class UserController {
         }
     }
 
+    async confirmEmail(req: Request, res: Response) {
+        try {
+            const email = req.body.email;
+
+            const user = await db.collection<User>('users').findOne({ email });
+
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+
+            if (user.emailVerified) {
+                return res.status(200).send('Email already verified');
+            }
+
+            await db.collection<User>('users').updateOne(
+                { email },
+                { $set: { emailVerified: true, updatedAt: new Date() } }
+            );
+
+            res.status(200).send('Email confirmed');
+        } catch (error) {
+            console.error("Error confirming email:", error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
     async admin(req: Request, res: Response) {
         const isAdmin = req.user.admin;
 
