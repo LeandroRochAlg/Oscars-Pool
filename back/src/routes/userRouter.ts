@@ -33,3 +33,6 @@ userRouter.post('/username', authMiddleware, userController.changeUsername);
 
 // Change password
 userRouter.post('/password', authMiddleware, userController.changePassword);
+
+// Reset password
+userRouter.put('/reset-password', userController.resetPassword);

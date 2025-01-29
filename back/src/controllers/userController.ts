@@ -189,6 +189,45 @@ class UserController {
             res.status(500).send('Internal Server Error');
         }
     }
+
+    async resetPassword(req: Request, res: Response) {
+        const { email, newPassword } = req.body;
+
+        try {
+            const user = await db.collection<User>('users').findOne({
+                email
+            });
+
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+            await db.collection<User>('users').updateOne({
+                email
+            }, {
+                $set: {
+                    password: hashedPassword
+                }
+            });
+
+            try {
+                const firebaseUser = await admin.auth().getUserByEmail(email);
+                await admin.auth().updateUser(firebaseUser.uid, {
+                    password: newPassword
+                });
+            } catch (firebaseError) {
+                console.error('Error updating Firebase user:', firebaseError);
+                return res.status(500).send('Internal Server Error');
+            }
+
+            res.status(200).send('Password updated');
+        } catch (error) {
+            console.error("Error resetting password:", error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
 }
 
 export default new UserController();

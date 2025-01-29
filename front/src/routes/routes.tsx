@@ -9,7 +9,7 @@ import WinnersPage from "../pages/Winners/WinnersComponent";
 import LeaderboardPage from "../pages/Leaderboard/LeaderboardComponent";
 import UserPage from "../pages/User/UserComponent";
 import NotFoundPage from "../pages/NotFound/NotFoundComponent";
-import ConfirmEmailPage from "../pages/ConfirmEmail/ConfirmEmailPage";
+import ActionHandler from "../pages/ActionHandler/ActionHandler";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 
 const AppRoutes: React.FC = () => {
@@ -48,8 +48,8 @@ const AppRoutes: React.FC = () => {
                     </PrivateRoute>
                 } />
                 
-                {/* Confirm Email */}
-                <Route path="/confirm-email" element={<ConfirmEmailPage />} />
+                {/* Action Handler */}
+                <Route path="/action-handler" element={<ActionHandler />} />
 
                 {/* 404 */}
                 <Route path="*" element={<NotFoundPage />} />

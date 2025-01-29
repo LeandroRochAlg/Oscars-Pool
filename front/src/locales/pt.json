@@ -71,5 +71,21 @@
         "proceed": "Prosseguir",
         "emailSent": "Email enviado com sucesso",
         "backToLogin": "Voltar para o login"
+    },
+    "actionHandler": {
+        "invalidLink": "Link inválido ou expirado.",
+        "invalidAction": "Ação inválida.",
+        "emailNotFound": "Email não encontrado.",
+        "emailVerificationError": "Erro ao verificar email.",
+        "passwordsDoNotMatch": "As senhas não coincidem.",
+        "passwordResetError": "Erro ao redefinir a senha.",
+        "loading": "Carregando...",
+        "emailVerified": "Email verificado com sucesso!",
+        "proceed": "Prosseguir",
+        "resetPasswordTitle": "Redefinir Senha",
+        "newPassword": "Nova Senha",
+        "confirmPassword": "Confirmar Senha",
+        "resetPassword": "Redefinir Senha",
+        "passwordResetSuccess": "Senha redefinida com sucesso"
     }
 }

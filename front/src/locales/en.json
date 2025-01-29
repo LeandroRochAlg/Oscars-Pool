@@ -71,5 +71,21 @@
         "proceed": "Proceed",
         "emailSent": "Email sent successfully",
         "backToLogin": "Back to login"
+    },
+    "actionHandler": {
+        "invalidLink": "Invalid or expired link.",
+        "invalidAction": "Invalid action.",
+        "emailNotFound": "Email not found.",
+        "emailVerificationError": "Error verifying email.",
+        "passwordsDoNotMatch": "Passwords do not match.",
+        "passwordResetError": "Error resetting password.",
+        "loading": "Loading...",
+        "emailVerified": "Email verified successfully!",
+        "proceed": "Proceed",
+        "resetPasswordTitle": "Reset Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "resetPassword": "Reset Password",
+        "passwordResetSuccess": "Password reset successfully"
     }
 }
