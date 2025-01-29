@@ -79,8 +79,10 @@ const ActionHandler = () => {
             }
 
             await api.patch('/confirm-email', { email: userEmail });
+            
+            // Update the user in local storage
             const user = JSON.parse(localStorage.getItem('user') || '{}');
-            user.emailConfirmed = true;
+            user.emailVerified = true;
             localStorage.setItem('user', JSON.stringify(user));
 
             setStatus("success");
