@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../components/layout/Header';
 import Sidebar from '../../components/layout/Sidebar';
 import Footer from '../../components/layout/Footer';
-import ConfirmEmail from '../../components/common/ConfirmEmail';
 import styles from './HomeComponent.module.css';
 import "../../styles/system.css"
 
@@ -24,7 +23,7 @@ const HomePage: React.FC = () => {
         <p className={styles.message}>You are now logged into the Pool. Feel free to make a <a href="/bets">Bet</a> or see the <a href="/winners">Winners</a> or <a href="/leaderboard">Leaderboard</a> if available!</p>
       </div>
       <Sidebar />
-      <ConfirmEmail />
+      <Footer />
     </div>
   );
 };
