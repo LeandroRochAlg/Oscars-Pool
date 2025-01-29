@@ -42,9 +42,14 @@ const RegisterPage = () => {
   });
 
   const onSubmit = async (data: UserForm) => {
+    const userRegister = {
+      username: data.username,
+      email: data.email,
+      password: data.password
+    }
     try {
       setLoading(true);
-      const response = await api.post<string>('/register', data);
+      const response = await api.post<string>('/register', userRegister);
       
       if (response.status === 201) {
         setMsg(t('apiResults.register.success'));
