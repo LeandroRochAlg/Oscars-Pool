@@ -5,7 +5,9 @@
     "password": "Senha",
     "confirmPassword": "Confirmar Senha",
     "email": "Email",
+    "usernameOrEmail": "Usuário ou Email",
     "rememberMe": "manter conectado?",
+    "forgotPassword": "esqueceu a senha?",
     "dontHaveAnAccount": "ainda não tem uma conta?",
     "createAccount": "crie uma agora",
     "loginError": "Ops... Você não pode ir para lá 👉",
@@ -14,7 +16,7 @@
     "register": "Registrar",
     "validation": {
         "usernameRequired": "Nome de usuário é obrigatório",
-        "usernameLength": "Nome de usuário deve ter pelo menos 3 caracteres",
+        "usernameLength": "Nome de usuário deve ter pelo menos 4 caracteres",
         "emailRequired": "Email é obrigatório",
         "emailInvalid": "Email é inválido",
         "passwordRequired": "Senha é obrigatória",
@@ -23,12 +25,67 @@
         "passwordLowercase": "Senha deve conter pelo menos uma letra minúscula",
         "passwordUppercase": "Senha deve conter pelo menos uma letra maiúscula",
         "passwordNonAlphanumeric": "Senha deve conter pelo menos um caractere não alfanumérico",
-        "passwordsDontMatch": "As senhas não coincidem"
+        "passwordsDontMatch": "As senhas não coincidem",
+        "usernameOrEmailRequired": "Nome de usuário ou email é obrigatório"
     },
     "signInWithGoogle": "Entrar com o Google",
     "whyConnectWithGoogle": "por que pedimos para você se conectar com o Google?",
     "continueWithoutGoogle": "Continuar sem o Google",
     "connected": "conectado!",
     "connectWithAnother": "Conectar com outra conta?",
-    "home": "Início"
+    "home": "Início",
+    "apiResults": {
+        "register": {
+            "success": "Usuário registrado com sucesso",
+            "error": "Erro ao registrar usuário",
+            "usernameOrEmailTaken": "Nome de usuário ou email já em uso"
+        },
+        "login": {
+            "success": "Usuário logado com sucesso",
+            "error": "Erro ao fazer login",
+            "invalidCredentials": "Credenciais inválidas"
+        }
+    },
+    "images": {
+        "alt": {
+            "AindaEstouAqui": "Uma cena do filme Eu Ainda Estou Aqui. Uma câmera dos anos 70 é mostrada pronta para tirar uma foto."
+        }
+    },
+    "confirmEmail": {
+        "title": "Confirme seu email",
+        "message": "Por favor, clique no link de confirmação para ativar sua conta.",
+        "sendEmail": "Enviar email de confirmação",
+        "success": "Email enviado com sucesso",
+        "error": "Erro ao enviar email",
+        "confirmSuccess": "Email confirmado com sucesso",
+        "confirmError": "Erro ao confirmar email",
+        "confirmLoading": "Confirmando email...",
+        "proceed": "Prosseguir"
+    },
+    "resetPassword": {
+        "title": "Redefinir sua senha",
+        "message": "Por favor, insira seu endereço de email e enviaremos um link para redefinir sua senha.",
+        "submit": "Enviar email de redefinição",
+        "success": "Email enviado com sucesso",
+        "error": "Erro ao enviar email",
+        "proceed": "Prosseguir",
+        "emailSent": "Email enviado com sucesso",
+        "backToLogin": "Voltar para o login"
+    },
+    "actionHandler": {
+        "invalidLink": "Link inválido ou expirado.",
+        "invalidAction": "Ação inválida.",
+        "emailNotFound": "Email não encontrado.",
+        "emailVerificationError": "Erro ao verificar email.",
+        "passwordsDoNotMatch": "As senhas não coincidem.",
+        "passwordResetError": "Erro ao redefinir a senha.",
+        "loading": "Carregando...",
+        "emailVerified": "Email verificado com sucesso!",
+        "proceed": "Prosseguir",
+        "resetPasswordTitle": "Redefinir Senha",
+        "newPassword": "Nova Senha",
+        "confirmPassword": "Confirmar Senha",
+        "resetPassword": "Redefinir Senha",
+        "passwordResetSuccess": "Senha redefinida com sucesso"
+    }
 }

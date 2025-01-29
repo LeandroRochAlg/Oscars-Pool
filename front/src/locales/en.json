@@ -5,7 +5,9 @@
     "password": "Password",
     "confirmPassword": "Confirm Password",
     "email": "Email",
+    "usernameOrEmail": "Username or Email",
     "rememberMe": "remember me?",
+    "forgotPassword": "forgot password?",
     "dontHaveAnAccount": "don't have an account yet?",
     "createAccount": "create one now",
     "loginError": "Oops... You can't go there 👉",
@@ -14,7 +16,7 @@
     "register": "Register",
     "validation": {
         "usernameRequired": "Username is required",
-        "usernameLength": "Username must be at least 3 characters long",
+        "usernameLength": "Username must be at least 4 characters long",
         "emailRequired": "Email is required",
         "emailInvalid": "Email is invalid",
         "passwordRequired": "Password is required",
@@ -23,12 +25,67 @@
         "passwordLowercase": "Password must contain at least one lowercase letter",
         "passwordUppercase": "Password must contain at least one uppercase letter",
         "passwordNonAlphanumeric": "Password must contain at least one non-alphanumeric character",
-        "passwordsDontMatch": "Passwords do not match"
+        "passwordsDontMatch": "Passwords do not match",
+        "usernameOrEmailRequired": "Username or email is required"
     },
     "signInWithGoogle": "Sign in with Google",
     "whyConnectWithGoogle": "why do we ask you to connect with Google?",
     "continueWithoutGoogle": "Continue without Google",
     "connected": "connected!",
     "connectWithAnother": "Connect with another account?",
-    "home": "Home"
+    "home": "Home",
+    "apiResults": {
+        "register": {
+            "success": "User registered successfully",
+            "error": "Error registering user",
+            "usernameOrEmailTaken": "Username or email already in use"
+        },
+        "login": {
+            "success": "User logged in successfully",
+            "error": "Error logging in",
+            "invalidCredentials": "Invalid credentials"
+        }
+    },
+    "images": {
+        "alt": {
+            "AindaEstouAqui": "A still from the movie I'm Still Here. A 70's camera is shown set to take a picture."
+        }
+    },
+    "confirmEmail": {
+        "title": "Confirm your email",
+        "message": "Please click the confirmation link to activate your account.",
+        "sendEmail": "Send confirmation email",
+        "success": "Email sent successfully",
+        "error": "Error sending email",
+        "confirmSuccess": "Email confirmed successfully",
+        "confirmError": "Error confirming email",
+        "confirmLoading": "Confirming email...",
+        "proceed": "Proceed"
+    },
+    "resetPassword": {
+        "title": "Reset your password",
+        "message": "Please enter your email address and we'll send you a link to reset your password.",
+        "submit": "Send reset email",
+        "success": "Email sent successfully",
+        "error": "Error sending email",
+        "proceed": "Proceed",
+        "emailSent": "Email sent successfully",
+        "backToLogin": "Back to login"
+    },
+    "actionHandler": {
+        "invalidLink": "Invalid or expired link.",
+        "invalidAction": "Invalid action.",
+        "emailNotFound": "Email not found.",
+        "emailVerificationError": "Error verifying email.",
+        "passwordsDoNotMatch": "Passwords do not match.",
+        "passwordResetError": "Error resetting password.",
+        "loading": "Loading...",
+        "emailVerified": "Email verified successfully!",
+        "proceed": "Proceed",
+        "resetPasswordTitle": "Reset Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "resetPassword": "Reset Password",
+        "passwordResetSuccess": "Password reset successfully"
+    }
 }

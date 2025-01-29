@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
-import api from '../../libs/api';
 import Header from '../../components/layout/Header';
 import Sidebar from '../../components/layout/Sidebar';
 import Footer from '../../components/layout/Footer';
@@ -12,21 +10,9 @@ const HomePage: React.FC = () => {
   const [available, setAvailable] = useState(false);
 
   useEffect(() => {
-    const fetchUsername = async () => {
-      try {
-        const response = await api.get<{username: string}>('/username');
-        setUsername(response.data.username);
-        setAvailable(true);
-      } catch (error) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response?.status === 401 || axiosError.response?.status === 400) {
-          localStorage.removeItem('token');
-          window.location.href = '/login';
-        }
-      }
-    };
-
-    fetchUsername();
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    setUsername(user.username || '');
+    setAvailable(true);
   }, []);
 
   return (document.title = 'Home',

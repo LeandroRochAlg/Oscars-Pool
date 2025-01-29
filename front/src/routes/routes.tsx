@@ -9,6 +9,8 @@ import WinnersPage from "../pages/Winners/WinnersComponent";
 import LeaderboardPage from "../pages/Leaderboard/LeaderboardComponent";
 import UserPage from "../pages/User/UserComponent";
 import NotFoundPage from "../pages/NotFound/NotFoundComponent";
+import ActionHandler from "../pages/ActionHandler/ActionHandler";
+import ResetPassword from "../pages/ResetPassword/ResetPassword";
 
 const AppRoutes: React.FC = () => {
     return (
@@ -17,6 +19,7 @@ const AppRoutes: React.FC = () => {
                 {/* Public Routes */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
 
                 {/* Private Routes */}
                 <Route path="/" element={
@@ -44,6 +47,9 @@ const AppRoutes: React.FC = () => {
                         <UserPage />
                     </PrivateRoute>
                 } />
+                
+                {/* Action Handler */}
+                <Route path="/action-handler" element={<ActionHandler />} />
 
                 {/* 404 */}
                 <Route path="*" element={<NotFoundPage />} />

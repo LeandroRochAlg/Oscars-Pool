@@ -1,4 +1,3 @@
-import '../../styles/auth.css';
 import styles from './NotFoundComponent.module.css';
 
 const NotFoundPage = () => {
