@@ -82,6 +82,11 @@ const LoginPage: React.FC = () => {
           {...register('password')}
         />
 
+        {/* Forgot password */}
+        <div className='w-full flex justify-end text-sm text-base-100 mt-2 italic'>
+          <a href='/reset-password' className='text-base-100 hover:underline'>{t('forgotPassword')}</a>
+        </div>
+
         <div className='w-full flex justify-center'>
           <Button type="submit" loading={loading}>{t('login')}</Button>
         </div>

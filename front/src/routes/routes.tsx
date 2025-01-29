@@ -10,6 +10,7 @@ import LeaderboardPage from "../pages/Leaderboard/LeaderboardComponent";
 import UserPage from "../pages/User/UserComponent";
 import NotFoundPage from "../pages/NotFound/NotFoundComponent";
 import ConfirmEmailPage from "../pages/ConfirmEmail/ConfirmEmailPage";
+import ResetPassword from "../pages/ResetPassword/ResetPassword";
 
 const AppRoutes: React.FC = () => {
     return (
@@ -18,6 +19,7 @@ const AppRoutes: React.FC = () => {
                 {/* Public Routes */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
 
                 {/* Private Routes */}
                 <Route path="/" element={

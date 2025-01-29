@@ -7,6 +7,7 @@
     "email": "Email",
     "usernameOrEmail": "Usuário ou Email",
     "rememberMe": "manter conectado?",
+    "forgotPassword": "esqueceu a senha?",
     "dontHaveAnAccount": "ainda não tem uma conta?",
     "createAccount": "crie uma agora",
     "loginError": "Ops... Você não pode ir para lá 👉",
@@ -60,5 +61,15 @@
         "confirmError": "Erro ao confirmar email",
         "confirmLoading": "Confirmando email...",
         "proceed": "Prosseguir"
+    },
+    "resetPassword": {
+        "title": "Redefinir sua senha",
+        "message": "Por favor, insira seu endereço de email e enviaremos um link para redefinir sua senha.",
+        "submit": "Enviar email de redefinição",
+        "success": "Email enviado com sucesso",
+        "error": "Erro ao enviar email",
+        "proceed": "Prosseguir",
+        "emailSent": "Email enviado com sucesso",
+        "backToLogin": "Voltar para o login"
     }
 }
