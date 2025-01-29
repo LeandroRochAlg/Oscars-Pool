@@ -44,8 +44,9 @@ const LoginPage: React.FC = () => {
       // Save user in Firebase Authentication
       await signInWithEmailAndPassword(auth, user.email, data.password);
 
-      // Redirect to the home page
-      window.location.href = '/';
+      // Check if there is a redirect URL, if so, redirect the user to that page
+      const redirectUrl = new URLSearchParams(window.location.search).get('redirect');
+      window.location.href = redirectUrl ? redirectUrl : '/';
     } catch (error) {
       setLoading(false);
       const axiosError = error as AxiosError;
