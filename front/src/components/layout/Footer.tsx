@@ -27,7 +27,7 @@ const Footer = () => {
         <p>
           Academy Bolao
           <br />
-          © 2024 Leandro Rocha.
+          © 2025 Leandro Rocha.
         </p>
       </aside>
       <nav>
