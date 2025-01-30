@@ -87,5 +87,7 @@
         "confirmPassword": "Confirmar Senha",
         "resetPassword": "Redefinir Senha",
         "passwordResetSuccess": "Senha redefinida com sucesso"
-    }
+    },
+    "contact": "Contato",
+    "social": "Social"
 }

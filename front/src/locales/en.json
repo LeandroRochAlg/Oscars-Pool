@@ -87,5 +87,7 @@
         "confirmPassword": "Confirm Password",
         "resetPassword": "Reset Password",
         "passwordResetSuccess": "Password reset successfully"
-    }
+    },
+    "contact": "Contact",
+    "social": "Social"
 }
