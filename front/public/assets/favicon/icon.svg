@@ -1,0 +1,17 @@
+<svg
+  width="50"
+  height="50"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+  fillRule="evenodd"
+  clipRule="evenodd"
+>
+  <path
+    d="M12 2c-1.1 0-2 .9-2 2v2H8v2h2v10H8v2h8v-2h-2V8h2V6h-2V4c0-1.1-.9-2-2-2zm0 2h2v2h-2V4z"
+    fill="#eab308"
+  />
+  <path
+    d="M12 6c-1.1 0-2 .9-2 2v2H8v2h2v6H8v2h8v-2h-2v-6h2v-2h-2V8c0-1.1-.9-2-2-2zm0 2h2v2h-2V8z"
+    fill="#eab308"
+  />
+</svg>
