@@ -48,7 +48,8 @@
     },
     "images": {
         "alt": {
-            "AindaEstouAqui": "Uma cena do filme Eu Ainda Estou Aqui. Uma câmera dos anos 70 é mostrada pronta para tirar uma foto."
+            "AindaEstouAqui": "Uma cena do filme Eu Ainda Estou Aqui. Uma câmera dos anos 70 é mostrada pronta para tirar uma foto.",
+            "Flow": "O gato do filme Flow olhando para a câmera com rochas e uma cidade antiga ao fundo."
         }
     },
     "confirmEmail": {
@@ -89,5 +90,10 @@
         "passwordResetSuccess": "Senha redefinida com sucesso"
     },
     "contact": "Contato",
-    "social": "Social"
+    "social": "Social",
+    "pages": {
+        "home": "Início",
+        "profile": "Perfil"
+    },
+    "logout": "Sair"
 }
