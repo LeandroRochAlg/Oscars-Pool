@@ -25,7 +25,7 @@ const Footer = () => {
           />
         </svg>
         <p>
-          Academy Bolao
+          AcademyBolao
           <br />
           © 2025 Leandro Rocha.
         </p>
