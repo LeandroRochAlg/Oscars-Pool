@@ -10,7 +10,7 @@ const FormCard: React.FC<FormCardProps> = ({ children, onSubmit }) => {
     const { t } = useTranslation();
 
     return (
-        <div className="flex items-center justify-center h-screen w-screen bg-base-100">
+        <div className="flex items-center justify-center w-full bg-base-100 my-16">
             <div className="card lg:card-side lg:w-1/2 lg:h-[400px] mx-4 lg:mx-auto bg-base-200 shadow-xl">
                 <figure className="max-h-40 lg:max-h-full lg:w-1/2">
                     <img

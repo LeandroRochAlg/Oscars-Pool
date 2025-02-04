@@ -33,7 +33,6 @@
     "continueWithoutGoogle": "Continue without Google",
     "connected": "connected!",
     "connectWithAnother": "Connect with another account?",
-    "home": "Home",
     "apiResults": {
         "register": {
             "success": "User registered successfully",
@@ -48,7 +47,8 @@
     },
     "images": {
         "alt": {
-            "AindaEstouAqui": "A still from the movie I'm Still Here. A 70's camera is shown set to take a picture."
+            "AindaEstouAqui": "A still from the movie I'm Still Here. A 70's camera is shown set to take a picture.",
+            "Flow": "The cat from the movie Flow looking at the camera with rocks and an ancient city in the background."
         }
     },
     "confirmEmail": {
@@ -87,5 +87,13 @@
         "confirmPassword": "Confirm Password",
         "resetPassword": "Reset Password",
         "passwordResetSuccess": "Password reset successfully"
-    }
+    },
+    "contact": "Contact",
+    "social": "Social",
+    "settings": "Settings",
+    "pages": {
+        "home": "Home",
+        "profile": "Profile"
+    },
+    "logout": "Logout"
 }

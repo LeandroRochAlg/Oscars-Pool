@@ -11,10 +11,14 @@ import UserPage from "../pages/User/UserComponent";
 import NotFoundPage from "../pages/NotFound/NotFoundComponent";
 import ActionHandler from "../pages/ActionHandler/ActionHandler";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 
 const AppRoutes: React.FC = () => {
     return (
         <Router>
+            <Header />
+
             <Routes>
                 {/* Public Routes */}
                 <Route path="/login" element={<LoginPage />} />
@@ -54,6 +58,8 @@ const AppRoutes: React.FC = () => {
                 {/* 404 */}
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
+
+            <Footer />
         </Router>
     );
 }
