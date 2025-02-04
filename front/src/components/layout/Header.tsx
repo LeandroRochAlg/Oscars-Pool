@@ -1,8 +1,27 @@
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 const Header = () => {
-    const { t } = useTranslation();
+    // Handle Theme Change
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
+    useEffect(() => {
+        localStorage.setItem("theme", theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        const newTheme = theme === "light" ? "dark" : "light";
+        setTheme(newTheme);
+    };
+    
+    // Handle Language Change
+    const { t, i18n } = useTranslation();
+
+    const changeLanguage = (language: string) => {
+        i18n.changeLanguage(language);
+    }
+
+    // Handle Logout
     const handleLogout = () => {
         // Handle logout logic here
         localStorage.removeItem('user');
@@ -54,7 +73,66 @@ const Header = () => {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-info rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         <li><a href="/user">{t('pages.profile')}</a></li>
-                        <li><a>Settings</a></li>
+                        
+                        {/* Settings option */}
+                        <li>
+                            <details>
+                                <summary>{t("settings")}</summary>
+                                <ul>
+                                    {/* Change language */}
+                                    <li>
+                                        <a onClick={() => changeLanguage("en")}>
+                                            {i18n.language === "en" ? <strong>🇺🇸 English</strong> : "🇺🇸 English"}
+                                        </a>
+
+                                        <a onClick={() => changeLanguage("pt")}>
+                                            {i18n.language === "pt" ? <strong>🇧🇷 Português</strong> : "🇧🇷 Português"}
+                                        </a>
+                                    </li>
+
+                                    {/* Theme switcher */}
+                                    <li className="mt-2">
+                                        <label className="flex cursor-pointer gap-2">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            >
+                                                <circle cx="12" cy="12" r="5" />
+                                                <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                                            </svg>
+                                            <input
+                                                type="checkbox"
+                                                value="mythemedark"
+                                                className="toggle theme-controller"
+                                                onChange={toggleTheme}
+                                                checked={theme === "dark"}
+                                            />
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeWidth="2"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            >
+                                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                            </svg>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </details>
+                        </li>
+
                         <li><a onClick={handleLogout}>{t('logout')}</a></li>
                     </ul>
                 </div>

@@ -90,6 +90,7 @@
     },
     "contact": "Contact",
     "social": "Social",
+    "settings": "Settings",
     "pages": {
         "home": "Home",
         "profile": "Profile"

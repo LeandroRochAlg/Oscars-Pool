@@ -14,20 +14,6 @@ export default {
   daisyui: {
     themes: [
       {
-        mythemedark: {
-          "primary": "#eab308",
-          "secondary": "#fef9c3",
-          "accent": "#713f12",
-          "neutral": "#eab308",
-          "base-100": "#1c1917",
-          "base-200": "#fef3c7",
-          "info": "#713f12",
-          "success": "#3f6212",
-          "warning": "#ea580c",
-          "error": "#b91c1c",
-        },
-      },
-      {
         mythemelight: {
           "primary": "#eab308",
           "secondary": "#fef9c3",
@@ -41,9 +27,23 @@ export default {
           "error": "#b91c1c",
         },
       },
+      {
+        mythemedark: {
+          "primary": "#eab308",
+          "secondary": "#fef9c3",
+          "accent": "#713f12",
+          "neutral": "#eab308",
+          "base-100": "#1c1917",
+          "base-200": "#fef3c7",
+          "info": "#713f12",
+          "success": "#3f6212",
+          "warning": "#ea580c",
+          "error": "#b91c1c",
+        },
+      },
       "black",
     ],
-    darkTheme: "mydarktheme",
+    darkTheme: "mythemelight",
     base: true,
     styled: true,
     utils: true,
