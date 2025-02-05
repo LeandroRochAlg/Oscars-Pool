@@ -2,8 +2,29 @@ import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { ObjectId } from 'mongodb';
 import { Nominee } from '../models/nominee';
+import path from 'path';
+import fs from 'fs';
 
 class BetController {
+    async getCategories(_req: Request, res: Response) {
+        try {
+            // Get only the categories names from the json file
+            const nomineesPath = path.join('src', 'data', 'nominees.json');
+            const nomineesData = fs.readFileSync(nomineesPath);
+            const nominees = JSON.parse(nomineesData.toString());
+
+            const categories: string[] = [];
+
+            nominees.map((category: any) => {
+            categories.push(category.category);
+            });
+
+            res.status(200).json(categories);
+        } catch (error) {
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
     async getNominees(req: Request, res: Response) {
         try {
             const users = db.collection('users');
