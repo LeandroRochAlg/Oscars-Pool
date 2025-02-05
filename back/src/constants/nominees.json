@@ -1,0 +1,717 @@
+[
+    {
+        "category": "nominees.category.actor",
+        "nominees": [
+            {
+                "name": "Adrien Brody",
+                "detail": "nominees.movie.theBrutalist",
+                "movieImage": "/nominees/the_brutalist.jpg"
+            },
+            {
+                "name": "Timothée Chalamet",
+                "detail": "nominees.movie.aCompleteUnknown",
+                "movieImage": "/nominees/a_complete_unknown.jpg"
+            },
+            {
+                "name": "Colman Domingo",
+                "detail": "nominees.movie.singSing",
+                "movieImage": "/nominees/sing_sing.jpg"
+            },
+            {
+                "name": "Ralph Fiennes",
+                "detail": "nominees.movie.conclave",
+                "movieImage": "/nominees/conclave.jpg"
+            },
+            {
+                "name": "Sebastian Stan",
+                "detail": "nominees.movie.theApprentice",
+                "movieImage": "/nominees/the_apprentice.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.supportingActor",
+        "nominees": [
+            {
+                "name": "Yura Borisov",
+                "detail": "nominees.movie.anora",
+                "movieImage": "/nominees/anora.jpg"
+            },
+            {
+                "name": "Kieran Culkin",
+                "detail": "nominees.movie.aRealPain",
+                "movieImage": "/nominees/a_real_pain.jpg"
+            },
+            {
+                "name": "Edward Norton",
+                "detail": "nominees.movie.aCompleteUnknown",
+                "movieImage": "/nominees/a_complete_unknown.jpg"
+            },
+            {
+                "name": "Guy Pearce",
+                "detail": "nominees.movie.theBrutalist",
+                "movieImage": "/nominees/the_brutalist.jpg"
+            },
+            {
+                "name": "Jeremy Strong",
+                "detail": "nominees.movie.theApprentice",
+                "movieImage": "/nominees/the_apprentice.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.actress",
+        "nominees": [
+            {
+                "name": "Cynthia Erivo",
+                "detail": "nominees.movie.wicked",
+                "movieImage": "/nominees/wicked.jpg"
+            },
+            {
+                "name": "Karla Sofía Gascón",
+                "detail": "nominees.movie.emiliaPerez",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "Mikey Madison",
+                "detail": "nominees.movie.anora",
+                "movieImage": "/nominees/anora.jpg"
+            },
+            {
+                "name": "Demi Moore",
+                "detail": "nominees.movie.theSubstance",
+                "movieImage": "/nominees/the_substance.jpg"
+            },
+            {
+                "name": "Fernanda Torres",
+                "detail": "nominees.movie.imStillHere",
+                "movieImage": "/nominees/im_still_here.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.supportingActress",
+        "nominees": [
+            {
+                "name": "Monica Barbaro",
+                "detail": "nominees.movie.aCompleteUnknown",
+                "movieImage": "/nominees/a_complete_unknown.jpg"
+            },
+            {
+                "name": "Ariana Grande",
+                "detail": "nominees.movie.wicked",
+                "movieImage": "/nominees/wicked.jpg"
+            },
+            {
+                "name": "Felicity Jones",
+                "detail": "nominees.movie.theBrutalist",
+                "movieImage": "/nominees/the_brutalist.jpg"
+            },
+            {
+                "name": "Isabella Rossellini",
+                "detail": "nominees.movie.conclave",
+                "movieImage": "/nominees/conclave.jpg"
+            },
+            {
+                "name": "Zoe Saldaña",
+                "detail": "nominees.movie.emiliaPerez",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.animatedFeature",
+        "nominees": [
+            {
+                "name": "nominees.movie.flow",
+                "detail": "Gints Zilbalodis, Matīss Kaža, Ron Dyens, Gregory Zalcman",
+                "movieImage": "/nominees/flow.jpg"
+            },
+            {
+                "name": "nominees.movie.insideOut2",
+                "detail": "Kelsey Mann, Mark Nielsen",
+                "movieImage": "/nominees/inside_out_2.jpg"
+            },
+            {
+                "name": "nominees.movie.memoirOfASnail",
+                "detail": "Adam Elliot, Liz Kearney",
+                "movieImage": "/nominees/memoir_of_a_snail.jpg"
+            },
+            {
+                "name": "nominees.movie.wallaceGromit",
+                "detail": "Nick Park, Merlin Crossingham, Richard Beek",
+                "movieImage": "/nominees/wallace_gromit.jpg"
+            },
+            {
+                "name": "nominees.movie.theWildRobot",
+                "detail": "Chris Sanders, Jeff Hermann",
+                "movieImage": "/nominees/the_wild_robot.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.animatedShort",
+        "nominees": [
+            {
+                "name": "nominees.movie.beautifulMen",
+                "detail": "Nicolas Keppens, Brecht Van Elslande",
+                "movieImage": "/nominees/beautiful_men.jpg"
+            },
+            {
+                "name": "nominees.movie.inTheShadowOfTheCypress",
+                "detail": "Shirin Sohani, Hossein Molayemi",
+                "movieImage": "/nominees/in_the_shadow_of_the_cypress.jpg"
+            },
+            {
+                "name": "nominees.movie.magicCandies",
+                "detail": "Daisuke Nishio, Takashi Washio",
+                "movieImage": "/nominees/magic_candies.jpg"
+            },
+            {
+                "name": "nominees.movie.wanderToWonder",
+                "detail": "Nina Gantz, Stienette Bosklopper",
+                "movieImage": "/nominees/wander_to_wonder.jpg"
+            },
+            {
+                "name": "nominees.movie.yuck",
+                "detail": "Loïc Espuche, Juliette Marquet",
+                "movieImage": "/nominees/yuck.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.cinematography",
+        "nominees": [
+            {
+                "name": "nominees.movie.theBrutalist",
+                "detail": "Lol Crawley",
+                "movieImage": "/nominees/the_brutalist.jpg"
+            },
+            {
+                "name": "nominees.movie.dunePartTwo",
+                "detail": "Greig Fraser",
+                "movieImage": "/nominees/dune_part_two.jpg"
+            },
+            {
+                "name": "nominees.movie.emiliaPerez",
+                "detail": "Paul Guilhaume",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "nominees.movie.maria",
+                "detail": "Ed Lachman",
+                "movieImage": "/nominees/maria.jpg"
+            },
+            {
+                "name": "nominees.movie.nosferatu",
+                "detail": "Jarin Blaschke",
+                "movieImage": "/nominees/nosferatu.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.costumeDesign",
+        "nominees": [
+            {
+                "name": "nominees.movie.aCompleteUnknown",
+                "detail": "Arianne Phillips",
+                "movieImage": "/nominees/a_complete_unknown.jpg"
+            },
+            {
+                "name": "nominees.movie.conclave",
+                "detail": "Lisy Christl",
+                "movieImage": "/nominees/conclave.jpg"
+            },
+            {
+                "name": "nominees.movie.gladiatorII",
+                "detail": "Janty Yates, Dave Crossman",
+                "movieImage": "/nominees/gladiator_ii.jpg"
+            },
+            {
+                "name": "nominees.movie.nosferatu",
+                "detail": "Linda Muir",
+                "movieImage": "/nominees/nosferatu.jpg"
+            },
+            {
+                "name": "nominees.movie.wicked",
+                "detail": "Paul Tazewell",
+                "movieImage": "/nominees/wicked.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.directing",
+        "nominees": [
+            {
+                "name": "nominees.movie.anora",
+                "detail": "Sean Baker",
+                "movieImage": "/nominees/anora.jpg"
+            },
+            {
+                "name": "nominees.movie.theBrutalist",
+                "detail": "Brady Corbet",
+                "movieImage": "/nominees/the_brutalist.jpg"
+            },
+            {
+                "name": "nominees.movie.aCompleteUnknown",
+                "detail": "James Mangold",
+                "movieImage": "/nominees/a_complete_unknown.jpg"
+            },
+            {
+                "name": "nominees.movie.emiliaPerez",
+                "detail": "Jacques Audiard",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "nominees.movie.theSubstance",
+                "detail": "Coralie Fargeat",
+                "movieImage": "/nominees/the_substance.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.documentaryFeature",
+        "nominees": [
+            {
+                "name": "nominees.movie.blackBoxDiaries",
+                "detail": "Shiori Ito, Eric Nyari, Hanna Aqvilin",
+                "movieImage": "/nominees/black_box_diaries.jpg"
+            },
+            {
+                "name": "nominees.movie.noOtherLand",
+                "detail": "Basel Adra, Rachel Szor, Hamdan Ballal, Yuval Abraham",
+                "movieImage": "/nominees/no_other_land.jpg"
+            },
+            {
+                "name": "nominees.movie.porcelainWar",
+                "detail": "Brendan Bellomo, Slava Leontyev, Aniela Sidorska, Paula DuPre' Pesmen",
+                "movieImage": "/nominees/porcelain_war.jpg"
+            },
+            {
+                "name": "nominees.movie.soundtrackToACoupDetat",
+                "detail": "Johan Grimonprez, Daan Milius, Rémi Grellety",
+                "movieImage": "/nominees/soundtrack_to_a_coup_detat.jpg"
+            },
+            {
+                "name": "nominees.movie.sugarcane",
+                "detail": "Julian Brave NoiseCat, Emily Kassie, Kellen Quinn",
+                "movieImage": "/nominees/sugarcane.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.documentaryShort",
+        "nominees": [
+            {
+                "name": "nominees.movie.deathByNumbers",
+                "detail": "Kim A. Snyder, Janique L. Robillard",
+                "movieImage": "/nominees/death_by_numbers.jpg"
+            },
+            {
+                "name": "nominees.movie.iAmReadyWarden",
+                "detail": "Smriti Mundhra, Maya Gnyp",
+                "movieImage": "/nominees/i_am_ready_warden.jpg"
+            },
+            {
+                "name": "nominees.movie.incident",
+                "detail": "Bill Morrison, Jamie Kalven",
+                "movieImage": "/nominees/incident.jpg"
+            },
+            {
+                "name": "nominees.movie.instrumentsOfABeatingHeart",
+                "detail": "Ema Ryan Yamazaki, Eric Nyari",
+                "movieImage": "/nominees/instruments_of_a_beating_heart.jpg"
+            },
+            {
+                "name": "nominees.movie.theOnlyGirlInTheOrchestra",
+                "detail": "Molly O’Brien, Lisa Remington",
+                "movieImage": "/nominees/the_only_girl_in_the_orchestra.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.filmEditing",
+        "nominees": [
+            {
+                "name": "nominees.movie.anora",
+                "detail": "Sean Baker",
+                "movieImage": "/nominees/anora.jpg"
+            },
+            {
+                "name": "nominees.movie.theBrutalist",
+                "detail": "David Jancso",
+                "movieImage": "/nominees/the_brutalist.jpg"
+            },
+            {
+                "name": "nominees.movie.conclave",
+                "detail": "Nick Emerson",
+                "movieImage": "/nominees/conclave.jpg"
+            },
+            {
+                "name": "nominees.movie.emiliaPerez",
+                "detail": "Juliette Welfling",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "nominees.movie.wicked",
+                "detail": "Myron Kerstein",
+                "movieImage": "/nominees/wicked.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.internationalFeature",
+        "nominees": [
+            {
+                "name": "nominees.movie.imStillHere",
+                "detail": "nominees.country.brazil",
+                "movieImage": "/nominees/im_still_here.jpg"
+            },
+            {
+                "name": "nominees.movie.theGirlWithTheNeedle",
+                "detail": "nominees.country.denmark",
+                "movieImage": "/nominees/the_girl_with_the_needle.jpg"
+            },
+            {
+                "name": "nominees.movie.emiliaPerez",
+                "detail": "nominees.country.france",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "nominees.movie.theSeedOfTheSacredFig",
+                "detail": "nominees.country.germany",
+                "movieImage": "/nominees/the_seed_of_the_sacred_fig.jpg"
+            },
+            {
+                "name": "nominees.movie.flow",
+                "detail": "nominees.country.latvia",
+                "movieImage": "/nominees/flow.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.makeupAndHairstyling",
+        "nominees": [
+            {
+                "name": "nominees.movie.aDifferentMan",
+                "detail": "Mike Marino, David Presto, Crystal Jurado",
+                "movieImage": "/nominees/a_different_man.jpg"
+            },
+            {
+                "name": "nominees.movie.emiliaPerez",
+                "detail": "Julia Floch Carbonel, Emmanuel Janvier, Jean-Christophe Spadaccini",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "nominees.movie.nosferatu",
+                "detail": "David White, Traci Loader, Suzanne Stokes-Munton",
+                "movieImage": "/nominees/nosferatu.jpg"
+            },
+            {
+                "name": "nominees.movie.theSubstance",
+                "detail": "Pierre-Olivier Persin, Stéphanie Guillon, Marilyne Scarselli",
+                "movieImage": "/nominees/the_substance.jpg"
+            },
+            {
+                "name": "nominees.movie.wicked",
+                "detail": "Frances Hannon, Laura Blount, Sarah Nuth",
+                "movieImage": "/nominees/wicked.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.musicOriginalScore",
+        "nominees": [
+            {
+                "name": "nominees.movie.theBrutalist",
+                "detail": "Daniel Blumberg",
+                "movieImage": "/nominees/the_brutalist.jpg"
+            },
+            {
+                "name": "nominees.movie.conclave",
+                "detail": "Volker Bertelmann",
+                "movieImage": "/nominees/conclave.jpg"
+            },
+            {
+                "name": "nominees.movie.emiliaPerez",
+                "detail": "Clément Ducol, Camille",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "nominees.movie.wicked",
+                "detail": "John Powell, Stephen Schwartz",
+                "movieImage": "/nominees/wicked.jpg"
+            },
+            {
+                "name": "nominees.movie.theWildRobot",
+                "detail": "Kris Bowers",
+                "movieImage": "/nominees/the_wild_robot.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.musicOriginalSong",
+        "nominees": [
+            {
+                "name": "El Mal - Clément Ducol, Camille; Clément Ducol, Camille, Jacques Audiard",
+                "detail": "nominees.movie.emiliaPerez",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "The Journey; Diane Warren",
+                "detail": "nominees.movie.theSixTripleEight",
+                "movieImage": "/nominees/the_six_triple_eight.jpg"
+            },
+            {
+                "name": "Like A Bird - Abraham Alexander, Adrian Quesada",
+                "detail": "nominees.movie.singSing",
+                "movieImage": "/nominees/sing_sing.jpg"
+            },
+            {
+                "name": "Mi Camino - Camille, Clément Ducol",
+                "detail": "nominees.movie.emiliaPerez",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "Never Too Late - Elton John, Brandi Carlile, Andrew Watt, Bernie Taupin",
+                "detail": "nominees.movie.eltonJohnNeverTooLate",
+                "movieImage": "/nominees/elton_john_never_too_late.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.bestPicture",
+        "nominees": [
+            {
+                "name": "nominees.movie.anora",
+                "detail": "Sean Baker",
+                "movieImage": "/nominees/anora.jpg"
+            },
+            {
+                "name": "nominees.movie.theBrutalist",
+                "detail": "Brady Corbet",
+                "movieImage": "/nominees/the_brutalist.jpg"
+            },
+            {
+                "name": "nominees.movie.aCompleteUnknown",
+                "detail": "James Mangold",
+                "movieImage": "/nominees/a_complete_unknown.jpg"
+            },
+            {
+                "name": "nominees.movie.conclave",
+                "detail": "Edward Berger",
+                "movieImage": "/nominees/conclave.jpg"
+            },
+            {
+                "name": "nominees.movie.dunePartTwo",
+                "detail": "Denis Villeneuve",
+                "movieImage": "/nominees/dune_part_two.jpg"
+            },
+            {
+                "name": "nominees.movie.emiliaPerez",
+                "detail": "Jacques Audiard",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "nominees.movie.imStillHere",
+                "detail": "Walter Salles",
+                "movieImage": "/nominees/im_still_here.jpg"
+            },
+            {
+                "name": "nominees.movie.nickelBoys",
+                "detail": "RaMell Ross",
+                "movieImage": "/nominees/nickel_boys.jpg"
+            },
+            {
+                "name": "nominees.movie.theSubstance",
+                "detail": "Coralie Fargeat",
+                "movieImage": "/nominees/the_substance.jpg"
+            },
+            {
+                "name": "nominees.movie.wicked",
+                "detail": "Jon M. Chu",
+                "movieImage": "/nominees/wicked.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.productionDesign",
+        "nominees": [
+            {
+                "name": "nominees.movie.theBrutalist",
+                "detail": "Judy Becker, Patricia Cuccia",
+                "movieImage": "/nominees/the_brutalist.jpg"
+            },
+            {
+                "name": "nominees.movie.conclave",
+                "detail": "Suzie Davies, Cynthia Sleiter",
+                "movieImage": "/nominees/conclave.jpg"
+            },
+            {
+                "name": "nominees.movie.dunePartTwo",
+                "detail": "Patrice Vermette, Shane Vieau",
+                "movieImage": "/nominees/dune_part_two.jpg"
+            },
+            {
+                "name": "nominees.movie.nosferatu",
+                "detail": "Craig Lathrop, Beatrice Brentnerová",
+                "movieImage": "/nominees/nosferatu.jpg"
+            },
+            {
+                "name": "nominees.movie.wicked",
+                "detail": "Nathan Crowley, Lee Sandales",
+                "movieImage": "/nominees/wicked.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.liveActionShort",
+        "nominees": [
+            {
+                "name": "nominees.movie.aLien",
+                "detail": "Sam Cutler-Kreutz, David Cutler-Kreutz",
+                "movieImage": "/nominees/a_lien.jpg"
+            },
+            {
+                "name": "nominees.movie.anuja",
+                "detail": "Adam J. Graves, Suchitra Mattai",
+                "movieImage": "/nominees/anuja.jpg"
+            },
+            {
+                "name": "nominees.movie.imNotARobot",
+                "detail": "Victoria Warmerdam, Trent",
+                "movieImage": "/nominees/im_not_a_robot.jpg"
+            },
+            {
+                "name": "nominees.movie.theLastRanger",
+                "detail": "Cindy Lee, Darwin Shaw",
+                "movieImage": "/nominees/the_last_ranger.jpg"
+            },
+            {
+                "name": "nominees.movie.theManWhoCouldNotRemainSilent",
+                "detail": "Nebojša Slijepčević, Danijel Pek",
+                "movieImage": "/nominees/the_man_who_could_not_remain_silent.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.sound",
+        "nominees": [
+            {
+                "name": "nominees.movie.aCompleteUnknown",
+                "detail": "Tod A. Maitland, Donald Sylvester, Ted Caplan, Paul Massey, David Giammarco",
+                "movieImage": "/nominees/a_complete_unknown.jpg"
+            },
+            {
+                "name": "nominees.movie.dunePartTwo",
+                "detail": "Gareth John, Richard King, Ron Bartlett, Doug Hemphill",
+                "movieImage": "/nominees/dune_part_two.jpg"
+            },
+            {
+                "name": "nominees.movie.emiliaPerez",
+                "detail": "Erwan Kerzanet, Aymeric Devoldère, Maxence Dussère, Cyril Holtz, Niels Barletta",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "nominees.movie.wicked",
+                "detail": "Simon Hayes, Nancy Nugent Title, Jack Dolman, Andy Nelson, John Marquis",
+                "movieImage": "/nominees/wicked.jpg"
+            },
+            {
+                "name": "nominees.movie.theWildRobot",
+                "detail": "Randy Thom, Brian Chumney, Gary A. Rizzo, Leff Lefferts",
+                "movieImage": "/nominees/the_wild_robot.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.visualEffects",
+        "nominees": [
+            {
+                "name": "nominees.movie.alienRomulus",
+                "detail": "Eric Barba, Nelson Sepulveda-Fauser, Daniel Macarin, Shane Mahan",
+                "movieImage": "/nominees/alien_romulus.jpg"
+            },
+            {
+                "name": "nominees.movie.betterMan",
+                "detail": "Luke Millar, David Clayton, Keith Herft, Peter Stubbs",
+                "movieImage": "/nominees/better_man.jpg"
+            },
+            {
+                "name": "nominees.movie.dunePartTwo",
+                "detail": "Paul Lambert, Stephen James, Rhys Salcombe, Gerd Nefzer",
+                "movieImage": "/nominees/dune_part_two.jpg"
+            },
+            {
+                "name": "nominees.movie.kingdomOfThePlanetOfTheApes",
+                "detail": "Erik Winquist, Stephen Unterfranz, Paul Story, Rodney Burke",
+                "movieImage": "/nominees/kingdom_of_the_planet_of_the_apes.jpg"
+            },
+            {
+                "name": "nominees.movie.wicked",
+                "detail": "Pablo Helman, Jonathan Fawkner, David Shirk, Paul Corbould",
+                "movieImage": "/nominees/wicked.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.writingAdaptedScreenplay",
+        "nominees": [
+            {
+                "name": "nominees.movie.aCompleteUnknown",
+                "detail": "James Mangold, Jay Cocks",
+                "movieImage": "/nominees/a_complete_unknown.jpg"
+            },
+            {
+                "name": "nominees.movie.conclave",
+                "detail": "Peter Straughan",
+                "movieImage": "/nominees/conclave.jpg"
+            },
+            {
+                "name": "nominees.movie.emiliaPerez",
+                "detail": "Jacques Audiard",
+                "movieImage": "/nominees/emilia_perez.jpg"
+            },
+            {
+                "name": "nominees.movie.nickelBoys",
+                "detail": "RaMell Ross & Joslyn Barnes",
+                "movieImage": "/nominees/nickel_boys.jpg"
+            },
+            {
+                "name": "nominees.movie.singSing",
+                "detail": "Clint Bentley, Greg Kwedar",
+                "movieImage": "/nominees/sing_sing.jpg"
+            }
+        ]
+    },
+    {
+        "category": "nominees.category.writingOriginalScreenplay",
+        "nominees": [
+            {
+                "name": "nominees.movie.anora",
+                "detail": "Sean Baker",
+                "movieImage": "/nominees/anora.jpg"
+            },
+            {
+                "name": "nominees.movie.theBrutalist",
+                "detail": "Brady Corbet, Mona Fastvold",
+                "movieImage": "/nominees/the_brutalist.jpg"
+            },
+            {
+                "name": "nominees.movie.aRealPain",
+                "detail": "Jesse Eisenberg",
+                "movieImage": "/nominees/a_real_pain.jpg"
+            },
+            {
+                "name": "nominees.movie.september5",
+                "detail": "Moritz Binder, Tim Fehlbaum, Alex David",
+                "movieImage": "/nominees/september_5.jpg"
+            },
+            {
+                "name": "nominees.movie.theSubstance",
+                "detail": "Written by Coralie Fargeat",
+                "movieImage": "/nominees/the_substance.jpg"
+            }
+        ]
+    }
+]
