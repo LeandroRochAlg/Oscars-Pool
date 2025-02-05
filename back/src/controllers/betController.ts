@@ -1,5 +1,3 @@
-// src/controllers/betController.ts
-
 import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { ObjectId } from 'mongodb';
