@@ -7,9 +7,6 @@ import { adminMiddleware } from '../middlewares/adminMiddleware';
 
 export const betRouter = express.Router();
 
-// Get categories
-betRouter.get('/categories', BetController.getCategories);
-
 // Get nominees
 betRouter.get('/nominees', authMiddleware, BetController.getNominees);
 
