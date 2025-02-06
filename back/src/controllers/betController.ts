@@ -74,7 +74,7 @@ class BetController {
     
             // Adjust the result to include information about the user's bets
             const adjustedResult = categoriesWithMovies.map(category => {
-                category.nominees.forEach((nominee: Nominee) => {
+                category.nominees.forEach((nominee: any) => {
                     // Check if the user has placed a bet on this nominee
                     nominee.userBet = userBetsMap[category._id.toString()] === nominee.id;
                 });

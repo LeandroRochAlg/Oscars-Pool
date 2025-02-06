@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import NomineeService from '../services/nomineeService';
+import { Category } from '../models/category';
+import { Nominee } from '../models/nominee';
 
 class NomineeController {
     async getCategories(_req: Request, res: Response) {
@@ -9,8 +11,8 @@ class NomineeController {
 
             const categories: string[] = [];
 
-            nominees.map((category: any) => {
-            categories.push(category.category);
+            nominees.map((category: Category) => {
+                categories.push(category.category);
             });
 
             res.status(200).json(categories);
@@ -25,14 +27,14 @@ class NomineeController {
             
             const nominees = await NomineeService.getNominees();
 
-            const categoryData = nominees.find((categoryData: any) => categoryData.category === category);
+            const categoryData = nominees.find((categoryData: Category) => categoryData.category === category);
 
             if (!categoryData) {
                 res.status(404).send('Category not found');
                 return;
             }
 
-            const nomineesList: any[] = categoryData.nominees;
+            const nomineesList: Nominee[] = categoryData.nominees;
 
             res.status(200).json(nomineesList);
         } catch (error) {
