@@ -35,7 +35,7 @@ const Header = () => {
     };
 
     return (
-        <div className="navbar bg-info text-secondary">
+        <div className="navbar bg-primary text-black">
             <div className="navbar-start">
                 {isAuthenticated && (
                     <div className="dropdown">
@@ -55,9 +55,9 @@ const Header = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-info rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><a href="/">{t('pages.home')}</a></li>
-                            <li><a>Portfolio</a></li>
+                            <li><a href="/nominees">{t('pages.nominees')}</a></li>
                             <li><a>About</a></li>
                         </ul>
                     </div>
@@ -65,9 +65,9 @@ const Header = () => {
             </div>
 
             <div className="navbar-center">
-                <img src="/assets/favicon/icon.svg" alt="icon" className="h-6 w-6 mr-2 hidden md:block" />
+                <img src="/assets/favicon/icon.svg" alt="icon" className="h-6 w-6 mr-2 hidden md:block" style={{ filter: "brightness(0)" }} />
                 <a className="btn btn-ghost text-xl font-light" href="/">AcademyBolao</a>
-                <img src="/assets/favicon/icon.svg" alt="icon" className="h-6 w-6 ml-2 hidden md:block" />
+                <img src="/assets/favicon/icon.svg" alt="icon" className="h-6 w-6 ml-2 hidden md:block" style={{ filter: "brightness(0)" }} />
             </div>
 
             <div className="navbar-end">
@@ -82,7 +82,7 @@ const Header = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-info rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><a href="/user">{t('pages.profile')}</a></li>
                             
                             {/* Settings option */}
@@ -163,7 +163,7 @@ const Header = () => {
                             </svg>
                         </div>
                         <ul tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-info rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             {/* Change language */}
                             <li>
                                 <a onClick={() => changeLanguage("en")}>
