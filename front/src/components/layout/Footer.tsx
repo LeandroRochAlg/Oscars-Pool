@@ -4,7 +4,7 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="footer bg-info text-secondary p-10">
+    <footer className="footer bg-primary text-black p-10">
       <aside>
         <svg
           width="50"

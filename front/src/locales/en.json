@@ -48,7 +48,8 @@
     "images": {
         "alt": {
             "AindaEstouAqui": "A still from the movie I'm Still Here. A 70's camera is shown set to take a picture.",
-            "Flow": "The cat from the movie Flow looking at the camera with rocks and an ancient city in the background."
+            "Flow": "The cat from the movie Flow looking at the camera with rocks and an ancient city in the background.",
+            "Conclave": "Personagem principal do filme Conclave de lado, usando uma roupa vermelha, com os olhos fechados, em um ambiente escuro com uma cortina vermelha no fundo"
         }
     },
     "confirmEmail": {
@@ -93,7 +94,108 @@
     "settings": "Settings",
     "pages": {
         "home": "Home",
-        "profile": "Profile"
+        "profile": "Profile",
+        "nominees": "Nominees"
     },
-    "logout": "Logout"
+    "logout": "Logout",
+    "nominees": {
+        "category": {
+            "actor": "Actor in a Leading Role",
+            "supportingActor": "Actor in a Supporting Role",
+            "actress": "Actress in a Leading Role",
+            "supportingActress": "Actress in a Supporting Role",
+            "animatedFeature": "Animated Feature Film",
+            "animatedShort": "Animated Short Film",
+            "cinematography": "Cinematography",
+            "costumeDesign": "Costume Design",
+            "directing": "Directing",
+            "documentaryFeature": "Documentary Feature Film",
+            "documentaryShort": "Documentary Short Film",
+            "filmEditing": "Film Editing",
+            "internationalFeature": "International Feature Film",
+            "makeupAndHairstyling": "Makeup and Hairstyling",
+            "musicOriginalScore": "Music (Original Score)",
+            "musicOriginalSong": "Music (Original Song)",
+            "bestPicture": "Best Picture",
+            "productionDesign": "Production Design",
+            "liveActionShort": "Live Action Short Film",
+            "sound": "Sound",
+            "visualEffects": "Visual Effects",
+            "writingAdaptedScreenplay": "Writing (Adapted Screenplay)",
+            "writingOriginalScreenplay": "Writing (Original Screenplay)"
+        },
+        "movie": {
+            "theBrutalist": "The Brutalist",
+            "aCompleteUnknown": "A Complete Unknown",
+            "singSing": "Sing Sing",
+            "conclave": "Conclave",
+            "theApprentice": "The Apprentice",
+            "anora": "Anora",
+            "aRealPain": "A Real Pain",
+            "wicked": "Wicked",
+            "emiliaPerez": "Emilia Pérez",
+            "theSubstance": "The Substance",
+            "imStillHere": "I'm Still Here",
+            "flow": "Flow",
+            "insideOut2": "Inside Out 2",
+            "memoirOfASnail": "Memoir of a Snail",
+            "wallaceGromit": "Wallace & Gromit: Vengeance Most Fowl",
+            "theWildRobot": "The Wild Robot",
+            "beautifulMen": "Beautiful Men",
+            "inTheShadowOfTheCypress": "In the Shadow of the Cypress",
+            "magicCandies": "Magic Candies",
+            "wanderToWonder": "Wander to Wonder",
+            "yuck": "Yuck!",
+            "dunePartTwo": "Dune: Part Two",
+            "maria": "Maria",
+            "nosferatu": "Nosferatu",
+            "gladiatorII": "Gladiator II",
+            "blackBoxDiaries": "Black Box Diaries",
+            "noOtherLand": "No Other Land",
+            "porcelainWar": "Porcelain War",
+            "soundtrackToACoupDetat": "Soundtrack to a Coup d'Etat",
+            "sugarcane": "Sugarcane",
+            "deathByNumbers": "Death by Numbers",
+            "iAmReadyWarden": "I Am Ready, Warden",
+            "incident": "Incident",
+            "instrumentsOfABeatingHeart": "Instruments of a Beating Heart",
+            "theOnlyGirlInTheOrchestra": "The Only Girl in the Orchestra",
+            "theGirlWithTheNeedle": "The Girl with the Needle",
+            "theSeedOfTheSacredFig": "The Seed of the Sacred Fig",
+            "aDifferentMan": "A Different Man",
+            "eltonJohnNeverTooLate": "Elton John: Never Too Late",
+            "theSixTripleEight": "The Six Triple Eight",
+            "aLien": "A Lien",
+            "anuja": "Anuja",
+            "imNotARobot": "I'm Not a Robot",
+            "theLastRanger": "The Last Ranger",
+            "theManWhoCouldNotRemainSilent": "The Man Who Could Not Remain Silent",
+            "alienRomulus": "Alien: Romulus",
+            "betterMan": "Better Man",
+            "kingdomOfThePlanetOfTheApes": "Kingdom of the Planet of the Apes",
+            "september5": "September 5",
+            "nickelBoys": "Nickel Boys"
+        },
+        "country": {
+            "brazil": "Brazil",
+            "denmark": "Denmark",
+            "france": "France",
+            "germany": "Germany",
+            "latvia": "Latvia"
+        }
+    },
+    "countdown": {
+        "days": "days",
+        "hours": "hours",
+        "minutes": "min",
+        "seconds": "sec",
+        "until": "until the Oscars ceremony!"
+    },
+    "homePage": {
+        "nominees": {
+            "title": "Nominees",
+            "subtitle": "Check out the 2025 Oscar nominees",
+            "viewAll": "View all"
+        }
+    }
 }

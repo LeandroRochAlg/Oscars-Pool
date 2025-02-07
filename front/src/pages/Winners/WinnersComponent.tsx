@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../components/layout/Header';
 import Sidebar from '../../components/layout/Sidebar';
 import Footer from '../../components/layout/Footer';
-import NomineesCard from '../../components/common/NomineesCard';
+import NomineesCard from '../../components/common/NomineeCard';
 import "../../styles/system.css"
 import styles from '../Bets/BetsComponent.module.css';
 import api from '../../libs/api';

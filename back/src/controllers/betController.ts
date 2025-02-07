@@ -1,9 +1,9 @@
-// src/controllers/betController.ts
-
 import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { ObjectId } from 'mongodb';
 import { Nominee } from '../models/nominee';
+import path from 'path';
+import fs from 'fs';
 
 class BetController {
     async getNominees(req: Request, res: Response) {
@@ -74,7 +74,7 @@ class BetController {
     
             // Adjust the result to include information about the user's bets
             const adjustedResult = categoriesWithMovies.map(category => {
-                category.nominees.forEach((nominee: Nominee) => {
+                category.nominees.forEach((nominee: any) => {
                     // Check if the user has placed a bet on this nominee
                     nominee.userBet = userBetsMap[category._id.toString()] === nominee.id;
                 });
