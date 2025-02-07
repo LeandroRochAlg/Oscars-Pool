@@ -182,5 +182,12 @@
             "germany": "Germany",
             "latvia": "Latvia"
         }
+    },
+    "countdown": {
+        "days": "days",
+        "hours": "hours",
+        "minutes": "min",
+        "seconds": "sec",
+        "until": "until the Oscars ceremony!"
     }
 }
