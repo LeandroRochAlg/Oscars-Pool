@@ -189,5 +189,12 @@
         "minutes": "min",
         "seconds": "sec",
         "until": "until the Oscars ceremony!"
+    },
+    "homePage": {
+        "nominees": {
+            "title": "Nominees",
+            "subtitle": "Check out the 2025 Oscar nominees",
+            "viewAll": "View all"
+        }
     }
 }

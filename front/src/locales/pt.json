@@ -190,5 +190,12 @@
         "minutes": "min",
         "seconds": "seg",
         "until": "até a cerimônia do Oscar!"
+    },
+    "homePage": {
+        "nominees": {
+            "title": "Indicados",
+            "subtitle": "Confira os indicados ao Oscar 2025",
+            "viewAll": "Ver todos"
+        }
     }
 }
