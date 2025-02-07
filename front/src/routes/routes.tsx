@@ -11,6 +11,8 @@ import UserPage from "../pages/User/UserComponent";
 import NotFoundPage from "../pages/NotFound/NotFoundComponent";
 import ActionHandler from "../pages/ActionHandler/ActionHandler";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
+import Nominees from "../pages/Nominees/Nominees";
+
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
@@ -24,6 +26,7 @@ const AppRoutes: React.FC = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/nominees" element={<Nominees />} />
 
                 {/* Private Routes */}
                 <Route path="/" element={
