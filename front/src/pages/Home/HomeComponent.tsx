@@ -19,7 +19,7 @@ const HomePage = () => {
 				<figure className="h-56 w-40">
 					<img
 						src="assets/images/Conclave.jpg"
-						alt="Movie"
+						alt={t('images.alt.Conclave')}
 						className='h-full'
 					/>
 				</figure>
