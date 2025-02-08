@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import Countdown from '../../components/common/CountDown';
+import Countdown from '../../components/common/Countdown';
 
 const HomePage = () => {
 	const { t } = useTranslation();
