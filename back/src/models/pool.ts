@@ -7,10 +7,10 @@ type UserPool = {
     bets?: Bet[];
 };
 
-export interface CategoryPool {
+type CategoryPool = {
     category: string;
     weight: number;
-}
+};
 
 export interface Pool {
     _id?: ObjectId;
@@ -22,4 +22,4 @@ export interface Pool {
     users: UserPool[];
     createdBy: ObjectId;
     createdAt: Date;
-}
+};
