@@ -44,17 +44,22 @@ class PoolController{
         try {
             const pools = db.collection('pools');
 
-            const page = parseInt(req.query.page as string) || 1;
             const limit = parseInt(req.query.limit as string) || 10;
-            const skip = (page - 1) * limit;
+            const cursor = req.query.cursor as string;
+
+            const query: any = {
+                $or: [
+                    { public: true },
+                    { users: { $elemMatch: { user: req.user._id } } }
+                ]
+            }
+
+            if (cursor) {
+                query['_id'] = { $gt: ObjectId.createFromHexString(cursor) };
+            }
 
             const result = await pools
-                .find({
-                    $or: [
-                        { public: true },
-                        { users: { $elemMatch: { user: req.user._id } } }
-                    ]
-                }, {
+                .find(query, {
                     projection: {
                         name: 1,
                         description: 1,
@@ -66,25 +71,18 @@ class PoolController{
                     }
                 })
                 .sort({
-                    users: -1
+                    users: -1,
+                    _id: 1
                 })
-                .skip(skip)
                 .limit(limit)
                 .toArray();
-
-            const total = await pools.countDocuments({
-                $or: [
-                    { public: true },
-                    { users: { $elemMatch: { user: req.user._id } } }
-                ]
-            });
-            const totalPages = Math.ceil(total / limit);
+            
+            const lastCursor = result.length > 0 ? result[result.length - 1]._id : null;
 
             res.status(200).send({
                 pools: result,
-                page,
-                totalPages,
-                totalPools: total
+                nextCursor: lastCursor,
+                hasMore: result.length === limit,
             });
         } catch (error) {
             res.status(500).send({ error: 'An error occurred while getting the pools.' });
@@ -96,14 +94,19 @@ class PoolController{
         try {
             const pools = db.collection('pools');
 
-            const page = parseInt(req.query.page as string) || 1;
             const limit = parseInt(req.query.limit as string) || 10;
-            const skip = (page - 1) * limit;
+            const cursor = req.query.cursor as string;
+
+            const query: any = {
+                users: { $elemMatch: { user: req.user._id } }
+            };
+
+            if (cursor) {
+                query['_id'] = { $gt: ObjectId.createFromHexString(cursor) };
+            }
 
             const result = await pools
-                .find({
-                    users: { $elemMatch: { user: req.user._id } } 
-                }, {
+                .find(query, {
                     projection: {
                         name: 1,
                         description: 1,
@@ -115,22 +118,18 @@ class PoolController{
                     }
                 })
                 .sort({
-                    users: -1
+                    users: -1,
+                    _id: 1
                 })
-                .skip(skip)
                 .limit(limit)
                 .toArray();
 
-            const total = await pools.countDocuments({
-                users: { $elemMatch: { user: req.user._id } } 
-            });
-            const totalPages = Math.ceil(total / limit);
+            const lastCursor = result.length > 0 ? result[result.length - 1]._id : null;
 
             res.status(200).send({
                 pools: result,
-                page,
-                totalPages,
-                totalPools: total
+                nextCursor: lastCursor,
+                hasMore: result.length === limit,
             });
         } catch (error) {
             res.status(500).send({ error: 'An error occurred while getting the pools.' });
