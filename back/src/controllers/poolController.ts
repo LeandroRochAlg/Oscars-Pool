@@ -12,7 +12,7 @@ class PoolController{
             const pool: PoolCreation = req.body;
             const userId = req.user._id;
 
-            const inviteToken = pool.public ? undefined : uuidv4();
+            const inviteToken = uuidv4();
 
             const pools = db.collection('pools');
 
