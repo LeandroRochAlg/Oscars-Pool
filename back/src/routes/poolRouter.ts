@@ -6,3 +6,6 @@ export const poolRouter = express.Router();
 
 // Create a pool
 poolRouter.post('/createPool', authMiddleware, PoolController.createPool);
+
+// Get pools info ordered by number of users in the pool
+poolRouter.get('/getPoolsByUserNumber', authMiddleware, PoolController.getPoolsByUserNumber);

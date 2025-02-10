@@ -29,7 +29,7 @@ class PoolController{
             // Add the pool to the user's pools
             const users = db.collection('users');
             await users.updateOne(
-                { _id: ObjectId.createFromHexString(userId) },              // TODO: update the 'new ObjectId()' structure
+                { _id: ObjectId.createFromHexString(userId) },
                 { $push: { pools: result.insertedId } }
             );
 
@@ -38,6 +38,74 @@ class PoolController{
             res.status(500).send({ error: 'An error occurred while creating the pool.' });
         }
     }
+
+    // get pools info ordered by number of users in the pool
+    async getPoolsByUserNumber(req: Request, res: Response) {
+        try {
+            const pools = db.collection('pools');
+
+            const page = parseInt(req.query.page as string) || 1;
+            const limit = parseInt(req.query.limit as string) || 10;
+            const skip = (page - 1) * limit;
+
+            const result = await pools
+                .find({
+                    $or: [
+                        { public: true },
+                        { users: { $elemMatch: { user: req.user._id } } }
+                    ]
+                }, {
+                    projection: {
+                        name: 1,
+                        description: 1,
+                        public: 1,
+                        categories: { $size: "$categories" },
+                        users: { $size: "$users" }
+                    }
+                })
+                .sort({
+                    users: -1
+                })
+                .skip(skip)
+                .limit(limit)
+                .toArray();
+
+            const total = await pools.countDocuments({
+                $or: [
+                    { public: true },
+                    { users: { $elemMatch: { user: req.user._id } } }
+                ]
+            });
+            const totalPages = Math.ceil(total / limit);
+
+            res.status(200).send({
+                pools: result,
+                page,
+                totalPages,
+                totalPools: total
+            });
+        } catch (error) {
+            res.status(500).send({ error: 'An error occurred while getting the pools.' });
+        }
+    }
+
+    // getPoolsByUser
+
+    // getPoolsBySearch
+
+    // getPoolByToken
+    
+    // getPool
+
+    // enterPool
+
+    // exitPool
+
+    // banUser
+
+    // updatePool
+
+    // deletePool
 }
 
 export default new PoolController();
