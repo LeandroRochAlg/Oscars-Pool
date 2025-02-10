@@ -9,3 +9,6 @@ poolRouter.post('/createPool', authMiddleware, PoolController.createPool);
 
 // Get pools info ordered by number of users in the pool
 poolRouter.get('/getPoolsByUserNumber', authMiddleware, PoolController.getPoolsByUserNumber);
+
+// Get pools by user
+poolRouter.get('/getPoolsByUser', authMiddleware, PoolController.getPoolsByUser);
