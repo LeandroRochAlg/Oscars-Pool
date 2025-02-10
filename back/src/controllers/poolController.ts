@@ -29,7 +29,7 @@ class PoolController{
             // Add the pool to the user's pools
             const users = db.collection('users');
             await users.updateOne(
-                { _id: new ObjectId(userId) },              // TODO: update the 'new ObjectId()' structure
+                { _id: ObjectId.createFromHexString(userId) },              // TODO: update the 'new ObjectId()' structure
                 { $push: { pools: result.insertedId } }
             );
 
