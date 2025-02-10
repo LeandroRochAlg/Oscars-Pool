@@ -60,7 +60,9 @@ class PoolController{
                         description: 1,
                         public: 1,
                         categories: { $size: "$categories" },
-                        users: { $size: "$users" }
+                        users: { $size: "$users" },
+                        isAdmin: { $cond: [{ $in: [req.user._id, "$users.user"] }, { $arrayElemAt: ["$users.admin", { $indexOfArray: ["$users.user", req.user._id] }] }, false] },
+                        isCreator: { $eq: [req.user._id, "$createdBy"] }
                     }
                 })
                 .sort({
