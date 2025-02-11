@@ -146,9 +146,19 @@ class PoolController{
             const search = req.query.search as string;
 
             const query: any = {
-                $or: [
-                    { name: { $regex: search, $options: 'i' } },
-                    { description: { $regex: search, $options: 'i' } }
+                $and: [
+                    {
+                        $or: [
+                            { name: { $regex: search, $options: 'i' } },
+                            { description: { $regex: search, $options: 'i' } }
+                        ]
+                    },
+                    {
+                        $or: [
+                            { public: true },
+                            { users: { $elemMatch: { user: req.user._id } } }
+                        ]
+                    }
                 ]
             };
 
