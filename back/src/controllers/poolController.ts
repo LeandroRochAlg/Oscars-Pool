@@ -187,7 +187,37 @@ class PoolController{
         }
     }
 
-    // getPoolByToken
+    // get pool info by token
+    async getPoolByToken(req: Request, res: Response) {
+        try {
+            const pools = db.collection('pools');
+
+            const token = req.query.token as string;
+
+            const result = await pools.findOne(
+                { inviteToken: token },
+                {
+                    projection: {
+                        name: 1,
+                        description: 1,
+                        public: 1,
+                        categories: { $size: "$categories" },
+                        users: { $size: "$users" },
+                        alreadyIn: { $in: [req.user._id, "$users.user"] }
+                    }
+                }
+            );
+
+            if (!result) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+
+            res.status(200).send(result);
+        } catch (error) {
+            res.status(500).send({ error: 'An error occurred while getting the pool.' });
+        }
+    }
     
     // getPool
 

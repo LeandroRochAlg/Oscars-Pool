@@ -15,3 +15,6 @@ poolRouter.get('/getPoolsByUser', authMiddleware, PoolController.getPoolsByUser)
 
 // Get pools by search
 poolRouter.get('/getPoolsBySearch', authMiddleware, PoolController.getPoolsBySearch);
+
+// Get pool by token
+poolRouter.get('/getPoolByToken/:token', authMiddleware, PoolController.getPoolByToken);
