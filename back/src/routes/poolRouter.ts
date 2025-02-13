@@ -36,3 +36,6 @@ poolRouter.post('/addAdmin', authMiddleware, PoolController.addAdmin);
 
 // Remove an admin
 poolRouter.post('/removeAdmin', authMiddleware, PoolController.removeAdmin);
+
+// Ban a user
+poolRouter.post('/banUser', authMiddleware, PoolController.banUser);

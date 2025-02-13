@@ -626,7 +626,68 @@ class PoolController{
         }
     }
 
-    // banUser
+    // ban a user
+    async banUser(req: Request, res: Response) {
+        try {
+            const { poolId, userId } = req.body;
+            const pools = db.collection('pools');
+
+            // Check if the pool exists
+            const pool = await pools.findOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                {
+                    projection: {
+                        users: 1
+                    }
+                }
+            );
+
+            if (!pool) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+
+            // Check if the requester is an admin
+            const isRequesterAdmin = pool.users.some((user: any) => user.user === req.user._id && user.admin);
+
+            if (!isRequesterAdmin) {
+                res.status(403).send({ error: 'Only admins can ban a user.' });
+                return;
+            }
+
+            // Check if the user is in the pool
+            const isUserInPool = pool.users.some((user: any) => user.user === userId);
+
+            if (!isUserInPool) {
+                res.status(400).send({ error: 'The user is not in this pool.' });
+                return;
+            }
+
+            // Check if the user is the creator
+            if (pool.createdBy === userId) {
+                res.status(403).send({ error: 'You cannot ban the creator of the pool.' });
+                return;
+            }
+
+            // Remove the user from the pool
+            await pools.updateOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                { $pull: { users: { user: userId } } }
+            );
+
+            // Remove the pool from the user's pools
+            const users = db.collection('users');
+
+            await users.updateOne(
+                { _id: ObjectId.createFromHexString(userId) },
+                { $pull: { pools: ObjectId.createFromHexString(poolId) } }
+            );
+
+            res.status(200).send();
+        } catch (error) {
+            res.status(500).send({ error: 'An error occurred while banning the user.' });
+        }
+    }
 
     // updatePool
 
