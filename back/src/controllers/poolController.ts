@@ -202,7 +202,7 @@ class PoolController{
         try {
             const pools = db.collection('pools');
 
-            const token = req.query.token as string;
+            const token = req.params.token as string;
 
             const result = await pools.findOne(
                 { inviteToken: token },
