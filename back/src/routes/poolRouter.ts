@@ -7,6 +7,12 @@ export const poolRouter = express.Router();
 // Create a pool
 poolRouter.post('/createPool', authMiddleware, PoolController.createPool);
 
+// Update a pool
+poolRouter.put('/updatePool/:poolId', authMiddleware, PoolController.updatePool);
+
+// Delete a pool
+poolRouter.delete('/deletePool/:poolId', authMiddleware, PoolController.deletePool);
+
 // Get pools info ordered by number of users in the pool
 poolRouter.get('/getPoolsByUserNumber', authMiddleware, PoolController.getPoolsByUserNumber);
 

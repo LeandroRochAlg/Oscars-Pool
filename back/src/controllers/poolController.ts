@@ -40,6 +40,95 @@ class PoolController{
         }
     }
 
+    // update pool
+    async updatePool(req: Request, res: Response) {
+        try {
+            const poolId = req.params.poolId as string;
+            const pool: PoolCreation = req.body;
+
+            const pools = db.collection('pools');
+
+            // Check if the pool exists and if the user is an admin
+            const existingPool = await pools.findOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                { projection: { users: 1 } }
+            );
+
+            if (!existingPool) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+
+            const isAdmin = existingPool.users.some((user: any) => user.user === req.user._id && user.admin);
+
+            if (!isAdmin) {
+                res.status(403).send({ error: 'Only admins can update the pool.' });
+                return;
+            }
+
+            const result = await pools.updateOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                { $set: pool }
+            );
+
+            if (result.matchedCount === 0) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+
+            res.status(200).send();
+        } catch (error) {
+            res.status(500).send({ error: 'An error occurred while updating the pool.' });
+        }
+    }
+
+    // delete pool
+    async deletePool(req: Request, res: Response) {
+        try {
+            const poolId = req.params.poolId as string;
+            const pools = db.collection('pools');
+            const users = db.collection('users');
+
+            // Check if the pool exists and if the user is the creator
+            const existingPool = await pools.findOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                { projection: { createdBy: 1 } }
+            );
+
+            if (!existingPool) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+
+            if (existingPool.createdBy !== req.user._id) {
+                res.status(403).send({ error: 'Only the creator can delete the pool.' });
+                return;
+            }
+
+            // Remove the pool from the users
+            for (const user of await users.find({ pools: ObjectId.createFromHexString(poolId) }).toArray()) {
+                await users.updateOne(
+                    { _id: user._id },
+                    { $pull: { pools: ObjectId.createFromHexString(poolId) } }
+                );
+            }
+
+            // Delete the pool
+            const result = await pools.deleteOne(
+                { _id: ObjectId.createFromHexString(poolId) }
+            );
+
+            if (result.deletedCount === 0) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+
+            res.status(200).send();
+        } catch (error) {
+            res.status(500).send({ error: 'An error occurred while deleting the pool.' });
+        }
+    }
+
     // get pools info ordered by number of users in the pool
     async getPoolsByUserNumber(req: Request, res: Response) {
         try {
@@ -688,10 +777,6 @@ class PoolController{
             res.status(500).send({ error: 'An error occurred while banning the user.' });
         }
     }
-
-    // updatePool
-
-    // deletePool
 }
 
 export default new PoolController();
