@@ -281,6 +281,7 @@ class PoolController{
             const usersWithDetails = pool.users.map((userPool: any) => {
                 const user = users.find(u => u._id.equals(ObjectId.createFromHexString(userPool.user)));
                 return {
+                    userId: userPool.user,
                     username: user ? user.username : null,
                     admin: userPool.admin
                 };
