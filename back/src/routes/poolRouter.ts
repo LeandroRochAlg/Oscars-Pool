@@ -18,3 +18,6 @@ poolRouter.get('/getPoolsBySearch', authMiddleware, PoolController.getPoolsBySea
 
 // Get pool by token
 poolRouter.get('/getPoolByToken/:token', authMiddleware, PoolController.getPoolByToken);
+
+// Get pool info
+poolRouter.get('/getPoolById/:poolId', authMiddleware, PoolController.getPoolLeaderboard);
