@@ -356,15 +356,18 @@ class PoolController{
             // Calculate the leaderboard
             const leaderboard = [];
 
-            for (const userPool of pool.users) {
-                const user = await db.collection('users').findOne(
-                    { _id: ObjectId.createFromHexString(userPool.user) },
-                    {
-                        projection: {
-                            username: 1
-                        }
+            const userIds = pool.users.map((userPool: any) => ObjectId.createFromHexString(userPool.user));
+            const users = await db.collection('users').find(
+                { _id: { $in: userIds } },
+                {
+                    projection: {
+                        username: 1
                     }
-                );
+                }
+            ).toArray();
+
+            for (const userPool of pool.users) {
+                const user = users.find(u => u._id.equals(ObjectId.createFromHexString(userPool.user)));
 
                 if (!user) {
                     continue;
