@@ -229,6 +229,82 @@ class PoolController{
             res.status(500).send({ error: 'An error occurred while getting the pool.' });
         }
     }
+
+    // get pool info
+    async getPoolInfo(req: Request, res: Response) {
+        try {
+            const poolId = req.params.poolId as string;
+            const pools = db.collection('pools');
+    
+            // Get the pool info
+            const pool = await pools.findOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                {
+                    projection: {
+                        name: 1,
+                        description: 1,
+                        public: 1,
+                        categories: 1,
+                        users: 1,
+                        createdBy: 1,
+                        createdAt: 1
+                    }
+                }
+            );
+    
+            if (!pool) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+    
+            // Check if the user is in the pool
+            const isUserInPool = pool.users.some((user: any) => user.user === req.user._id);
+    
+            if (!isUserInPool) {
+                res.status(403).send({ error: 'You are not a member of this pool.' });
+                return;
+            }
+    
+            // Get the users and the creator in one request
+            const userIds = pool.users.map((userPool: any) => ObjectId.createFromHexString(userPool.user));
+            userIds.push(ObjectId.createFromHexString(pool.createdBy));
+
+            const users = await db.collection('users').find(
+                { _id: { $in: userIds } },
+                {
+                    projection: {
+                        username: 1
+                    }
+                }
+            ).toArray();
+
+            const usersWithDetails = pool.users.map((userPool: any) => {
+                const user = users.find(u => u._id.equals(ObjectId.createFromHexString(userPool.user)));
+                return {
+                    username: user ? user.username : null,
+                    admin: userPool.admin
+                };
+            });
+
+            const creator = users.find(u => u._id.equals(ObjectId.createFromHexString(pool.createdBy)));
+    
+            // Build the result
+            const result = {
+                _id: pool._id,
+                name: pool.name,
+                description: pool.description,
+                public: pool.public,
+                categories: pool.categories,
+                users: usersWithDetails,
+                createdBy: creator ? creator.username : null,
+                createdAt: pool.createdAt
+            };
+    
+            res.status(200).send(result);
+        } catch (error) {
+            res.status(500).send({ error: 'An error occurred while getting the pool.' });
+        }
+    }
     
     // get pool leaderboard
     async getPoolLeaderboard(req: Request, res: Response) {

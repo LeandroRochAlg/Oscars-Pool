@@ -20,4 +20,7 @@ poolRouter.get('/getPoolsBySearch', authMiddleware, PoolController.getPoolsBySea
 poolRouter.get('/getPoolByToken/:token', authMiddleware, PoolController.getPoolByToken);
 
 // Get pool info
-poolRouter.get('/getPoolById/:poolId', authMiddleware, PoolController.getPoolLeaderboard);
+poolRouter.get('/getPoolInfo/:poolId', authMiddleware, PoolController.getPoolInfo);
+
+// Get pool leaderboard
+poolRouter.get('/getPoolLeaderboard/:poolId', authMiddleware, PoolController.getPoolLeaderboard);
