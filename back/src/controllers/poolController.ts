@@ -430,19 +430,206 @@ class PoolController{
         }
     }
 
-    // joinPool
+    // join a pool
+    async joinPool(req: Request, res: Response) {
+        try {
+            const { poolId, inviteToken } = req.body;
+            const pools = db.collection('pools');
 
-    // exitPool
+            // Check if the pool exists
+            const pool = await pools.findOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                {
+                    projection: {
+                        users: 1,
+                        inviteToken: 1,
+                        public: 1
+                    }
+                }
+            );
+
+            if (!pool) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+            
+            // Check if the user is already in the pool
+            const isUserInPool = pool.users.some((user: any) => user.user === req.user._id);
+            
+            if (isUserInPool) {
+                res.status(400).send({ error: 'You are already in this pool.' });
+                return;
+            }
+            
+            // Check if the user is allowed to join the pool
+            if (!pool.public && pool.inviteToken !== inviteToken) {
+                res.status(403).send({ error: 'You are not allowed to join this pool.' });
+                return;
+            }
+
+            // Add the user to the pool
+            await pools.updateOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                { $push: { users: { user: req.user._id, admin: false } } }
+            );
+
+            // Add the pool to the user's pools
+            const users = db.collection('users');
+
+            await users.updateOne(
+                { _id: ObjectId.createFromHexString(req.user._id) },
+                { $push: { pools: ObjectId.createFromHexString(poolId) } }
+            );
+
+            res.status(200).send();
+        } catch (error) {
+            res.status(500).send({ error: 'An error occurred while joining the pool.' });
+        }
+    }
+
+    // leave pool
+    async leavePool(req: Request, res: Response) {
+        try {
+            const poolId = req.params.poolId as string;
+            const pools = db.collection('pools');
+
+            // Check if the pool exists
+            const pool = await pools.findOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                {
+                    projection: {
+                        users: 1,
+                        createdBy: 1
+                    }
+                }
+            );
+
+            if (!pool) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+
+            // Check if the user is in the pool
+            const isUserInPool = pool.users.some((user: any) => user.user === req.user._id);
+
+            if (!isUserInPool) {
+                res.status(400).send({ error: 'You are not in this pool.' });
+                return;
+            }
+
+            // Check if the user is the creator
+            if (pool.createdBy === req.user._id) {
+                res.status(403).send({ error: 'You cannot leave a pool you created.' });
+                return;
+            }
+
+            // Remove the user from the pool
+            await pools.updateOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                { $pull: { users: { user: req.user._id } } }
+            );
+
+            // Remove the pool from the user's pools
+            const users = db.collection('users');
+
+            await users.updateOne(
+                { _id: ObjectId.createFromHexString(req.user._id) },
+                { $pull: { pools: ObjectId.createFromHexString(poolId) } }
+            );
+
+            res.status(200).send();
+        } catch (error) {
+            res.status(500).send({ error: 'An error occurred while leaving the pool.' });
+        }
+    }
+
+    // add an admin
+    async addAdmin(req: Request, res: Response) {
+        try {
+            const { poolId, userId } = req.body;
+            const pools = db.collection('pools');
+
+            // Check if the pool exists
+            const pool = await pools.findOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                {
+                    projection: {
+                        users: 1
+                    }
+                }
+            );
+
+            if (!pool) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+
+            // Check if the requester is an admin
+            const isRequesterAdmin = pool.users.some((user: any) => user.user === req.user._id && user.admin);
+
+            if (!isRequesterAdmin) {
+                res.status(403).send({ error: 'Only admins can add another admin.' });
+                return;
+            }
+
+            // Add admin role to the user
+            await pools.updateOne(
+                { _id: ObjectId.createFromHexString(poolId), "users.user": userId },
+                { $set: { "users.$.admin": true } }
+            );
+
+            res.status(200).send();
+        } catch (error) {
+            res.status(500).send({ error: 'An error occurred while adding the admin.' });
+        }
+    }
+
+    // remove an admin
+    async removeAdmin(req: Request, res: Response) {
+        try {
+            const { poolId, userId } = req.body;
+            const pools = db.collection('pools');
+
+            // Check if the pool exists
+            const pool = await pools.findOne(
+                { _id: ObjectId.createFromHexString(poolId) },
+                {
+                    projection: {
+                        users: 1
+                    }
+                }
+            );
+
+            if (!pool) {
+                res.status(404).send({ error: 'Pool not found.' });
+                return;
+            }
+
+            // Check if the requester is an admin
+            const isRequesterAdmin = pool.users.some((user: any) => user.user === req.user._id && user.admin);
+
+            if (!isRequesterAdmin) {
+                res.status(403).send({ error: 'Only admins can remove another admin.' });
+                return;
+            }
+
+            // Remove admin role from the user
+            await pools.updateOne(
+                { _id: ObjectId.createFromHexString(poolId), "users.user": userId },
+                { $set: { "users.$.admin": false } }
+            );
+
+            res.status(200).send();
+        } catch (error) {
+            res.status(500).send({ error: 'An error occurred while removing the admin.' });
+        }
+    }
 
     // banUser
 
     // updatePool
 
     // deletePool
-
-    // addAdmin
-
-    // removeAdmin
 }
 
 export default new PoolController();

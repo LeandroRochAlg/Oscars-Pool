@@ -24,3 +24,15 @@ poolRouter.get('/getPoolInfo/:poolId', authMiddleware, PoolController.getPoolInf
 
 // Get pool leaderboard
 poolRouter.get('/getPoolLeaderboard/:poolId', authMiddleware, PoolController.getPoolLeaderboard);
+
+// Join a pool
+poolRouter.post('/joinPool', authMiddleware, PoolController.joinPool);
+
+// Leave a pool
+poolRouter.post('/leavePool/:poolId', authMiddleware, PoolController.leavePool);
+
+// Add an admin
+poolRouter.post('/addAdmin', authMiddleware, PoolController.addAdmin);
+
+// Remove an admin
+poolRouter.post('/removeAdmin', authMiddleware, PoolController.removeAdmin);
