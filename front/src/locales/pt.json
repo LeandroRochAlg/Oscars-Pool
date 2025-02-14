@@ -200,6 +200,30 @@
         }
     },
     "createPoolPage": {
-        "title": "Criar Bolão"
+        "title": "Criar bolão",
+        "pages": {
+            "generalInfo": "Informações Gerais",
+            "categories": "Categorias",
+            "weights": "Pesos"
+        },
+        "form": {
+            "name": "Nome do Bolão",
+            "description": "Descrição",
+            "public": "Bolão Público"
+        },
+        "buttons": {
+            "previous": "Anterior",
+            "next": "Próximo",
+            "createPool": "Criar Bolão"
+        },
+        "errors": {
+            "nameRequired": "O nome do bolão é obrigatório.",
+            "weightMin": "O peso deve ser pelo menos 1.",
+            "atLeastOneCategory": "Você deve selecionar pelo menos uma categoria.",
+            "totalWeight": "O peso total de todas as categorias deve ser exatamente 1000.",
+            "createPoolFailed": "Falha ao criar o bolão. Por favor, tente novamente.",
+            "nameMaxLength": "O nome do bolão deve ter no máximo 50 caracteres.",
+            "descriptionMaxLength": "A descrição do bolão deve ter no máximo 500 caracteres."
+        }
     }
 }

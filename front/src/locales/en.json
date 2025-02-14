@@ -199,6 +199,30 @@
         }
     },
     "createPoolPage": {
-        "title": "Create Pool"
+        "title": "Create pool",
+        "pages": {
+            "generalInfo": "General Info",
+            "categories": "Categories",
+            "weights": "Weights"
+        },
+        "form": {
+            "name": "Pool Name",
+            "description": "Description",
+            "public": "Public Pool"
+        },
+        "buttons": {
+            "previous": "Previous",
+            "next": "Next",
+            "createPool": "Create Pool"
+        },
+        "errors": {
+            "nameRequired": "Pool name is required.",
+            "weightMin": "Weight must be at least 1.",
+            "atLeastOneCategory": "You must select at least one category.",
+            "totalWeight": "The total weight of all categories must be exactly 1000.",
+            "createPoolFailed": "Failed to create the pool. Please try again.",
+            "nameMaxLength": "Pool name must be at most 50 characters long.",
+            "descriptionMaxLength": "Description must be at most 500 characters long."
+        }
     }
 }
