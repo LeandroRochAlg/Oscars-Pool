@@ -58,7 +58,7 @@ const Header = () => {
                             className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><a href="/">{t('pages.home')}</a></li>
                             <li><a href="/nominees">{t('pages.nominees')}</a></li>
-                            <li><a>About</a></li>
+                            <li><a href="/createPool">{t('createPoolPage.title')}</a></li>
                         </ul>
                     </div>
                 )}

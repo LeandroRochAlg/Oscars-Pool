@@ -197,5 +197,8 @@
             "subtitle": "Check out the 2025 Oscar nominees",
             "viewAll": "View all"
         }
+    },
+    "createPoolPage": {
+        "title": "Create Pool"
     }
 }

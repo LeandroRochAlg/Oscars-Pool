@@ -198,5 +198,8 @@
             "subtitle": "Confira os indicados ao Oscar 2025",
             "viewAll": "Ver todos"
         }
+    },
+    "createPoolPage": {
+        "title": "Criar Bolão"
     }
 }

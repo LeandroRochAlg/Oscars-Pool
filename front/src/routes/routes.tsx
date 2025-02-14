@@ -12,6 +12,7 @@ import NotFoundPage from "../pages/NotFound/NotFoundComponent";
 import ActionHandler from "../pages/ActionHandler/ActionHandler";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import Nominees from "../pages/Nominees/Nominees";
+import CreatePool from "../pages/CreatePool/CreatePool";
 
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
@@ -48,6 +49,11 @@ const AppRoutes: React.FC = () => {
                 <Route path="/user" element={
                     <PrivateRoute>
                         <UserPage />
+                    </PrivateRoute>
+                } />
+                <Route path="/createPool" element={
+                    <PrivateRoute>
+                        <CreatePool />
                     </PrivateRoute>
                 } />
                 
