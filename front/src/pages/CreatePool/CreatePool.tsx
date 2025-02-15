@@ -35,7 +35,7 @@ const CreatePool = () => {
     // Validation schema with yup
     const schema = yup.object().shape({
         name: yup.string().required(t('createPoolPage.errors.nameRequired')).max(50, t('createPoolPage.errors.nameMaxLength')),
-        description: yup.string().max(500, t('createPoolPage.errors.descriptionMaxLength')),
+        description: yup.string().max(5000, t('createPoolPage.errors.descriptionMaxLength')),
         public: yup.boolean().required(),
         categories: yup
             .array()
