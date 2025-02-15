@@ -333,10 +333,14 @@ class PoolController{
                         name: 1,
                         description: 1,
                         public: 1,
+                        inviteToken: 1,
                         categories: 1,
                         users: 1,
                         createdBy: 1,
-                        createdAt: 1
+                        createdAt: 1,
+                        isUserInPool: { $in: [req.user._id, "$users.user"] },
+                        isAdmin: { $cond: [{ $in: [req.user._id, "$users.user"] }, { $arrayElemAt: ["$users.admin", { $indexOfArray: ["$users.user", req.user._id] }] }, false] },
+                        isCreator: { $eq: [req.user._id, "$createdBy"] }
                     }
                 }
             );
@@ -347,9 +351,7 @@ class PoolController{
             }
     
             // Check if the user is in the pool
-            const isUserInPool = pool.users.some((user: any) => user.user === req.user._id);
-    
-            if (!isUserInPool) {
+            if (!pool.isUserInPool && !pool.public) {
                 res.status(403).send({ error: 'You are not a member of this pool.' });
                 return;
             }
@@ -378,19 +380,11 @@ class PoolController{
 
             const creator = users.find(u => u._id.equals(ObjectId.createFromHexString(pool.createdBy)));
     
-            // Build the result
-            const result = {
-                _id: pool._id,
-                name: pool.name,
-                description: pool.description,
-                public: pool.public,
-                categories: pool.categories,
+            res.status(200).send({
+                ...pool,
                 users: usersWithDetails,
-                createdBy: creator ? creator.username : null,
-                createdAt: pool.createdAt
-            };
-    
-            res.status(200).send(result);
+                createdBy: creator ? creator.username : null
+            });
         } catch (error) {
             res.status(500).send({ error: 'An error occurred while getting the pool.' });
         }
