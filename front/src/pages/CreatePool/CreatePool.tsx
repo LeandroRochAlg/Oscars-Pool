@@ -6,6 +6,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useState, useEffect } from "react";
 import api from "../../libs/api";
 import { AxiosError } from 'axios';
+import { useNavigate } from "react-router-dom";
 import Title from "../../components/ui/Title";
 import Button from "../../components/common/Button";
 import CategorySelector from "../../components/common/CategorySelector";
@@ -27,7 +28,9 @@ const CreatePool = () => {
     const [selectedCategories, setSelectedCategories] = useState<CategoryPool[]>([]);
     const [allCategories, setAllCategories] = useState<string[]>([]);
     const [loadingSubmit, setLoadingSubmit] = useState(false);
-    const [submitError, setSubmitError] = useState<string | null>(null);
+    const [submitError, setSubmitError] = useState<string>('');
+
+    const navigate = useNavigate();
 
     // Validation schema with yup
     const schema = yup.object().shape({
@@ -113,10 +116,11 @@ const CreatePool = () => {
             // Create the pool
             const response = await api.post('/pools/createPool', data);
 
-            window.location.href = `/pools/${response.data._id}`;
+            // Redirect to the pool page
+            navigate(`/pool/${response.data}`);
         } catch (error) {
             const axiosError = error as AxiosError;
-            setSubmitError((axiosError.response?.data as { message: string }).message);
+            setSubmitError((axiosError.response?.data as { error: string }).error);
             console.error('Error creating pool:', axiosError.response?.data);
         }
 
@@ -226,7 +230,7 @@ const CreatePool = () => {
             </form>
 
             {/* Error Message */}
-            {submitError && <ErrorMessage error={submitError}/>}
+            <ErrorMessage error={submitError}/>
         </div>
     );
 };
