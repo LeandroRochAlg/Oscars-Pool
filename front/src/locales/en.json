@@ -224,5 +224,43 @@
             "nameMaxLength": "Pool name must be at most 50 characters long.",
             "descriptionMaxLength": "Description must be at most 500 characters long."
         }
+    },
+    "pool": {
+        "title": "Pool",
+        "errors": {
+            "notAMember": "Você não é membro deste bolão.",
+            "poolNotFound": "Bolão não encontrado.",
+            "error": "An error occurred while loading the pool."
+        },
+        "tabs": {
+            "generalInfo": "General Info",
+            "categories": "Categories",
+            "members": "Members",
+            "results": "Results",
+            "edit": "Edit Pool"
+        },
+        "generalInfo": {
+            "name": "Name",
+            "description": "Description",
+            "createdBy": "Created by",
+            "createdAt": "Created at",
+            "private": "Private",
+            "copyInviteToken": "Copy invite token",
+            "at": "at"
+        },
+        "feedback": {
+            "inviteTokenCopied": "Invite token copied to clipboard"
+        },
+        "categories": {
+            "category": "Category",
+            "weight": "Weight"
+        },
+        "members": {
+            "admin": "Admin"
+        },
+        "results": {
+            "user": "User",
+            "score": "Score"
+        }
     }
 }

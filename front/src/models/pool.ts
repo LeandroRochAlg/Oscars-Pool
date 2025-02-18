@@ -20,5 +20,5 @@ export interface Pool {
     categories: CategoryPool[];
     users: UserPool[];
     createdBy: string;
-    createdAt: Date;
+    createdAt: string;
 };

@@ -225,5 +225,44 @@
             "nameMaxLength": "O nome do bolão deve ter no máximo 50 caracteres.",
             "descriptionMaxLength": "A descrição do bolão deve ter no máximo 500 caracteres."
         }
+    },
+    "pool": {
+        "title": "Bolão",
+        "errors": {
+            "notAMember": "Você não é membro deste bolão.",
+            "poolNotFound": "Bolão não encontrado.",
+            "error": "Um erro ocorreu ao carregar o bolão."
+        },
+        "tabs": {
+            "generalInfo": "Informações Gerais",
+            "categories": "Categorias",
+            "members": "Membros",
+            "results": "Resultados",
+            "edit": "Editar Bolão"
+        },
+        "generalInfo": {
+            "name": "Nome",
+            "description": "Descrição",
+            "public": "Público",
+            "createdBy": "Criado por",
+            "createdAt": "Criado em",
+            "private": "Privado",
+            "copyInviteToken": "Copiar Token de Convite",
+            "at": "em"
+        },
+        "categories": {
+            "category": "Categoria",
+            "weight": "Peso"
+        },
+        "feedback": {
+            "inviteTokenCopied": "Token de convite copiado!"
+        },
+        "members": {
+            "admin": "Administrador"
+        },
+        "results": {
+            "user": "Usuário",
+            "score": "Pontuação"
+        }
     }
 }
