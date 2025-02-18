@@ -20,7 +20,8 @@ import Footer from "../components/layout/Footer";
 const AppRoutes: React.FC = () => {
     return (
         <Router>
-            <Header />
+            <div className="min-h-screen flex flex-col">
+                <Header />
 
             <Routes>
                 {/* Public Routes */}
@@ -64,7 +65,8 @@ const AppRoutes: React.FC = () => {
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
 
-            <Footer />
+                <Footer />
+            </div>
         </Router>
     );
 }
