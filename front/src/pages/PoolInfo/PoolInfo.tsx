@@ -88,7 +88,7 @@ const PoolInfo = () => {
         setLoadingLeaderboard(false);
     }, [id]);
 
-    return (document.title = 'Pool Info',
+    return (document.title = title,
         <div className="mx-2 md:max-w-[700px] md:mx-auto my-4 text-base-200">
             {loadingPoolInfo ? (
                 <>
