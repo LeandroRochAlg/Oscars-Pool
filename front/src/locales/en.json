@@ -261,6 +261,14 @@
         "results": {
             "user": "User",
             "score": "Score"
+        },
+        "editPool": {
+            "errors": {
+                "fetchCategoriesFailed": "Failed to fetch categories. Please try again."
+            },
+            "buttons": {
+                "saveChanges": "Save Changes"
+            }
         }
     }
 }

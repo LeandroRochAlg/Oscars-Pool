@@ -11,6 +11,7 @@ import GeneralInfo from "./Components/GeneralInfo";
 import Categories from "./Components/Categories";
 import Members from "./Components/Members";
 import Leaderboard from "./Components/Leaderboard";
+import EditPool from "./Components/EditPool";
 
 type Users = {
     _id: string;
@@ -138,8 +139,7 @@ const PoolInfo = () => {
                             {pool?.isAdmin && (<>
                                 <input type="radio" name="my_tabs_1" role="tab" className="tab text-base-200 h-8" aria-label={t('pool.tabs.edit')} />
                                 <Container>
-                                    {/* TODO */}
-                                    <button className="btn btn-primary">{t('pool.edit')}</button>
+                                    <EditPool pool={pool} />
                                 </Container>
                             </>)}
                         </div>

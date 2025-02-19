@@ -263,6 +263,14 @@
         "results": {
             "user": "Usuário",
             "score": "Pontuação"
+        },
+        "editPool": {
+            "errors": {
+                "fetchCategoriesFailed": "Falha ao buscar categorias. Por favor, tente novamente."
+            },
+            "buttons": {
+                "saveChanges": "Salvar Alterações"
+            }
         }
     }
 }
