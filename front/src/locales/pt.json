@@ -14,6 +14,8 @@
     "alreadyHaveAnAccount": "já tem uma conta?",
     "loginNow": "entre agora",
     "register": "Registrar",
+    "yes": "Sim",
+    "no": "Não",
     "validation": {
         "usernameRequired": "Nome de usuário é obrigatório",
         "usernameLength": "Nome de usuário deve ter pelo menos 4 caracteres",
@@ -233,7 +235,10 @@
             "poolNotFound": "Bolão não encontrado.",
             "error": "Um erro ocorreu ao carregar o bolão.",
             "joinPoolFailed": "Falha ao entrar no bolão. Por favor, tente novamente.",
-            "leavePoolFailed": "Falha ao sair do bolão. Por favor, tente novamente."
+            "leavePoolFailed": "Falha ao sair do bolão. Por favor, tente novamente.",
+            "addAdminFailed": "Falha ao adicionar administrador. Por favor, tente novamente.",
+            "removeAdminFailed": "Falha ao remover administrador. Por favor, tente novamente.",
+            "banUserFailed": "Falha ao banir usuário. Por favor, tente novamente."
         },
         "tabs": {
             "generalInfo": "Informações Gerais",
@@ -262,7 +267,13 @@
             "inviteTokenCopied": "Token de convite copiado!"
         },
         "members": {
-            "admin": "Administrador"
+            "admin": "Administrador",
+            "actions": "Ações para",
+            "ban": "Banir",
+            "addAdmin": "Tornar administrador",
+            "removeAdmin": "Remover administrador",
+            "cantDoNothing": "Você não pode fazer nada aqui.",
+            "areYouSure": "Tem certeza que quer fazer isso?"
         },
         "results": {
             "user": "Usuário",

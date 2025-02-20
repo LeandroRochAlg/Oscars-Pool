@@ -14,6 +14,8 @@
     "alreadyHaveAnAccount": "already have an account?",
     "loginNow": "login now",
     "register": "Register",
+    "yes": "Yes",
+    "no": "No",
     "validation": {
         "usernameRequired": "Username is required",
         "usernameLength": "Username must be at least 4 characters long",
@@ -232,7 +234,10 @@
             "poolNotFound": "Bolão não encontrado.",
             "error": "An error occurred while loading the pool.",
             "joinPoolFailed": "Failed to join the pool. Please try again.",
-            "leavePoolFailed": "Failed to leave the pool. Please try again."
+            "leavePoolFailed": "Failed to leave the pool. Please try again.",
+            "addAdminFailed": "Failed to add admin. Please try again.",
+            "removeAdminFailed": "Failed to remove admin. Please try again.",
+            "banUserFailed": "Failed to ban user. Please try again."
         },
         "tabs": {
             "generalInfo": "General Info",
@@ -260,7 +265,13 @@
             "weight": "Weight"
         },
         "members": {
-            "admin": "Admin"
+            "admin": "Admin",
+            "actions": "Actions for",
+            "ban": "Ban",
+            "addAdmin": "Add admin",
+            "removeAdmin": "Remove admin",
+            "cantDoNothing": "You can't do anything here.",
+            "areYouSure": "Are you sure you want to do this?"
         },
         "results": {
             "user": "User",
