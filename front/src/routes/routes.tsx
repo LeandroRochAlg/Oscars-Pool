@@ -14,6 +14,7 @@ import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import Nominees from "../pages/Nominees/Nominees";
 import CreatePool from "../pages/CreatePool/CreatePool";
 import PoolInfo from "../pages/PoolInfo/PoolInfo";
+import FindPools from "../pages/FindPools/FindPools";
 
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
@@ -61,6 +62,11 @@ const AppRoutes: React.FC = () => {
                     <Route path="/pool/:id" element={
                         <PrivateRoute>
                             <PoolInfo />
+                        </PrivateRoute>
+                    } />
+                    <Route path="/findPools" element={
+                        <PrivateRoute>
+                            <FindPools />
                         </PrivateRoute>
                     } />
                     

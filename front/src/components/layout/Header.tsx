@@ -63,6 +63,7 @@ const Header = () => {
                             <li><a onClick={() => navigate("/")}>{t('pages.home')}</a></li>
                             <li><a onClick={() => navigate("/nominees")}>{t('pages.nominees')}</a></li>
                             <li><a onClick={() => navigate("/createPool")}>{t('createPoolPage.title')}</a></li>
+                            <li><a onClick={() => navigate("/findPools")}>{t('findPools.title')}</a></li>
                         </ul>
                     </div>
                 )}

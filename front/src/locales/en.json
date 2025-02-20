@@ -288,5 +288,11 @@
             },
             "areYouSure": "Are you sure you want to do this?"
         }
+    },
+    "findPools": {
+        "title": "Find pools",
+        "search": "Search",
+        "noPoolsFound": "No pools found.",
+        "searchPlaceholder": "Search for pools by name or description"
     }
 }

@@ -290,5 +290,11 @@
             },
             "areYouSure": "Tem certeza que quer fazer isso?"
         }
+    },
+    "findPools": {
+        "title": "Encontrar bolão",
+        "search": "Buscar",
+        "noPoolsFound": "Nenhum bolão encontrado.",
+        "searchPlaceholder": "Busque bolões por nome ou descrição"
     }
 }
