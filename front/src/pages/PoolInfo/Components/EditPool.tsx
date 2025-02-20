@@ -9,6 +9,7 @@ import Button from "../../../components/common/Button";
 import CategorySelector from "../../../components/common/CategorySelector";
 import WeightAssigner from "../../../components/common/WeightAssigner";
 import ErrorMessage from "../../../components/common/ErrorMessage";
+import AreYouSure from "../../../components/common/AreYouSure";
 
 type PoolForm = {
     name: string;
@@ -24,6 +25,7 @@ const EditPool = ({ pool, fetchPool }: { pool: any, fetchPool: Function }) => {
     const [submitError, setSubmitError] = useState("");
     const [fetchError, setFetchError] = useState("");
     const [allCategories, setAllCategories] = useState<string[]>([]);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
     // Validation schema
     const schema = yup.object().shape({
@@ -115,6 +117,19 @@ const EditPool = ({ pool, fetchPool }: { pool: any, fetchPool: Function }) => {
         setLoading(false);
     };
 
+    const handleDeletePool = async () => {
+        setLoading(true);
+
+        try {
+            await api.delete(`/pools/deletePool/${pool._id}`);
+            fetchPool();
+        } catch (error) {
+            setSubmitError(t("pool.errors.deleteError"));
+        }
+
+        setLoading(false);
+    }
+
     if (!pool) {
         return null;
     }
@@ -196,15 +211,23 @@ const EditPool = ({ pool, fetchPool }: { pool: any, fetchPool: Function }) => {
                 )}
             </div>
 
-            {/* Submit Button */}
-            <div className="mt-6 flex">
+            <div className="mt-6 flex justify-between items-center">
+                {/* Submit Button */}
                 <Button type="submit" loading={loadingCategories || loading}>
                     {t("pool.editPool.buttons.saveChanges")}
                 </Button>
+
+                {/* Delete Pool Button */}
+                <button type="button" className="btn btn-error uppercase mx-auto" disabled={loading} onClick={() => setDeleteModalOpen(true)}>
+                    {loading ? (<span className="loading loading-spinner"></span>) : t("pool.editPool.buttons.deletePool")}
+                </button>
             </div>
 
             {/* Error Message */}
             {submitError && <ErrorMessage error={submitError || fetchError} />}
+
+            {/* Delete Pool Modal */}
+            <AreYouSure onYes={handleDeletePool} onNo={() => setDeleteModalOpen(false)} message={t("pool.editPool.areYouSure")} show={deleteModalOpen} />
         </form>
     );
 }

@@ -237,7 +237,8 @@
             "leavePoolFailed": "Failed to leave the pool. Please try again.",
             "addAdminFailed": "Failed to add admin. Please try again.",
             "removeAdminFailed": "Failed to remove admin. Please try again.",
-            "banUserFailed": "Failed to ban user. Please try again."
+            "banUserFailed": "Failed to ban user. Please try again.",
+            "deleteError": "Failed to delete pool. Please try again."
         },
         "tabs": {
             "generalInfo": "General Info",
@@ -282,8 +283,10 @@
                 "fetchCategoriesFailed": "Failed to fetch categories. Please try again."
             },
             "buttons": {
-                "saveChanges": "Save Changes"
-            }
+                "saveChanges": "Save Changes",
+                "deletePool": "Delete Pool"
+            },
+            "areYouSure": "Are you sure you want to do this?"
         }
     }
 }

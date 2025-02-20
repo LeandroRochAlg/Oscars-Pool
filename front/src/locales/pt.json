@@ -238,7 +238,8 @@
             "leavePoolFailed": "Falha ao sair do bolão. Por favor, tente novamente.",
             "addAdminFailed": "Falha ao adicionar administrador. Por favor, tente novamente.",
             "removeAdminFailed": "Falha ao remover administrador. Por favor, tente novamente.",
-            "banUserFailed": "Falha ao banir usuário. Por favor, tente novamente."
+            "banUserFailed": "Falha ao banir usuário. Por favor, tente novamente.",
+            "deleteError": "Falha ao deletar bolão. Por favor, tente novamente."
         },
         "tabs": {
             "generalInfo": "Informações Gerais",
@@ -284,8 +285,10 @@
                 "fetchCategoriesFailed": "Falha ao buscar categorias. Por favor, tente novamente."
             },
             "buttons": {
-                "saveChanges": "Salvar Alterações"
-            }
+                "saveChanges": "Salvar Alterações",
+                "deletePool": "Apagar Bolão"
+            },
+            "areYouSure": "Tem certeza que quer fazer isso?"
         }
     }
 }

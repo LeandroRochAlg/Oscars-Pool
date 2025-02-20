@@ -57,7 +57,7 @@ const PoolInfo = () => {
             }
 
             if (axiosError.response?.status === 404) {
-                setApiError(t('pool.errors.notFound'));
+                setApiError(t('pool.errors.poolNotFound'));
             }
 
             if (axiosError.response?.status === 403) {
