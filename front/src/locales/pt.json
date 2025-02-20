@@ -231,7 +231,9 @@
         "errors": {
             "notAMember": "Você não é membro deste bolão.",
             "poolNotFound": "Bolão não encontrado.",
-            "error": "Um erro ocorreu ao carregar o bolão."
+            "error": "Um erro ocorreu ao carregar o bolão.",
+            "joinPoolFailed": "Falha ao entrar no bolão. Por favor, tente novamente.",
+            "leavePoolFailed": "Falha ao sair do bolão. Por favor, tente novamente."
         },
         "tabs": {
             "generalInfo": "Informações Gerais",
@@ -248,7 +250,9 @@
             "createdAt": "Criado em",
             "private": "Privado",
             "copyInviteToken": "Copiar Token de Convite",
-            "at": "em"
+            "at": "em",
+            "joinPool": "Entrar no Bolão",
+            "leavePool": "Sair do Bolão"
         },
         "categories": {
             "category": "Categoria",

@@ -230,7 +230,9 @@
         "errors": {
             "notAMember": "Você não é membro deste bolão.",
             "poolNotFound": "Bolão não encontrado.",
-            "error": "An error occurred while loading the pool."
+            "error": "An error occurred while loading the pool.",
+            "joinPoolFailed": "Failed to join the pool. Please try again.",
+            "leavePoolFailed": "Failed to leave the pool. Please try again."
         },
         "tabs": {
             "generalInfo": "General Info",
@@ -246,7 +248,9 @@
             "createdAt": "Created at",
             "private": "Private",
             "copyInviteToken": "Copy invite token",
-            "at": "at"
+            "at": "at",
+            "joinPool": "Join Pool",
+            "leavePool": "Leave Pool"
         },
         "feedback": {
             "inviteTokenCopied": "Invite token copied to clipboard"
