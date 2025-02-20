@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -18,9 +17,8 @@ type PoolForm = {
     categories: { category: string; weight: number }[];
 };
 
-const EditPool = ({ pool }: { pool: any }) => {
+const EditPool = ({ pool, fetchPool }: { pool: any, fetchPool: Function }) => {
     const { t } = useTranslation();
-    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [loadingCategories, setLoadingCategories] = useState(true);
     const [submitError, setSubmitError] = useState("");
@@ -105,7 +103,7 @@ const EditPool = ({ pool }: { pool: any }) => {
                 categories: data.categories,
             });
 
-            navigate(`/pool/${pool._id}`);
+            fetchPool();
         } catch (error) {
             const axiosError = error as AxiosError;
 

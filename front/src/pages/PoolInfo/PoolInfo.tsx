@@ -41,34 +41,35 @@ const PoolInfo = () => {
     const [loadingLeaderboard, setLoadingLeaderboard] = useState(true);
     const { id } = useParams<{ id: string }>();
 
-    useEffect(() => {
+    // Get pool info
+    const fetchPoolInfo = async () => {
         setLoadingPoolInfo(true);
 
-        // Get pool info
-        const fetchPoolInfo = async () => {
-            try {
-                const result = await api.get(`/pools/getPoolInfo/${id}`);
-                setPool(result.data);
-                setTitle(result.data.name);
-            } catch (error) {
-                const axiosError = error as AxiosError;
-                
-                if (axiosError.response?.status === 500) {
-                    setApiError(t('pool.errors.error'));
-                }
-
-                if (axiosError.response?.status === 404) {
-                    setApiError(t('pool.errors.notFound'));
-                }
-
-                if (axiosError.response?.status === 403) {
-                    setApiError(t('pool.errors.notAMember'));
-                }
+        try {
+            const result = await api.get(`/pools/getPoolInfo/${id}`);
+            setPool(result.data);
+            setTitle(result.data.name);
+        } catch (error) {
+            const axiosError = error as AxiosError;
+            
+            if (axiosError.response?.status === 500) {
+                setApiError(t('pool.errors.error'));
             }
-        };
 
-        fetchPoolInfo();
+            if (axiosError.response?.status === 404) {
+                setApiError(t('pool.errors.notFound'));
+            }
+
+            if (axiosError.response?.status === 403) {
+                setApiError(t('pool.errors.notAMember'));
+            }
+        }
+
         setLoadingPoolInfo(false);
+    };
+
+    useEffect(() => {
+        fetchPoolInfo();
     }, [id]);
 
     useEffect(() => {
@@ -139,7 +140,7 @@ const PoolInfo = () => {
                             {pool?.isAdmin && (<>
                                 <input type="radio" name="my_tabs_1" role="tab" className="tab text-base-200 h-8" aria-label={t('pool.tabs.edit')} />
                                 <Container>
-                                    <EditPool pool={pool} />
+                                    <EditPool pool={pool} fetchPool={fetchPoolInfo} />
                                 </Container>
                             </>)}
                         </div>
