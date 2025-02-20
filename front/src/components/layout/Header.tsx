@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+    const navigate = useNavigate();
+
     const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('user') !== null);
 
     useEffect(() => {
@@ -31,7 +34,8 @@ const Header = () => {
     const handleLogout = () => {
         // Handle logout logic here
         localStorage.removeItem('user');
-        window.location.href = '/login';
+        setIsAuthenticated(false);
+        navigate("/login");
     };
 
     return (
@@ -56,9 +60,9 @@ const Header = () => {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li><a href="/">{t('pages.home')}</a></li>
-                            <li><a href="/nominees">{t('pages.nominees')}</a></li>
-                            <li><a href="/createPool">{t('createPoolPage.title')}</a></li>
+                            <li><a onClick={() => navigate("/")}>{t('pages.home')}</a></li>
+                            <li><a onClick={() => navigate("/nominees")}>{t('pages.nominees')}</a></li>
+                            <li><a onClick={() => navigate("/createPool")}>{t('createPoolPage.title')}</a></li>
                         </ul>
                     </div>
                 )}
@@ -83,7 +87,7 @@ const Header = () => {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li><a href="/user">{t('pages.profile')}</a></li>
+                            <li><a onClick={() => navigate("/user")}>{t('pages.profile')}</a></li>
                             
                             {/* Settings option */}
                             <li>
@@ -215,7 +219,7 @@ const Header = () => {
                                 </label>
                             </li>
                             <li className="mt-2">
-                                <a href="/login">{t('login')}</a>
+                                <a onClick={() => navigate('/login')}>{t('login')}</a>
                             </li>
                         </ul>
                     </div>
