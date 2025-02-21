@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import api from "../../libs/api";
 import Title from "../../components/ui/Title";
@@ -22,25 +22,51 @@ const FindPools = () => {
     const [nextCursor, setNextCursor] = useState<string | null>(null);
     const [hasMore, setHasMore] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
+    const observer = useRef<IntersectionObserver>();
 
-    useEffect(() => {
-        const fetchPools = async () => {
-            setLoading(true);
+    // Fetch pools
+    const fetchPools = useCallback(async () => {
+        if (loading || !hasMore) return;
 
-            const cursor = nextCursor ? `?cursor=${nextCursor}` : '';
+        setLoading(true);
 
+        try {
+            const cursor = nextCursor ? `?cursor=${nextCursor}` : "";
             const response = await api.get(`/pools/getPoolsByUserNumber${cursor}`);
             const data = response.data;
-            setPools([...pools, ...data.pools]);
+
+            setPools((prevPools) => [...prevPools, ...data.pools]);
             setNextCursor(data.nextCursor);
             setHasMore(data.hasMore);
+        } catch (error) {
+            console.error("Error fetching pools: ", error);
+        } finally {
             setLoading(false);
-
-            console.log(pools);
         }
+    }, [loading, hasMore, nextCursor]);
 
+    // Fetch pools on component mount
+    useEffect(() => {
         fetchPools();
     }, []);
+
+    // Set up observer for infinite scroll
+    const lastPoolElementRef = useCallback(
+        (node: HTMLElement | null) => {
+            if (loading) return;
+
+            if (observer.current) observer.current.disconnect();
+
+            observer.current = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && hasMore) {
+                    fetchPools();
+                }
+            });
+
+            if (node) observer.current.observe(node);
+        },
+        [loading, hasMore, fetchPools]
+    );
 
     return (document.title = t('findPools.title'),
         <>
@@ -70,18 +96,20 @@ const FindPools = () => {
 
             <div className="py-5 mx-2 md:w-[700px] md:mx-auto">
                 <div className="flex flex-col">
-                    {pools.map((pool) => (
-                        <PoolPreview key={pool._id} pool={pool} />
-                    ))}
+                    {pools.map((pool, index) => {
+                        // If we are at the last pool, we want to attach the ref to the last pool element
+                        if (pools.length === index + 1) {
+                            return (
+                                <div ref={lastPoolElementRef} key={pool._id}>
+                                    <PoolPreview pool={pool} />
+                                </div>
+                            );
+                        } else {
+                            return <PoolPreview key={pool._id} pool={pool} />;
+                        }
+                    })}
                 </div>
                 {loading && <p className="text-center">{t('findPools.loading')}</p>}
-                {!loading && hasMore && (
-                    <button
-                        onClick={() => setNextCursor(nextCursor)}
-                        className="btn btn-primary">
-                        {t('findPools.loadMore')}
-                    </button>
-                )}
             </div>
         </>
     )
