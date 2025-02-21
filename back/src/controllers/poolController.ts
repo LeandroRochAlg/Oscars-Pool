@@ -306,7 +306,7 @@ class PoolController{
                         public: 1,
                         categories: { $size: "$categories" },
                         users: { $size: "$users" },
-                        alreadyIn: { $in: [req.user._id, "$users.user"] }
+                        isMember: { $in: [req.user._id, "$users.user"] }
                     }
                 }
             );
