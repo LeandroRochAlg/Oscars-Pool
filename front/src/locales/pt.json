@@ -295,6 +295,13 @@
         "title": "Encontrar bolão",
         "search": "Buscar",
         "noPoolsFound": "Nenhum bolão encontrado.",
-        "searchPlaceholder": "Busque bolões por nome ou descrição"
+        "searchPlaceholder": "Busque bolões por nome ou descrição",
+        "loading": "Carregando bolões...",
+        "poolPreview": {
+            "creator": "Criador",
+            "admin": "Administrador",
+            "member": "Membro",
+            "notAMember": "Não é membro"
+        }
     }
 }

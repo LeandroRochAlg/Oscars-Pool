@@ -293,6 +293,13 @@
         "title": "Find pools",
         "search": "Search",
         "noPoolsFound": "No pools found.",
-        "searchPlaceholder": "Search for pools by name or description"
+        "searchPlaceholder": "Search for pools by name or description",
+        "loading": "Loading pools...",
+        "poolPreview": {
+            "creator": "Creator",
+            "admin": "Admin",
+            "member": "Member",
+            "notAMember": "Not a member"
+        }
     }
 }
