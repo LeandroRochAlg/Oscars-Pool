@@ -10,7 +10,7 @@ const HomePage = () => {
 		<div>
 			<Countdown />
 
-			<div className="card card-side bg-base-100 shadow-xl mx-2 md:w-[600px] md:mx-auto border border-primary my-5 text-base-200">
+			<div className="card card-side bg-base-100 shadow-xl mx-2 md:w-[700px] md:mx-auto border border-primary my-5 text-base-200">
 				<div className="card-body">
 					<h2 className="card-title">{t('homePage.nominees.title')}</h2>
 					<p>{t('homePage.nominees.subtitle')}</p>
