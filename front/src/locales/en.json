@@ -294,6 +294,7 @@
         "search": "Search",
         "noPoolsFound": "No pools found.",
         "searchPlaceholder": "Search for pools by name or description",
+        "inviteTokenPlaceholder": "Invite token",
         "loading": "Loading pools...",
         "poolPreview": {
             "creator": "Creator",

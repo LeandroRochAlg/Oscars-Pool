@@ -296,6 +296,7 @@
         "search": "Buscar",
         "noPoolsFound": "Nenhum bolão encontrado.",
         "searchPlaceholder": "Busque bolões por nome ou descrição",
+        "inviteTokenPlaceholder": "Token de convite",
         "loading": "Carregando bolões...",
         "poolPreview": {
             "creator": "Criador",

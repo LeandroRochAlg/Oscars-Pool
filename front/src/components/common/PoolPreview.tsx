@@ -10,9 +10,9 @@ type Pool = {
     public: boolean;
     categories: number;
     users: number;
-    isAdmin: boolean;
-    isCreator: boolean;
-    isMember: boolean;
+    isAdmin?: boolean;
+    isCreator?: boolean;
+    isMember?: boolean;
 }
 
 const PoolPreview = ({ pool }: { pool: Pool }) => {
