@@ -302,5 +302,10 @@
             "member": "Member",
             "notAMember": "Not a member"
         }
+    },
+    "myPools": {
+        "title": "My pools",
+        "noPools": "You don't have any pools yet.",
+        "loading": "Loading pools..."
     }
 }

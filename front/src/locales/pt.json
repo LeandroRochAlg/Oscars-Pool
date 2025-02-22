@@ -304,5 +304,10 @@
             "member": "Membro",
             "notAMember": "Não é membro"
         }
+    },
+    "myPools": {
+        "title": "Meus bolões",
+        "noPools": "Você ainda não tem nenhum bolão.",
+        "loading": "Carregando bolões..."
     }
 }

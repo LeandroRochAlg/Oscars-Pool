@@ -62,8 +62,9 @@ const Header = () => {
                             className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><a onClick={() => navigate("/")}>{t('pages.home')}</a></li>
                             <li><a onClick={() => navigate("/nominees")}>{t('pages.nominees')}</a></li>
-                            <li><a onClick={() => navigate("/createPool")}>{t('createPoolPage.title')}</a></li>
+                            <li><a onClick={() => navigate("/myPools")}>{t('myPools.title')}</a></li>
                             <li><a onClick={() => navigate("/findPools")}>{t('findPools.title')}</a></li>
+                            <li><a onClick={() => navigate("/createPool")}>{t('createPoolPage.title')}</a></li>
                         </ul>
                     </div>
                 )}

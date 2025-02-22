@@ -15,6 +15,7 @@ import Nominees from "../pages/Nominees/Nominees";
 import CreatePool from "../pages/CreatePool/CreatePool";
 import PoolInfo from "../pages/PoolInfo/PoolInfo";
 import FindPools from "../pages/FindPools/FindPools";
+import MyPools from "../pages/MyPools/MyPools";
 
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
@@ -67,6 +68,11 @@ const AppRoutes: React.FC = () => {
                     <Route path="/findPools" element={
                         <PrivateRoute>
                             <FindPools />
+                        </PrivateRoute>
+                    } />
+                    <Route path="/myPools" element={
+                        <PrivateRoute>
+                            <MyPools />
                         </PrivateRoute>
                     } />
                     
