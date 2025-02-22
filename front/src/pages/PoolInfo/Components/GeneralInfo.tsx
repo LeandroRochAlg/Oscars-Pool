@@ -61,7 +61,7 @@ const GeneralInfo = ({ pool }: { pool: any }) => {
     return (
         <div>
             <div className="flex justify-between items-center">
-                <h2 className="text-lg font-bold flex items-center h-10 max-w-2/3">
+                <h2 className="text-lg font-bold flex items-center h-fit max-w-2/3">
                     {pool.name}
                     {!pool.public && (
                         <span className="ml-3 tooltip" data-tip={t('pool.generalInfo.private')}>
