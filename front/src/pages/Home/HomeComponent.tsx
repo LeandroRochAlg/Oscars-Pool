@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import Countdown from '../../components/common/Countdown';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
 	const { t } = useTranslation();
+	const navigate = useNavigate();
 
 	return (document.title = t('home'),
 		<div>
@@ -13,7 +15,12 @@ const HomePage = () => {
 					<h2 className="card-title">{t('homePage.nominees.title')}</h2>
 					<p>{t('homePage.nominees.subtitle')}</p>
 					<div className="card-actions">
-						<button className="btn btn-primary" onClick={() => window.location.href = '/nominees'}>{t('homePage.nominees.viewAll')}</button>
+						<button
+							className="btn btn-primary"
+							onClick={() => navigate('/nominees')}
+						>
+							{t('homePage.nominees.viewAll')}
+						</button>
 					</div>
 				</div>
 				<figure className="h-56 w-40">
