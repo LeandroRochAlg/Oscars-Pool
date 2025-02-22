@@ -146,8 +146,7 @@ const FindPools = () => {
     }
 
     return (
-        (document.title = t("findPools.title")),
-        (
+        (document.title = t("findPools.title")), (
             <>
                 <div
                     className="hero"
