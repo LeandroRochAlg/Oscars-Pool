@@ -13,7 +13,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, admin }) => {
     const { t } = useTranslation();
     const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-    if (!user) {
+    if (!user.token) {
         return <Navigate to={`/login?redirect=${window.location.pathname}`} />;
     }
 
