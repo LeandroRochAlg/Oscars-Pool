@@ -16,6 +16,7 @@
     "register": "Register",
     "yes": "Yes",
     "no": "No",
+    "unauthorized": "You are not authorized to view this page.",
     "validation": {
         "usernameRequired": "Username is required",
         "usernameLength": "Username must be at least 4 characters long",

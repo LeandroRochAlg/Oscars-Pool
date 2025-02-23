@@ -16,6 +16,7 @@
     "register": "Registrar",
     "yes": "Sim",
     "no": "Não",
+    "unauthorized": "Você não é permitido nessa página.",
     "validation": {
         "usernameRequired": "Nome de usuário é obrigatório",
         "usernameLength": "Nome de usuário deve ter pelo menos 4 caracteres",

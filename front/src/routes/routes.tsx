@@ -34,7 +34,7 @@ const AppRoutes: React.FC = () => {
 
                     {/* Private Routes */}
                     <Route path="/winners" element={
-                        <PrivateRoute>
+                        <PrivateRoute admin>
                             <WinnersPage />
                         </PrivateRoute>
                     } />
