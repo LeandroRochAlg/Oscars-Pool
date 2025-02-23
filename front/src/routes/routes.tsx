@@ -4,9 +4,7 @@ import PrivateRoute from "../components/PrivateRoute";
 import LoginPage from "../pages/Login/LoginComponent";
 import RegisterPage from "../pages/Register/RegisterComponent";
 import HomePage from "../pages/Home/HomeComponent";
-import BetsPage from "../pages/Bets/BetsComponent";
 import WinnersPage from "../pages/Winners/WinnersComponent";
-import LeaderboardPage from "../pages/Leaderboard/LeaderboardComponent";
 import UserPage from "../pages/User/UserComponent";
 import NotFoundPage from "../pages/NotFound/NotFoundComponent";
 import ActionHandler from "../pages/ActionHandler/ActionHandler";
@@ -35,19 +33,9 @@ const AppRoutes: React.FC = () => {
                     <Route path="/" element={<HomePage />} />
 
                     {/* Private Routes */}
-                    <Route path="/bets" element={
-                        <PrivateRoute>
-                            <BetsPage />
-                        </PrivateRoute>
-                    } />
                     <Route path="/winners" element={
                         <PrivateRoute>
                             <WinnersPage />
-                        </PrivateRoute>
-                    } />
-                    <Route path="/leaderboard" element={
-                        <PrivateRoute>
-                            <LeaderboardPage />
                         </PrivateRoute>
                     } />
                     <Route path="/user" element={
