@@ -199,6 +199,19 @@
             "title": "Indicados",
             "subtitle": "Confira os indicados ao Oscar 2025",
             "viewAll": "Ver todos"
+        },
+        "hero": {
+            "title": "Bem-vindo(a) ao AcademyBolao",
+            "description": {
+                "first": "Junte-se à diversão e compita com amigos prevendo os vencedores do Oscar. Acesse ",
+                "second": "Meus Bolões",
+                "third": ", ",
+                "fourth": "Encontrar Bolões",
+                "fifth": ", ou ",
+                "sixth": "Criar um Bolão",
+                "seventh": " para começar!"
+            },
+            "login": "Registre-se ou entre agora!"
         }
     },
     "createPoolPage": {

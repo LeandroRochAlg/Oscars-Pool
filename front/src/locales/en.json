@@ -198,6 +198,19 @@
             "title": "Nominees",
             "subtitle": "Check out the 2025 Oscar nominees",
             "viewAll": "View all"
+        },
+        "hero": {
+            "title": "Welcome to the AcademyBolao!",
+            "description": {
+                "first": "Join the fun and compete with friends by predicting the Oscar winners. ",
+                "second": "My Pools",
+                "third": ", ",
+                "fourth": "Find Pools",
+                "fifth": ", or ",
+                "sixth": "Create a Pool",
+                "seventh": " to get started!"
+            },
+            "login": "Register or login now!"
         }
     },
     "createPoolPage": {
