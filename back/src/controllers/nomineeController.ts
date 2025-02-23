@@ -62,6 +62,11 @@ class NomineeController {
             const existingCategory = await winners.findOne({ category });
 
             if (existingCategory) {
+                if (existingCategory.nominee === nominee) {
+                    winners.deleteOne({ category });
+                    return res.status(200).send('Winner removed');
+                }
+
                 await winners.updateOne({ category }, { $set: { nominee } });
                 return res.status(200).send('Winner updated');
             }
