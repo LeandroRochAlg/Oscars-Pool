@@ -14,6 +14,8 @@
     "alreadyHaveAnAccount": "already have an account?",
     "loginNow": "login now",
     "register": "Register",
+    "yes": "Yes",
+    "no": "No",
     "validation": {
         "usernameRequired": "Username is required",
         "usernameLength": "Username must be at least 4 characters long",
@@ -196,6 +198,127 @@
             "title": "Nominees",
             "subtitle": "Check out the 2025 Oscar nominees",
             "viewAll": "View all"
+        },
+        "hero": {
+            "title": "Welcome to the AcademyBolao!",
+            "description": {
+                "first": "Join the fun and compete with friends by predicting the Oscar winners. ",
+                "second": "My Pools",
+                "third": ", ",
+                "fourth": "Find Pools",
+                "fifth": ", or ",
+                "sixth": "Create a Pool",
+                "seventh": " to get started!"
+            },
+            "login": "Register or login now!"
         }
+    },
+    "createPoolPage": {
+        "title": "Create pool",
+        "pages": {
+            "generalInfo": "General Info",
+            "categories": "Categories",
+            "weights": "Weights"
+        },
+        "form": {
+            "name": "Pool Name",
+            "description": "Description",
+            "public": "Public Pool"
+        },
+        "buttons": {
+            "previous": "Previous",
+            "next": "Next",
+            "createPool": "Create Pool"
+        },
+        "errors": {
+            "nameRequired": "Pool name is required.",
+            "weightMin": "Weight must be at least 1.",
+            "atLeastOneCategory": "You must select at least one category.",
+            "totalWeight": "The total weight of all categories must be exactly 1000.",
+            "createPoolFailed": "Failed to create the pool. Please try again.",
+            "nameMaxLength": "Pool name must be at most 50 characters long.",
+            "descriptionMaxLength": "Description must be at most 500 characters long."
+        }
+    },
+    "pool": {
+        "title": "Pool",
+        "errors": {
+            "notAMember": "You are not a member of this pool.",
+            "poolNotFound": "Pool not found.",
+            "error": "An error occurred while loading the pool.",
+            "joinPoolFailed": "Failed to join the pool. Please try again.",
+            "leavePoolFailed": "Failed to leave the pool. Please try again.",
+            "addAdminFailed": "Failed to add admin. Please try again.",
+            "removeAdminFailed": "Failed to remove admin. Please try again.",
+            "banUserFailed": "Failed to ban user. Please try again.",
+            "deleteError": "Failed to delete pool. Please try again."
+        },
+        "tabs": {
+            "generalInfo": "General Info",
+            "categories": "Categories",
+            "members": "Members",
+            "results": "Results",
+            "edit": "Edit Pool"
+        },
+        "generalInfo": {
+            "name": "Name",
+            "description": "Description",
+            "createdBy": "Created by",
+            "createdAt": "Created at",
+            "private": "Private",
+            "copyInviteToken": "Copy invite token",
+            "at": "at",
+            "joinPool": "Join Pool",
+            "leavePool": "Leave Pool"
+        },
+        "feedback": {
+            "inviteTokenCopied": "Invite token copied to clipboard"
+        },
+        "categories": {
+            "category": "Category",
+            "weight": "Weight"
+        },
+        "members": {
+            "admin": "Admin",
+            "actions": "Actions for",
+            "ban": "Ban",
+            "addAdmin": "Add admin",
+            "removeAdmin": "Remove admin",
+            "cantDoNothing": "You can't do anything here.",
+            "areYouSure": "Are you sure you want to do this?"
+        },
+        "results": {
+            "user": "User",
+            "score": "Score"
+        },
+        "editPool": {
+            "errors": {
+                "fetchCategoriesFailed": "Failed to fetch categories. Please try again."
+            },
+            "buttons": {
+                "saveChanges": "Save Changes",
+                "deletePool": "Delete Pool"
+            },
+            "areYouSure": "Are you sure you want to do this?"
+        }
+    },
+    "findPools": {
+        "title": "Find pools",
+        "search": "Search",
+        "noPoolsFound": "No pools found.",
+        "searchPlaceholder": "Search for pools by name or description",
+        "inviteTokenPlaceholder": "Invite token",
+        "loading": "Loading pools...",
+        "poolPreview": {
+            "creator": "Creator",
+            "admin": "Admin",
+            "member": "Member",
+            "notAMember": "Not a member"
+        }
+    },
+    "myPools": {
+        "title": "My pools",
+        "noPools": "You don't have any pools yet.",
+        "loading": "Loading pools..."
     }
 }

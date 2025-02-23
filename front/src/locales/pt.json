@@ -14,6 +14,8 @@
     "alreadyHaveAnAccount": "já tem uma conta?",
     "loginNow": "entre agora",
     "register": "Registrar",
+    "yes": "Sim",
+    "no": "Não",
     "validation": {
         "usernameRequired": "Nome de usuário é obrigatório",
         "usernameLength": "Nome de usuário deve ter pelo menos 4 caracteres",
@@ -197,6 +199,128 @@
             "title": "Indicados",
             "subtitle": "Confira os indicados ao Oscar 2025",
             "viewAll": "Ver todos"
+        },
+        "hero": {
+            "title": "Bem-vindo(a) ao AcademyBolao",
+            "description": {
+                "first": "Junte-se à diversão e compita com amigos prevendo os vencedores do Oscar. Acesse ",
+                "second": "Meus Bolões",
+                "third": ", ",
+                "fourth": "Encontrar Bolões",
+                "fifth": ", ou ",
+                "sixth": "Criar um Bolão",
+                "seventh": " para começar!"
+            },
+            "login": "Registre-se ou entre agora!"
         }
+    },
+    "createPoolPage": {
+        "title": "Criar bolão",
+        "pages": {
+            "generalInfo": "Informações Gerais",
+            "categories": "Categorias",
+            "weights": "Pesos"
+        },
+        "form": {
+            "name": "Nome do Bolão",
+            "description": "Descrição",
+            "public": "Bolão Público"
+        },
+        "buttons": {
+            "previous": "Anterior",
+            "next": "Próximo",
+            "createPool": "Criar Bolão"
+        },
+        "errors": {
+            "nameRequired": "O nome do bolão é obrigatório.",
+            "weightMin": "O peso deve ser pelo menos 1.",
+            "atLeastOneCategory": "Você deve selecionar pelo menos uma categoria.",
+            "totalWeight": "O peso total de todas as categorias deve ser exatamente 1000.",
+            "createPoolFailed": "Falha ao criar o bolão. Por favor, tente novamente.",
+            "nameMaxLength": "O nome do bolão deve ter no máximo 50 caracteres.",
+            "descriptionMaxLength": "A descrição do bolão deve ter no máximo 500 caracteres."
+        }
+    },
+    "pool": {
+        "title": "Bolão",
+        "errors": {
+            "notAMember": "Você não é membro deste bolão.",
+            "poolNotFound": "Bolão não encontrado.",
+            "error": "Um erro ocorreu ao carregar o bolão.",
+            "joinPoolFailed": "Falha ao entrar no bolão. Por favor, tente novamente.",
+            "leavePoolFailed": "Falha ao sair do bolão. Por favor, tente novamente.",
+            "addAdminFailed": "Falha ao adicionar administrador. Por favor, tente novamente.",
+            "removeAdminFailed": "Falha ao remover administrador. Por favor, tente novamente.",
+            "banUserFailed": "Falha ao banir usuário. Por favor, tente novamente.",
+            "deleteError": "Falha ao deletar bolão. Por favor, tente novamente."
+        },
+        "tabs": {
+            "generalInfo": "Informações Gerais",
+            "categories": "Categorias",
+            "members": "Membros",
+            "results": "Resultados",
+            "edit": "Editar Bolão"
+        },
+        "generalInfo": {
+            "name": "Nome",
+            "description": "Descrição",
+            "public": "Público",
+            "createdBy": "Criado por",
+            "createdAt": "Criado em",
+            "private": "Privado",
+            "copyInviteToken": "Copiar Token de Convite",
+            "at": "em",
+            "joinPool": "Entrar no Bolão",
+            "leavePool": "Sair do Bolão"
+        },
+        "categories": {
+            "category": "Categoria",
+            "weight": "Peso"
+        },
+        "feedback": {
+            "inviteTokenCopied": "Token de convite copiado!"
+        },
+        "members": {
+            "admin": "Administrador",
+            "actions": "Ações para",
+            "ban": "Banir",
+            "addAdmin": "Tornar administrador",
+            "removeAdmin": "Remover administrador",
+            "cantDoNothing": "Você não pode fazer nada aqui.",
+            "areYouSure": "Tem certeza que quer fazer isso?"
+        },
+        "results": {
+            "user": "Usuário",
+            "score": "Pontuação"
+        },
+        "editPool": {
+            "errors": {
+                "fetchCategoriesFailed": "Falha ao buscar categorias. Por favor, tente novamente."
+            },
+            "buttons": {
+                "saveChanges": "Salvar Alterações",
+                "deletePool": "Apagar Bolão"
+            },
+            "areYouSure": "Tem certeza que quer fazer isso?"
+        }
+    },
+    "findPools": {
+        "title": "Encontrar bolão",
+        "search": "Buscar",
+        "noPoolsFound": "Nenhum bolão encontrado.",
+        "searchPlaceholder": "Busque bolões por nome ou descrição",
+        "inviteTokenPlaceholder": "Token de convite",
+        "loading": "Carregando bolões...",
+        "poolPreview": {
+            "creator": "Criador",
+            "admin": "Administrador",
+            "member": "Membro",
+            "notAMember": "Não é membro"
+        }
+    },
+    "myPools": {
+        "title": "Meus bolões",
+        "noPools": "Você ainda não tem nenhum bolão.",
+        "loading": "Carregando bolões..."
     }
 }

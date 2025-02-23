@@ -4,6 +4,7 @@ import api from '../../libs/api';
 import { AxiosError } from 'axios';
 import NomineeCard from "../../components/common/NomineeCard";
 import NomineeCardSkeleton from "../../components/common/NomineeCardSkeleton";
+import Title from "../../components/ui/Title";
 
 const Nominees = () => {
     const [categories, setCategories] = useState([]);
@@ -55,7 +56,7 @@ const Nominees = () => {
 
     return (document.title = t('pages.nominees'), 
         <div className="mx-2 md:max-w-[700px] md:mx-auto my-4">
-            <h1 className="text-3xl text-base-200 font-semibold uppercase text-center my-2">{t('pages.nominees')}</h1>
+            <Title>{t('pages.nominees')}</Title>
             <div className="nominees-container">
                 {loadingCategories ? (
                     <div className="skeleton h-12 rounded-md w-full my-2"></div>

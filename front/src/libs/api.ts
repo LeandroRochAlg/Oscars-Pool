@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
@@ -14,5 +15,19 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('user');
+      const navigate = useNavigate();
+      navigate('/login?redirect=' + window.location.pathname);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;
