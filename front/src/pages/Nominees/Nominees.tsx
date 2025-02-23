@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import api from '../../libs/api';
 import { AxiosError } from 'axios';
@@ -12,7 +12,13 @@ const Nominees = () => {
     const [currentCategory, setCurrentCategory] = useState('nominees.category.bestPicture');
     const [nominees, setNominees] = useState([]);
     const [loadingNominees, setLoadingNominees] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
     const { t } = useTranslation();
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        setIsAdmin(user.admin);
+    }, []);
 
     // Get all categories
     useEffect(() => {
@@ -35,7 +41,8 @@ const Nominees = () => {
     }, []);
 
     // Get nominees for the current category
-    useEffect(() => {
+
+    const fetchNominees = useCallback(() => {
         setLoadingNominees(true);
 
         try {
@@ -53,6 +60,29 @@ const Nominees = () => {
 
         setLoadingNominees(false);
     }, [currentCategory]);
+
+    useEffect(() => {
+        fetchNominees();
+    }, [currentCategory]);
+
+    // Handle register winner
+    const handleRegisterWinner = (nominee: any) => {
+        if (!isAdmin) return;
+
+        try {
+            api.put('/winner', { category: currentCategory, nominee: nominee.name })
+                .then(response => {
+                    console.log('Winner registered:', response.data);
+                    fetchNominees();
+                })
+                .catch((error) => {
+                    const axiosError = error as AxiosError;
+                    console.error('Error registering winner:', axiosError.response?.data);
+                });
+        } catch (error) {
+            console.error('Error registering winner:', error);
+        }
+    }
 
     return (document.title = t('pages.nominees'), 
         <div className="mx-2 md:max-w-[700px] md:mx-auto my-4">
@@ -75,7 +105,7 @@ const Nominees = () => {
                     <div className="nominees">
                         <ul>
                             {nominees.map((nominee: any) => (
-                                <li key={nominee.name}>
+                                <li key={nominee.name} onDoubleClick={() => handleRegisterWinner(nominee)}>
                                     <NomineeCard {...nominee} winner={nominee.winner} />
                                 </li>
                             ))}
