@@ -185,7 +185,8 @@
             "france": "France",
             "germany": "Germany",
             "latvia": "Latvia"
-        }
+        },
+        "winner": "Winner"
     },
     "countdown": {
         "days": "days",
