@@ -3,8 +3,6 @@ import Header from '../../components/layout/Header';
 import Sidebar from '../../components/layout/Sidebar';
 import Footer from '../../components/layout/Footer';
 import NomineesCard from '../../components/common/NomineeCard';
-import "../../styles/system.css"
-import styles from '../Bets/BetsComponent.module.css';
 import api from '../../libs/api';
 import { AxiosError } from 'axios';
 import { Category } from '../../types/Category';
@@ -106,10 +104,10 @@ const WinnersPage: React.FC = () => {
     <div className='system-body'>
       <Header />
       <Sidebar />
-      <div className={styles.card}>
-        <button onClick={navigateToPreviousCategory} className={styles.arrow}><GoArrowLeft /></button>
+      <div>
+        <button onClick={navigateToPreviousCategory}><GoArrowLeft /></button>
         {loaded && <NomineesCard category={currentCategory as Category} msg={msg} onClick={sendNominee} showBtn={isAdmin}/>} {/* If available, pass the current category to the NomineesCard component */}
-        <button onClick={navigateToNextCategory} className={styles.arrow}><GoArrowRight /></button>
+        <button onClick={navigateToNextCategory}><GoArrowRight /></button>
       </div>
       <Footer />
     </div>
