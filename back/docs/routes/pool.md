@@ -132,7 +132,8 @@ Get a list of pools ordered by the number of users in each pool.
           "categories": 2,
           "users": 5,
           "isAdmin": true,
-          "isCreator": false
+          "isCreator": false,
+          "isMember": true
         }
       ],
       "nextCursor": "67ab611a2260b61be8b0caff",
@@ -169,7 +170,8 @@ Get a list of pools the current user is in.
           "categories": 2,
           "users": 5,
           "isAdmin": true,
-          "isCreator": false
+          "isCreator": false,
+          "isMember": true
         }
       ],
       "nextCursor": "67ab611a2260b61be8b0caff",
@@ -207,7 +209,8 @@ Search for pools by name or description.
           "categories": 2,
           "users": 5,
           "isAdmin": true,
-          "isCreator": false
+          "isCreator": false,
+          "isMember": true
         }
       ],
       "nextCursor": "67ab611a2260b61be8b0caff",
@@ -238,7 +241,7 @@ Get pool information by invite token.
       "public": false,
       "categories": 2,
       "users": 5,
-      "alreadyIn": false
+      "isMember": false
     }
     ```
   - **Error (404)**:
