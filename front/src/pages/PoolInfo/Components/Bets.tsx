@@ -81,7 +81,7 @@ const Bets = ({ pool }: { pool: string })  => {
         <div className="space-y-8">
             {bets.map((category, categoryIndex) => (
                 <div key={categoryIndex} className="rounded-box">
-                    <h3 className="text-xl font-bold mb-4">{t(category.category)}</h3>
+                    <h3 className="text-xl font-bold mb-4 flex items-center gap-3">{t(category.category)} <span className="bg-primary text-black font-light px-3 py-1 rounded-lg">{category.weight}</span></h3>
                     <div className="space-y-2">
                         {category.nominees.map((nominee, nomineeIndex) => (
                             <div key={nomineeIndex} className="flex items-center gap-2 rounded-box border border-base-200 p-2">
