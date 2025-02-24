@@ -432,14 +432,16 @@ class PoolController{
             }
 
             // Get the winners from the categories of the pool
+            const poolCategories = Array.isArray(pool.categories) ? pool.categories.map((category: any) => category.category) : [pool.categories.category];
+
             const categoryWinners = await winners.find({
-                category: { $in: pool.categories }
+                category: { $in: poolCategories }
             }).toArray();
 
             // Map the winners to the categories
             const winnersMap = new Map<string, string>();
             categoryWinners.forEach(winner => {
-                winnersMap.set(winner.category, winner.user);
+                winnersMap.set(winner.category, winner.nominee);
             });
 
             // Calculate the leaderboard
@@ -466,13 +468,17 @@ class PoolController{
 
                 // For each category
                 for (const category of pool.categories) {
-                    const winner = winnersMap.get(category);
+                    const winner = winnersMap.get(category.category);
 
                     if (!winner) {
                         continue;
                     }
 
-                    const userBet = userPool.bets.find((bet: Bet) => bet.category === category);
+                    if (!userPool.bets){
+                        continue;
+                    }
+
+                    const userBet = userPool.bets.userBets.find((bet: Bet) => bet.category === category.category);
 
                     if (!userBet) {
                         continue;
@@ -515,6 +521,7 @@ class PoolController{
                 leaderboard
             });
         } catch (error) {
+            console.log(error);
             res.status(500).send({ error: 'An error occurred while getting the pool.' });
         }
     }

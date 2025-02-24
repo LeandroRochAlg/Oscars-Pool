@@ -9,6 +9,6 @@ import { poolRouter } from './poolRouter';
 export const routes = express.Router();
 
 routes.use(userRouter);
-routes.use(betRouter);
+routes.use('/bet', betRouter);
 routes.use(nomineeRouter);
 routes.use('/pools', poolRouter);

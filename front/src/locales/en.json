@@ -260,7 +260,8 @@
             "categories": "Categories",
             "members": "Members",
             "results": "Results",
-            "edit": "Edit Pool"
+            "edit": "Edit Pool",
+            "bets": "Bets"
         },
         "generalInfo": {
             "name": "Name",
@@ -302,6 +303,10 @@
                 "deletePool": "Delete Pool"
             },
             "areYouSure": "Are you sure you want to do this?"
+        },
+        "bets": {
+            "save": "Save bets",
+            "saved": "Bets saved successfully"
         }
     },
     "findPools": {

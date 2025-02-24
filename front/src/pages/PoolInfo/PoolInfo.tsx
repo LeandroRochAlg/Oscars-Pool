@@ -12,6 +12,7 @@ import Categories from "./Components/Categories";
 import Members from "./Components/Members";
 import Leaderboard from "./Components/Leaderboard";
 import EditPool from "./Components/EditPool";
+import Bets from "./Components/Bets";
 
 type Users = {
     _id: string;
@@ -123,6 +124,15 @@ const PoolInfo = () => {
                             <Container>
                                 <Members members={pool?.users || []} isAdmin={pool?.isAdmin || false} creator={pool?.createdBy || ''} poolId={pool?._id || ''} />
                             </Container>
+
+                            {pool?.isUserInPool && (
+                                <>
+                                    <input type="radio" name="my_tabs_1" role="tab" className="tab text-base-200 h-8" aria-label={t('pool.tabs.bets')} />
+                                    <Container>
+                                        <Bets pool={pool?._id || ''} />
+                                    </Container>
+                                </>
+                            )}
                             
                             <input type="radio" name="my_tabs_1" role="tab" className="tab text-base-200 h-8" aria-label={t('pool.tabs.results')} />
                             <Container>

@@ -261,7 +261,8 @@
             "categories": "Categorias",
             "members": "Membros",
             "results": "Resultados",
-            "edit": "Editar Bolão"
+            "edit": "Editar Bolão",
+            "bets": "Apostas"
         },
         "generalInfo": {
             "name": "Nome",
@@ -304,6 +305,10 @@
                 "deletePool": "Apagar Bolão"
             },
             "areYouSure": "Tem certeza que quer fazer isso?"
+        },
+        "bets": {
+            "save": "Salvar apostas",
+            "saved": "Apostas salvas com sucesso!"
         }
     },
     "findPools": {
