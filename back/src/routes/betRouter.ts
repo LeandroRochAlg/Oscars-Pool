@@ -4,5 +4,8 @@ import { authMiddleware } from '../middlewares/authMiddleware';
 
 export const betRouter = express.Router();
 
-// Get nominees
+// Create or update bets
 betRouter.put('/create/:poolId', authMiddleware, BetController.createBet);
+
+// Get bets
+betRouter.get('/:poolId', authMiddleware, BetController.getBets);
