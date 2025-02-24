@@ -22,5 +22,8 @@ userRouter.patch('/confirm-email', userController.confirmEmail);
 // Get user
 userRouter.get('/user', authMiddleware, userController.getUser);
 
+// Update username
+userRouter.put('/user', authMiddleware, userController.updateUser);
+
 // Reset password
 userRouter.put('/reset-password', userController.resetPassword);

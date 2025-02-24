@@ -121,6 +121,53 @@ class UserController {
         }
     }
 
+    async updateUser(req: Request, res: Response) {
+        try {
+            const userId = req.user._id;
+            const { username } = req.body;
+    
+            const updates: Partial<User> = {};
+            const firebaseUpdates: any = {};
+    
+            // Update username
+            if (username) {
+                const existingUser = await db.collection<User>('users').findOne({ username });
+                if (existingUser && existingUser._id.toString() !== userId) {
+                    return res.status(400).send('Username already taken');
+                }
+                updates.username = username;
+                firebaseUpdates.displayName = username;
+            }
+    
+            if (Object.keys(updates).length === 0) {
+                return res.status(400).send('No fields to update');
+            }
+    
+            updates.updatedAt = new Date();
+    
+            // Update MongoDB
+            await db.collection<User>('users').updateOne(
+                { _id: ObjectId.createFromHexString(userId) },
+                { $set: updates }
+            );
+    
+            // Update Firebase
+            const user = await db.collection<User>('users').findOne({ 
+                _id: ObjectId.createFromHexString(userId) 
+            });
+            
+            if (user) {
+                const firebaseUser = await admin.auth().getUserByEmail(user.email);
+                await admin.auth().updateUser(firebaseUser.uid, firebaseUpdates);
+            }
+    
+            res.status(200).send('User updated successfully');
+        } catch (error) {
+            console.error("Error updating user:", error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
     async resetPassword(req: Request, res: Response) {
         const { email, newPassword } = req.body;
 

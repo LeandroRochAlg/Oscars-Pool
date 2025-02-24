@@ -332,5 +332,17 @@
         "title": "404",
         "message": "Oops... The page you're looking for doesn't exist.",
         "backToHome": "Back to home"
+    },
+    "user": {
+        "pools": "pools",
+        "updateSuccess": "Update successful!",
+        "passwordSuccess": "Password updated successfully!",
+        "updateError": "Error updating information",
+        "usernameTaken": "Username already taken",
+        "newUsername": "New Username",
+        "updateUsername": "Update Username",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "updatePassword": "Update Password"
     }
 }

@@ -334,5 +334,17 @@
         "title": "404",
         "message": "Ops... A página que você está procurando não existe.",
         "backToHome": "Voltar para o início"
+    },
+    "user": {
+        "pools": "bolões",
+        "updateSuccess": "Atualização bem-sucedida!",
+        "passwordSuccess": "Senha atualizada com sucesso!",
+        "updateError": "Erro ao atualizar informações",
+        "usernameTaken": "Nome de usuário já está em uso",
+        "newUsername": "Novo Nome de Usuário",
+        "updateUsername": "Atualizar Nome de Usuário",
+        "newPassword": "Nova Senha",
+        "confirmPassword": "Confirmar Senha",
+        "updatePassword": "Atualizar Senha"
     }
 }
