@@ -97,7 +97,7 @@ class BetController {
 
             // Get user bets with isWinners
             if (userBets) {
-                userBets.forEach((bet: Bet) => {
+                userBets.userBets.forEach((bet: Bet) => {
                     const category = poolNominees.find((category: Category) => category.category === bet.category);
 
                     if (category) {
