@@ -6,14 +6,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* CSS Variables */
-:root {
-  --light-color: #d9f6fc;
-  --dark-color: #0f2339;
-  --primary-color: #e9b60d;
-  --secondary-color: #c10002;
-}
-
 /* Base styles */
 * {
   font-family: "Montserrat", sans-serif;
