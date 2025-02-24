@@ -5,6 +5,7 @@ import admin from '../configs/firebase';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { ObjectId } from 'mongodb';
 
 dotenv.config();
 
@@ -88,33 +89,29 @@ class UserController {
     }
 
     async getUser(req: Request, res: Response) {
-        const username = req.user.username;
+        const userId = req.user._id;
 
-        interface UserResponse {
+        type UserResponse = {
             username: string;
+            email: string;
             admin: boolean;
-            betNumber: number;
+            poolNumber: number;
         }
 
         try {
             const user = await db.collection<User>('users').findOne({
-                username
+                _id: ObjectId.createFromHexString(userId)
             });
 
             if (!user) {
                 return res.status(404).send('User not found');
             }
 
-            const userId = user._id;
-
-            const betNumber = await db.collection('bets').countDocuments({
-                userId
-            });
-
             const response: UserResponse = {
                 username: user.username,
+                email: user.email,
                 admin: user.admin,
-                betNumber
+                poolNumber: user.pools?.length || 0
             };
 
             res.status(200).send(response);
