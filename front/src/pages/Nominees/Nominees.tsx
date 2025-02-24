@@ -85,9 +85,9 @@ const Nominees = () => {
     }
 
     return (document.title = t('pages.nominees'), 
-        <div className="mx-2 md:max-w-[700px] md:mx-auto my-4">
+        <div className="mx-2 md:w-[700px] md:mx-auto my-4">
             <Title>{t('pages.nominees')}</Title>
-            <div className="nominees-container">
+            <div className="w-full">
                 {loadingCategories ? (
                     <div className="skeleton h-12 rounded-md w-full my-2"></div>
                 ) : (
