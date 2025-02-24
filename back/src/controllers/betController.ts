@@ -13,6 +13,17 @@ class BetController {
         const bets = req.body as Bet[];
         const poolId = req.params.poolId;
 
+        // Check the date to see if the user can update the bets
+        const currentDate = new Date();
+
+        // Oscar date: March 2, 2025, 9 PM (Brasília time)
+        const oscarDate = new Date("2025-03-02T21:00:00-03:00");
+
+        if (currentDate > oscarDate) {
+            res.status(400).send('Bets are closed');
+            return;
+        }
+
         try {
             const pools = db.collection('pools');
 
