@@ -329,5 +329,10 @@
         "title": "Meus bolões",
         "noPools": "Você ainda não tem nenhum bolão.",
         "loading": "Carregando bolões..."
+    },
+    "404": {
+        "title": "404",
+        "message": "Ops... A página que você está procurando não existe.",
+        "backToHome": "Voltar para o início"
     }
 }

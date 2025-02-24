@@ -327,5 +327,10 @@
         "title": "My pools",
         "noPools": "You don't have any pools yet.",
         "loading": "Loading pools..."
+    },
+    "404": {
+        "title": "404",
+        "message": "Oops... The page you're looking for doesn't exist.",
+        "backToHome": "Back to home"
     }
 }
