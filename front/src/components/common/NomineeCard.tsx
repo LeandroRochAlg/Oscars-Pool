@@ -7,7 +7,7 @@ const NomineeCard = (CardProps: NomineeCardProps) => {
 	const { t } = useTranslation();
 
 	return (
-		<div className="card card-side border border-primary bg-none text-base-200 shadow-md h-32 my-2 md:h-24 md:w-[700px]">
+		<div className="card card-side border border-primary bg-none text-base-200 shadow-md h-32 my-2 md:h-24 w-full">
 			<figure className="card-side-img w-24 min-w-24 md:w-20 md:min-w-20">
 				<img
 					src={CardProps.movieImage}
