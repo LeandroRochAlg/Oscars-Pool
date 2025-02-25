@@ -1,0 +1,348 @@
+{
+    "login": "Login",
+    "orLoginWith": "or login with",
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "email": "Email",
+    "usernameOrEmail": "Username or Email",
+    "rememberMe": "remember me?",
+    "forgotPassword": "forgot password?",
+    "dontHaveAnAccount": "don't have an account yet?",
+    "createAccount": "create one now",
+    "loginError": "Oops... You can't go there 👉",
+    "alreadyHaveAnAccount": "already have an account?",
+    "loginNow": "login now",
+    "register": "Register",
+    "yes": "Yes",
+    "no": "No",
+    "unauthorized": "You are not authorized to view this page.",
+    "validation": {
+        "usernameRequired": "Username is required",
+        "usernameLength": "Username must be at least 4 characters long",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Email is invalid",
+        "passwordRequired": "Password is required",
+        "passwordLength": "Password must be at least 6 characters long",
+        "passwordDigit": "Password must contain at least one digit",
+        "passwordLowercase": "Password must contain at least one lowercase letter",
+        "passwordUppercase": "Password must contain at least one uppercase letter",
+        "passwordNonAlphanumeric": "Password must contain at least one non-alphanumeric character",
+        "passwordsDontMatch": "Passwords do not match",
+        "usernameOrEmailRequired": "Username or email is required"
+    },
+    "signInWithGoogle": "Sign in with Google",
+    "whyConnectWithGoogle": "why do we ask you to connect with Google?",
+    "continueWithoutGoogle": "Continue without Google",
+    "connected": "connected!",
+    "connectWithAnother": "Connect with another account?",
+    "apiResults": {
+        "register": {
+            "success": "User registered successfully",
+            "error": "Error registering user",
+            "usernameOrEmailTaken": "Username or email already in use"
+        },
+        "login": {
+            "success": "User logged in successfully",
+            "error": "Error logging in",
+            "invalidCredentials": "Invalid credentials"
+        }
+    },
+    "images": {
+        "alt": {
+            "AindaEstouAqui": "A still from the movie I'm Still Here. A 70's camera is shown set to take a picture.",
+            "Flow": "The cat from the movie Flow looking at the camera with rocks and an ancient city in the background.",
+            "Conclave": "Personagem principal do filme Conclave de lado, usando uma roupa vermelha, com os olhos fechados, em um ambiente escuro com uma cortina vermelha no fundo"
+        }
+    },
+    "confirmEmail": {
+        "title": "Confirm your email",
+        "message": "Please click the confirmation link to activate your account.",
+        "sendEmail": "Send confirmation email",
+        "success": "Email sent successfully",
+        "error": "Error sending email",
+        "confirmSuccess": "Email confirmed successfully",
+        "confirmError": "Error confirming email",
+        "confirmLoading": "Confirming email...",
+        "proceed": "Proceed"
+    },
+    "resetPassword": {
+        "title": "Reset your password",
+        "message": "Please enter your email address and we'll send you a link to reset your password.",
+        "submit": "Send reset email",
+        "success": "Email sent successfully",
+        "error": "Error sending email",
+        "proceed": "Proceed",
+        "emailSent": "Email sent successfully",
+        "backToLogin": "Back to login"
+    },
+    "actionHandler": {
+        "invalidLink": "Invalid or expired link.",
+        "invalidAction": "Invalid action.",
+        "emailNotFound": "Email not found.",
+        "emailVerificationError": "Error verifying email.",
+        "passwordsDoNotMatch": "Passwords do not match.",
+        "passwordResetError": "Error resetting password.",
+        "loading": "Loading...",
+        "emailVerified": "Email verified successfully!",
+        "proceed": "Proceed",
+        "resetPasswordTitle": "Reset Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "resetPassword": "Reset Password",
+        "passwordResetSuccess": "Password reset successfully"
+    },
+    "contact": "Contact",
+    "social": "Social",
+    "settings": "Settings",
+    "pages": {
+        "home": "Home",
+        "profile": "Profile",
+        "nominees": "Nominees"
+    },
+    "logout": "Logout",
+    "nominees": {
+        "category": {
+            "actor": "Actor in a Leading Role",
+            "supportingActor": "Actor in a Supporting Role",
+            "actress": "Actress in a Leading Role",
+            "supportingActress": "Actress in a Supporting Role",
+            "animatedFeature": "Animated Feature Film",
+            "animatedShort": "Animated Short Film",
+            "cinematography": "Cinematography",
+            "costumeDesign": "Costume Design",
+            "directing": "Directing",
+            "documentaryFeature": "Documentary Feature Film",
+            "documentaryShort": "Documentary Short Film",
+            "filmEditing": "Film Editing",
+            "internationalFeature": "International Feature Film",
+            "makeupAndHairstyling": "Makeup and Hairstyling",
+            "musicOriginalScore": "Music (Original Score)",
+            "musicOriginalSong": "Music (Original Song)",
+            "bestPicture": "Best Picture",
+            "productionDesign": "Production Design",
+            "liveActionShort": "Live Action Short Film",
+            "sound": "Sound",
+            "visualEffects": "Visual Effects",
+            "writingAdaptedScreenplay": "Writing (Adapted Screenplay)",
+            "writingOriginalScreenplay": "Writing (Original Screenplay)"
+        },
+        "movie": {
+            "theBrutalist": "The Brutalist",
+            "aCompleteUnknown": "A Complete Unknown",
+            "singSing": "Sing Sing",
+            "conclave": "Conclave",
+            "theApprentice": "The Apprentice",
+            "anora": "Anora",
+            "aRealPain": "A Real Pain",
+            "wicked": "Wicked",
+            "emiliaPerez": "Emilia Pérez",
+            "theSubstance": "The Substance",
+            "imStillHere": "I'm Still Here",
+            "flow": "Flow",
+            "insideOut2": "Inside Out 2",
+            "memoirOfASnail": "Memoir of a Snail",
+            "wallaceGromit": "Wallace & Gromit: Vengeance Most Fowl",
+            "theWildRobot": "The Wild Robot",
+            "beautifulMen": "Beautiful Men",
+            "inTheShadowOfTheCypress": "In the Shadow of the Cypress",
+            "magicCandies": "Magic Candies",
+            "wanderToWonder": "Wander to Wonder",
+            "yuck": "Yuck!",
+            "dunePartTwo": "Dune: Part Two",
+            "maria": "Maria",
+            "nosferatu": "Nosferatu",
+            "gladiatorII": "Gladiator II",
+            "blackBoxDiaries": "Black Box Diaries",
+            "noOtherLand": "No Other Land",
+            "porcelainWar": "Porcelain War",
+            "soundtrackToACoupDetat": "Soundtrack to a Coup d'Etat",
+            "sugarcane": "Sugarcane",
+            "deathByNumbers": "Death by Numbers",
+            "iAmReadyWarden": "I Am Ready, Warden",
+            "incident": "Incident",
+            "instrumentsOfABeatingHeart": "Instruments of a Beating Heart",
+            "theOnlyGirlInTheOrchestra": "The Only Girl in the Orchestra",
+            "theGirlWithTheNeedle": "The Girl with the Needle",
+            "theSeedOfTheSacredFig": "The Seed of the Sacred Fig",
+            "aDifferentMan": "A Different Man",
+            "eltonJohnNeverTooLate": "Elton John: Never Too Late",
+            "theSixTripleEight": "The Six Triple Eight",
+            "aLien": "A Lien",
+            "anuja": "Anuja",
+            "imNotARobot": "I'm Not a Robot",
+            "theLastRanger": "The Last Ranger",
+            "theManWhoCouldNotRemainSilent": "The Man Who Could Not Remain Silent",
+            "alienRomulus": "Alien: Romulus",
+            "betterMan": "Better Man",
+            "kingdomOfThePlanetOfTheApes": "Kingdom of the Planet of the Apes",
+            "september5": "September 5",
+            "nickelBoys": "Nickel Boys"
+        },
+        "country": {
+            "brazil": "Brazil",
+            "denmark": "Denmark",
+            "france": "France",
+            "germany": "Germany",
+            "latvia": "Latvia"
+        },
+        "winner": "Winner"
+    },
+    "countdown": {
+        "days": "days",
+        "hours": "hours",
+        "minutes": "min",
+        "seconds": "sec",
+        "until": "until the Oscars ceremony!"
+    },
+    "homePage": {
+        "nominees": {
+            "title": "Nominees",
+            "subtitle": "Check out the 2025 Oscar nominees",
+            "viewAll": "View all"
+        },
+        "hero": {
+            "title": "Welcome to the AcademyBolao!",
+            "description": {
+                "first": "Join the fun and compete with friends by predicting the Oscar winners. ",
+                "second": "My Pools",
+                "third": ", ",
+                "fourth": "Find Pools",
+                "fifth": ", or ",
+                "sixth": "Create a Pool",
+                "seventh": " to get started!"
+            },
+            "login": "Register or login now!"
+        }
+    },
+    "createPoolPage": {
+        "title": "Create pool",
+        "pages": {
+            "generalInfo": "General Info",
+            "categories": "Categories",
+            "weights": "Weights"
+        },
+        "form": {
+            "name": "Pool Name",
+            "description": "Description",
+            "public": "Public Pool"
+        },
+        "buttons": {
+            "previous": "Previous",
+            "next": "Next",
+            "createPool": "Create Pool"
+        },
+        "errors": {
+            "nameRequired": "Pool name is required.",
+            "weightMin": "Weight must be at least 1.",
+            "atLeastOneCategory": "You must select at least one category.",
+            "totalWeight": "The total weight of all categories must be exactly 1000.",
+            "createPoolFailed": "Failed to create the pool. Please try again.",
+            "nameMaxLength": "Pool name must be at most 50 characters long.",
+            "descriptionMaxLength": "Description must be at most 500 characters long."
+        }
+    },
+    "pool": {
+        "title": "Pool",
+        "errors": {
+            "notAMember": "You are not a member of this pool.",
+            "poolNotFound": "Pool not found.",
+            "error": "An error occurred while loading the pool.",
+            "joinPoolFailed": "Failed to join the pool. Please try again.",
+            "leavePoolFailed": "Failed to leave the pool. Please try again.",
+            "addAdminFailed": "Failed to add admin. Please try again.",
+            "removeAdminFailed": "Failed to remove admin. Please try again.",
+            "banUserFailed": "Failed to ban user. Please try again.",
+            "deleteError": "Failed to delete pool. Please try again."
+        },
+        "tabs": {
+            "generalInfo": "General Info",
+            "categories": "Categories",
+            "members": "Members",
+            "results": "Results",
+            "edit": "Edit Pool",
+            "bets": "Bets"
+        },
+        "generalInfo": {
+            "name": "Name",
+            "description": "Description",
+            "createdBy": "Created by",
+            "createdAt": "Created at",
+            "private": "Private",
+            "copyInviteToken": "Copy invite token",
+            "at": "at",
+            "joinPool": "Join Pool",
+            "leavePool": "Leave Pool"
+        },
+        "feedback": {
+            "inviteTokenCopied": "Invite token copied to clipboard"
+        },
+        "categories": {
+            "category": "Category",
+            "weight": "Weight"
+        },
+        "members": {
+            "admin": "Admin",
+            "actions": "Actions for",
+            "ban": "Ban",
+            "addAdmin": "Add admin",
+            "removeAdmin": "Remove admin",
+            "cantDoNothing": "You can't do anything here.",
+            "areYouSure": "Are you sure you want to do this?"
+        },
+        "results": {
+            "user": "User",
+            "score": "Score"
+        },
+        "editPool": {
+            "errors": {
+                "fetchCategoriesFailed": "Failed to fetch categories. Please try again."
+            },
+            "buttons": {
+                "saveChanges": "Save Changes",
+                "deletePool": "Delete Pool"
+            },
+            "areYouSure": "Are you sure you want to do this?"
+        },
+        "bets": {
+            "save": "Save bets",
+            "saved": "Bets saved successfully"
+        }
+    },
+    "findPools": {
+        "title": "Find pools",
+        "search": "Search",
+        "noPoolsFound": "No pools found.",
+        "searchPlaceholder": "Search for pools by name or description",
+        "inviteTokenPlaceholder": "Invite token",
+        "loading": "Loading pools...",
+        "poolPreview": {
+            "creator": "Creator",
+            "admin": "Admin",
+            "member": "Member",
+            "notAMember": "Not a member"
+        }
+    },
+    "myPools": {
+        "title": "My pools",
+        "noPools": "You don't have any pools yet.",
+        "loading": "Loading pools..."
+    },
+    "404": {
+        "title": "404",
+        "message": "Oops... The page you're looking for doesn't exist.",
+        "backToHome": "Back to home"
+    },
+    "user": {
+        "pools": "pools",
+        "updateSuccess": "Update successful!",
+        "passwordSuccess": "Password updated successfully!",
+        "updateError": "Error updating information",
+        "usernameTaken": "Username already taken",
+        "newUsername": "New Username",
+        "updateUsername": "Update Username",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "updatePassword": "Update Password"
+    }
+}

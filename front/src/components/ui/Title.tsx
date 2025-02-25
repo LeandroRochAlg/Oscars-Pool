@@ -1,17 +1,15 @@
 import React from "react";
-import './Title.module.css';
 
 interface TitleProps {
-    title: string;
-    className?: string;
+    children: React.ReactNode;
 }
 
-const Title: React.FC<TitleProps> = ({title, className}) => {
+const Title: React.FC<TitleProps> = ({children}) => {
     return (
         <h1
-            className={className}
+            className="text-3xl text-base-200 font-semibold uppercase text-center my-2"
         >
-            {title}
+            {children}
         </h1>
     );
 };

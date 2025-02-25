@@ -1,45 +1,79 @@
-import React, { useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
-import api from '../../libs/api';
-import Header from '../../components/layout/Header';
-import Sidebar from '../../components/layout/Sidebar';
-import Footer from '../../components/layout/Footer';
-import styles from './HomeComponent.module.css';
-import "../../styles/system.css"
+import { useTranslation } from 'react-i18next';
+import Countdown from '../../components/common/Countdown';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-const HomePage: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [available, setAvailable] = useState(false);
+const HomePage = () => {
+	const { t } = useTranslation();
+	const navigate = useNavigate();
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const fetchUsername = async () => {
-      try {
-        const response = await api.get<{username: string}>('/username');
-        setUsername(response.data.username);
-        setAvailable(true);
-      } catch (error) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response?.status === 401 || axiosError.response?.status === 400) {
-          localStorage.removeItem('token');
-          window.location.href = '/login';
-        }
-      }
-    };
+	useEffect(() => {
+		const token = localStorage.getItem('user');
+		if (token) {
+			setIsAuthenticated(true);
+		}
+	}, []);
 
-    fetchUsername();
-  }, []);
+	return (document.title = t('home'),
+		<div>
+			<Countdown />
 
-  return (document.title = 'Home',
-    <div className='system-body'>
-      <Header />
-      <div className={styles.messageContainer}>
-        {available && <h2 className={styles.messageTitle}>Welcome, <span>{username}</span>!</h2>}
-        <p className={styles.message}>You are now logged into the Pool. Feel free to make a <a href="/bets">Bet</a> or see the <a href="/winners">Winners</a> or <a href="/leaderboard">Leaderboard</a> if available!</p>
-      </div>
-      <Sidebar />
-      <Footer />
-    </div>
-  );
+			<div className='h-fit md:h-[400px] mb-5 mx-2 md:mx-auto max-w-full md:w-[700px]'>
+				<div
+					className="hero p-0 border border-primary rounded-2xl h-full w-full"
+					style={{
+						backgroundImage: "url(/assets/images/Anora.jpg)",
+					}}>
+					<div className="hero-overlay bg-opacity-40 rounded-2xl brightness-50"></div>
+					<div className="hero-content text-secondary text-center">
+						<div className="">
+							<h1 className="mb-5 text-2xl md:text-5xl font-bold">{t('homePage.hero.title')}</h1>
+							<p className="mb-5 md:w-2/3 mx-auto">
+								{t('homePage.hero.description.first')}
+								<span className="link link-primary" onClick={() => navigate('/myPools')}>{t('homePage.hero.description.second')}</span>
+								{t('homePage.hero.description.third')}
+								<span className="link link-primary" onClick={() => navigate('/findPools')}>{t('homePage.hero.description.fourth')}</span>
+								{t('homePage.hero.description.fifth')}
+								<span className="link link-primary" onClick={() => navigate('/createPool')}>{t('homePage.hero.description.sixth')}</span>
+								{t('homePage.hero.description.seventh')}
+							</p>
+							{!isAuthenticated && (
+								<button
+									className="btn btn-primary"
+									onClick={() => navigate('/login')}
+								>
+									{t('homePage.hero.login')}
+								</button>
+							)}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="card card-side bg-base-100 shadow-xl mx-2 md:w-[700px] md:mx-auto border border-primary my-5 text-base-200">
+				<div className="card-body">
+					<h2 className="card-title">{t('homePage.nominees.title')}</h2>
+					<p>{t('homePage.nominees.subtitle')}</p>
+					<div className="card-actions">
+						<button
+							className="btn btn-primary"
+							onClick={() => navigate('/nominees')}
+						>
+							{t('homePage.nominees.viewAll')}
+						</button>
+					</div>
+				</div>
+				<figure className="h-56 w-40">
+					<img
+						src="assets/images/Conclave.jpg"
+						alt={t('images.alt.Conclave')}
+						className='h-full'
+					/>
+				</figure>
+			</div>
+		</div>
+	)
 };
 
 export default HomePage;

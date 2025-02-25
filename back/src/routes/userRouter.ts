@@ -10,20 +10,20 @@ export const userRouter = express.Router();
 // Login
 userRouter.post('/login', LoginController.login);
 
+// Login with Google
+userRouter.post('/login-google', LoginController.loginWithGoogle);
+
 // Register
 userRouter.post('/register', userController.register);
 
-// Admin check 
-userRouter.get('/admin', authMiddleware, userController.admin);
-
-// Get username
-userRouter.get('/username', authMiddleware, userController.username);
+// Confirm email
+userRouter.patch('/confirm-email', userController.confirmEmail);
 
 // Get user
 userRouter.get('/user', authMiddleware, userController.getUser);
 
-// Change username
-userRouter.post('/username', authMiddleware, userController.changeUsername);
+// Update username
+userRouter.put('/user', authMiddleware, userController.updateUser);
 
-// Change password
-userRouter.post('/password', authMiddleware, userController.changePassword);
+// Reset password
+userRouter.put('/reset-password', userController.resetPassword);

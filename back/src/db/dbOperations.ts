@@ -10,7 +10,10 @@ export const connectDatabase = async (uri: string) => {
         const client = new MongoClient(uri);
         await client.connect();
         console.log("Connected to the database");
-        db = client.db("pool"); // Connects to the pool database
+
+        const dbName = process.env.MONGODB_NAME || 'pool';
+        
+        db = client.db(dbName); // Connects to the pool database
     } catch (error) {
         console.error("Error connecting to the database", error);
         throw error; // Throws the error to be handled at the higher level

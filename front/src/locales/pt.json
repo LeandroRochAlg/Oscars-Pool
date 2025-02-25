@@ -1,0 +1,350 @@
+{
+    "login": "Entrar",
+    "orLoginWith": "ou entre com",
+    "username": "Usuário",
+    "password": "Senha",
+    "confirmPassword": "Confirmar Senha",
+    "email": "Email",
+    "usernameOrEmail": "Usuário ou Email",
+    "rememberMe": "manter conectado?",
+    "forgotPassword": "esqueceu a senha?",
+    "dontHaveAnAccount": "ainda não tem uma conta?",
+    "createAccount": "crie uma agora",
+    "loginError": "Ops... Você não pode ir para lá 👉",
+    "alreadyHaveAnAccount": "já tem uma conta?",
+    "loginNow": "entre agora",
+    "register": "Registrar",
+    "yes": "Sim",
+    "no": "Não",
+    "unauthorized": "Você não é permitido nessa página.",
+    "validation": {
+        "usernameRequired": "Nome de usuário é obrigatório",
+        "usernameLength": "Nome de usuário deve ter pelo menos 4 caracteres",
+        "emailRequired": "Email é obrigatório",
+        "emailInvalid": "Email é inválido",
+        "passwordRequired": "Senha é obrigatória",
+        "passwordLength": "Senha deve ter pelo menos 6 caracteres",
+        "passwordDigit": "Senha deve conter pelo menos um dígito",
+        "passwordLowercase": "Senha deve conter pelo menos uma letra minúscula",
+        "passwordUppercase": "Senha deve conter pelo menos uma letra maiúscula",
+        "passwordNonAlphanumeric": "Senha deve conter pelo menos um caractere não alfanumérico",
+        "passwordsDontMatch": "As senhas não coincidem",
+        "usernameOrEmailRequired": "Nome de usuário ou email é obrigatório"
+    },
+    "signInWithGoogle": "Entrar com o Google",
+    "whyConnectWithGoogle": "por que pedimos para você se conectar com o Google?",
+    "continueWithoutGoogle": "Continuar sem o Google",
+    "connected": "conectado!",
+    "connectWithAnother": "Conectar com outra conta?",
+    "home": "Início",
+    "apiResults": {
+        "register": {
+            "success": "Usuário registrado com sucesso",
+            "error": "Erro ao registrar usuário",
+            "usernameOrEmailTaken": "Nome de usuário ou email já em uso"
+        },
+        "login": {
+            "success": "Usuário logado com sucesso",
+            "error": "Erro ao fazer login",
+            "invalidCredentials": "Credenciais inválidas"
+        }
+    },
+    "images": {
+        "alt": {
+            "AindaEstouAqui": "Uma cena do filme Eu Ainda Estou Aqui. Uma câmera dos anos 70 é mostrada pronta para tirar uma foto.",
+            "Flow": "O gato do filme Flow olhando para a câmera com rochas e uma cidade antiga ao fundo.",
+            "Conclave": "Personagem principal do filme Conclave de lado, usando uma roupa vermelha, com os olhos fechados, em um ambiente escuro com uma cortina vermelha no fundo"
+        }
+    },
+    "confirmEmail": {
+        "title": "Confirme seu email",
+        "message": "Por favor, clique no link de confirmação para ativar sua conta.",
+        "sendEmail": "Enviar email de confirmação",
+        "success": "Email enviado com sucesso",
+        "error": "Erro ao enviar email",
+        "confirmSuccess": "Email confirmado com sucesso",
+        "confirmError": "Erro ao confirmar email",
+        "confirmLoading": "Confirmando email...",
+        "proceed": "Prosseguir"
+    },
+    "resetPassword": {
+        "title": "Redefinir sua senha",
+        "message": "Por favor, insira seu endereço de email e enviaremos um link para redefinir sua senha.",
+        "submit": "Enviar email de redefinição",
+        "success": "Email enviado com sucesso",
+        "error": "Erro ao enviar email",
+        "proceed": "Prosseguir",
+        "emailSent": "Email enviado com sucesso",
+        "backToLogin": "Voltar para o login"
+    },
+    "actionHandler": {
+        "invalidLink": "Link inválido ou expirado.",
+        "invalidAction": "Ação inválida.",
+        "emailNotFound": "Email não encontrado.",
+        "emailVerificationError": "Erro ao verificar email.",
+        "passwordsDoNotMatch": "As senhas não coincidem.",
+        "passwordResetError": "Erro ao redefinir a senha.",
+        "loading": "Carregando...",
+        "emailVerified": "Email verificado com sucesso!",
+        "proceed": "Prosseguir",
+        "resetPasswordTitle": "Redefinir Senha",
+        "newPassword": "Nova Senha",
+        "confirmPassword": "Confirmar Senha",
+        "resetPassword": "Redefinir Senha",
+        "passwordResetSuccess": "Senha redefinida com sucesso"
+    },
+    "contact": "Contato",
+    "social": "Social",
+    "settings": "Configurações",
+    "pages": {
+        "home": "Início",
+        "profile": "Perfil",
+        "nominees": "Indicados"
+    },
+    "logout": "Sair",
+    "nominees": {
+        "category": {
+            "actor": "Ator",
+            "supportingActor": "Ator Coadjuvante",
+            "actress": "Atriz",
+            "supportingActress": "Atriz Coadjuvante",
+            "animatedFeature": "Animação",
+            "animatedShort": "Curta-Metragem de Animação",
+            "cinematography": "Fotografia",
+            "costumeDesign": "Figurino",
+            "directing": "Direção",
+            "documentaryFeature": "Documentário",
+            "documentaryShort": "Curta-Metragem Documentário",
+            "filmEditing": "Edição",
+            "internationalFeature": "Filme Internacional",
+            "makeupAndHairstyling": "Maquiagem e Penteado",
+            "musicOriginalScore": "Trilha Sonora Original",
+            "musicOriginalSong": "Canção Original",
+            "bestPicture": "Melhor Filme",
+            "productionDesign": "Design de Produção",
+            "liveActionShort": "Curta-Metragem",
+            "sound": "Som",
+            "visualEffects": "Efeitos Visuais",
+            "writingAdaptedScreenplay": "Roteiro Adaptado",
+            "writingOriginalScreenplay": "Roteiro Original"
+        },
+        "movie": {
+            "theBrutalist": "O Brutalista",
+            "aCompleteUnknown": "Um Completo Desconhecido",
+            "singSing": "Sing Sing",
+            "conclave": "Conclave",
+            "theApprentice": "O Aprendiz",
+            "anora": "Anora",
+            "aRealPain": "A Verdadeira Dor",
+            "wicked": "Wicked",
+            "emiliaPerez": "Emilia Pérez",
+            "theSubstance": "A Substância",
+            "imStillHere": "Ainda Estou Aqui",
+            "flow": "Flow",
+            "insideOut2": "Divertida Mente 2",
+            "memoirOfASnail": "Memórias de um Caracol",
+            "wallaceGromit": "Wallace & Gromit: A Vingança das Aves",
+            "theWildRobot": "Robô Selvagem",
+            "beautifulMen": "Beautiful Men",
+            "inTheShadowOfTheCypress": "In the Shadow of the Cypress",
+            "magicCandies": "Magic Candies",
+            "wanderToWonder": "Wander to Wonder",
+            "yuck": "Yuck!",
+            "dunePartTwo": "Duna: Parte 2",
+            "maria": "Maria",
+            "nosferatu": "Nosferatu",
+            "gladiatorII": "Gladiador II",
+            "blackBoxDiaries": "Black Box Diaries",
+            "noOtherLand": "No Other Land",
+            "porcelainWar": "Porcelain War",
+            "soundtrackToACoupDetat": "Trilha Sonora para um Golpe de Estado",
+            "sugarcane": "Sugarcane",
+            "deathByNumbers": "Death by Numbers",
+            "iAmReadyWarden": "I Am Ready, Warden",
+            "incident": "Incident",
+            "instrumentsOfABeatingHeart": "Instruments of a Beating Heart",
+            "theOnlyGirlInTheOrchestra": "A Única Mulher na Orquestra",
+            "theGirlWithTheNeedle": "A Garota da Agulha",
+            "theSeedOfTheSacredFig": "A Semente do Fruto Sagrado",
+            "aDifferentMan": "Um Homem Diferente",
+            "eltonJohnNeverTooLate": "Elton John: Never Too Late",
+            "theSixTripleEight": "Batalhão 6888",
+            "aLien": "A Lien",
+            "anuja": "Anuja",
+            "imNotARobot": "I'm Not a Robot",
+            "theLastRanger": "The Last Ranger",
+            "theManWhoCouldNotRemainSilent": "The Man Who Could Not Remain Silent",
+            "alienRomulus": "Alien: Romulus",
+            "betterMan": "Better Man: A História de Robbie Williams",
+            "kingdomOfThePlanetOfTheApes": "Planeta dos Macacos: O Reinado",
+            "september5": "Setembro 5",
+            "nickelBoys": "Nickel Boys"
+        },
+        "country": {
+            "brazil": "Brasil",
+            "denmark": "Dinamarca",
+            "france": "França",
+            "germany": "Alemanha",
+            "latvia": "Letônia"
+        },
+        "winner": "Vencedor"
+    },
+    "countdown": {
+        "days": "dias",
+        "hours": "horas",
+        "minutes": "min",
+        "seconds": "seg",
+        "until": "até a cerimônia do Oscar!"
+    },
+    "homePage": {
+        "nominees": {
+            "title": "Indicados",
+            "subtitle": "Confira os indicados ao Oscar 2025",
+            "viewAll": "Ver todos"
+        },
+        "hero": {
+            "title": "Bem-vindo(a) ao AcademyBolao",
+            "description": {
+                "first": "Junte-se à diversão e compita com amigos prevendo os vencedores do Oscar. Acesse ",
+                "second": "Meus Bolões",
+                "third": ", ",
+                "fourth": "Encontrar Bolões",
+                "fifth": ", ou ",
+                "sixth": "Criar um Bolão",
+                "seventh": " para começar!"
+            },
+            "login": "Registre-se ou entre agora!"
+        }
+    },
+    "createPoolPage": {
+        "title": "Criar bolão",
+        "pages": {
+            "generalInfo": "Informações Gerais",
+            "categories": "Categorias",
+            "weights": "Pesos"
+        },
+        "form": {
+            "name": "Nome do Bolão",
+            "description": "Descrição",
+            "public": "Bolão Público"
+        },
+        "buttons": {
+            "previous": "Anterior",
+            "next": "Próximo",
+            "createPool": "Criar Bolão"
+        },
+        "errors": {
+            "nameRequired": "O nome do bolão é obrigatório.",
+            "weightMin": "O peso deve ser pelo menos 1.",
+            "atLeastOneCategory": "Você deve selecionar pelo menos uma categoria.",
+            "totalWeight": "O peso total de todas as categorias deve ser exatamente 1000.",
+            "createPoolFailed": "Falha ao criar o bolão. Por favor, tente novamente.",
+            "nameMaxLength": "O nome do bolão deve ter no máximo 50 caracteres.",
+            "descriptionMaxLength": "A descrição do bolão deve ter no máximo 500 caracteres."
+        }
+    },
+    "pool": {
+        "title": "Bolão",
+        "errors": {
+            "notAMember": "Você não é membro deste bolão.",
+            "poolNotFound": "Bolão não encontrado.",
+            "error": "Um erro ocorreu ao carregar o bolão.",
+            "joinPoolFailed": "Falha ao entrar no bolão. Por favor, tente novamente.",
+            "leavePoolFailed": "Falha ao sair do bolão. Por favor, tente novamente.",
+            "addAdminFailed": "Falha ao adicionar administrador. Por favor, tente novamente.",
+            "removeAdminFailed": "Falha ao remover administrador. Por favor, tente novamente.",
+            "banUserFailed": "Falha ao banir usuário. Por favor, tente novamente.",
+            "deleteError": "Falha ao deletar bolão. Por favor, tente novamente."
+        },
+        "tabs": {
+            "generalInfo": "Informações Gerais",
+            "categories": "Categorias",
+            "members": "Membros",
+            "results": "Resultados",
+            "edit": "Editar Bolão",
+            "bets": "Apostas"
+        },
+        "generalInfo": {
+            "name": "Nome",
+            "description": "Descrição",
+            "public": "Público",
+            "createdBy": "Criado por",
+            "createdAt": "Criado em",
+            "private": "Privado",
+            "copyInviteToken": "Copiar Token de Convite",
+            "at": "em",
+            "joinPool": "Entrar no Bolão",
+            "leavePool": "Sair do Bolão"
+        },
+        "categories": {
+            "category": "Categoria",
+            "weight": "Peso"
+        },
+        "feedback": {
+            "inviteTokenCopied": "Token de convite copiado!"
+        },
+        "members": {
+            "admin": "Administrador",
+            "actions": "Ações para",
+            "ban": "Banir",
+            "addAdmin": "Tornar administrador",
+            "removeAdmin": "Remover administrador",
+            "cantDoNothing": "Você não pode fazer nada aqui.",
+            "areYouSure": "Tem certeza que quer fazer isso?"
+        },
+        "results": {
+            "user": "Usuário",
+            "score": "Pontuação"
+        },
+        "editPool": {
+            "errors": {
+                "fetchCategoriesFailed": "Falha ao buscar categorias. Por favor, tente novamente."
+            },
+            "buttons": {
+                "saveChanges": "Salvar Alterações",
+                "deletePool": "Apagar Bolão"
+            },
+            "areYouSure": "Tem certeza que quer fazer isso?"
+        },
+        "bets": {
+            "save": "Salvar apostas",
+            "saved": "Apostas salvas com sucesso!"
+        }
+    },
+    "findPools": {
+        "title": "Encontrar bolão",
+        "search": "Buscar",
+        "noPoolsFound": "Nenhum bolão encontrado.",
+        "searchPlaceholder": "Busque bolões por nome ou descrição",
+        "inviteTokenPlaceholder": "Token de convite",
+        "loading": "Carregando bolões...",
+        "poolPreview": {
+            "creator": "Criador",
+            "admin": "Administrador",
+            "member": "Membro",
+            "notAMember": "Não é membro"
+        }
+    },
+    "myPools": {
+        "title": "Meus bolões",
+        "noPools": "Você ainda não tem nenhum bolão.",
+        "loading": "Carregando bolões..."
+    },
+    "404": {
+        "title": "404",
+        "message": "Ops... A página que você está procurando não existe.",
+        "backToHome": "Voltar para o início"
+    },
+    "user": {
+        "pools": "bolões",
+        "updateSuccess": "Atualização bem-sucedida!",
+        "passwordSuccess": "Senha atualizada com sucesso!",
+        "updateError": "Erro ao atualizar informações",
+        "usernameTaken": "Nome de usuário já está em uso",
+        "newUsername": "Novo Nome de Usuário",
+        "updateUsername": "Atualizar Nome de Usuário",
+        "newPassword": "Nova Senha",
+        "confirmPassword": "Confirmar Senha",
+        "updatePassword": "Atualizar Senha"
+    }
+}

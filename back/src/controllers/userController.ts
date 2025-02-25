@@ -1,62 +1,58 @@
-// src/controller/userController.ts
-
 import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { User } from '../models/user';
+import admin from '../configs/firebase';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { ObjectId } from 'mongodb';
 
 dotenv.config();
 
 class UserController {
     async register(req: Request, res: Response) {
         try {
-            const username = req.body.username;
-            const password = req.body.password;
-            const token = req.body.token;
-            let admin = false;
+            type UserRegister = Pick<User, 'username' | 'email' | 'password' | 'googleId'>;
+
+            const user: UserRegister = req.body;
+
+            const { username, email, password } = user;
     
-            // Check the token
-            const tokenDoc = await db.collection('tokens').findOne({
-                token
-            });
-    
-            if (!tokenDoc) {
-                return res.status(401).send('Invalid token');
-            }else if (tokenDoc.isUsed) {
-                return res.status(401).send('Token already used');
-            }else if (tokenDoc.isAdmin) {
-                admin = true;
-            }
-    
-            // Check if the username is already taken
+            // Check if the username or email are already taken
             const existingUser = await db.collection<User>('users').findOne({
-                username
+                $or: [
+                    { username },
+                    { email }
+                ]
             });
     
             if (existingUser) {
-                return res.status(400).send('Username already taken');
+                return res.status(400).send('Username or email already taken');
             }
     
             // Hash the password
             const hashedPassword = await bcrypt.hash(password, 10);
-    
+            user.password = hashedPassword;
+
+            const emailVerified = user.googleId ? true : false;
+
             const newUser: User = {
-                username,
-                password: hashedPassword,
-                admin: admin
+                ...user,
+                admin: false,
+                emailVerified,
+                createdAt: new Date(),
+                updatedAt: new Date()
             };
     
+            // Insert the new user into the database
             await db.collection<User>('users').insertOne(newUser);
-    
-            // Mark the token as used
-            await db.collection('tokens').updateOne({
-                token
-            }, {
-                $set: {
-                    isUsed: true
-                }
+
+            // Insert the new user into Firebase Authentication
+            await admin.auth().createUser({   // Don't wait for the promise to resolve to send the response for better performance
+                email,
+                emailVerified,
+                password,
+                displayName: username
             });
     
             res.status(201).send('User registered');
@@ -66,46 +62,56 @@ class UserController {
         }
     }
 
-    async admin(req: Request, res: Response) {
-        const isAdmin = req.user.admin;
+    async confirmEmail(req: Request, res: Response) {
+        try {
+            const email = req.body.email;
 
-        res.status(200).send({isAdmin});
-    }
+            const user = await db.collection<User>('users').findOne({ email });
 
-    async username(req: Request, res: Response) {
-        const username = req.user.username;
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
 
-        res.status(200).send({username});
+            if (user.emailVerified) {
+                return res.status(200).send('Email already verified');
+            }
+
+            await db.collection<User>('users').updateOne(
+                { email },
+                { $set: { emailVerified: true, updatedAt: new Date() } }
+            );
+
+            res.status(200).send('Email confirmed');
+        } catch (error) {
+            console.error("Error confirming email:", error);
+            res.status(500).send('Internal Server Error');
+        }
     }
 
     async getUser(req: Request, res: Response) {
-        const username = req.user.username;
+        const userId = req.user._id;
 
-        interface UserResponse {
+        type UserResponse = {
             username: string;
+            email: string;
             admin: boolean;
-            betNumber: number;
+            poolNumber: number;
         }
 
         try {
             const user = await db.collection<User>('users').findOne({
-                username
+                _id: ObjectId.createFromHexString(userId)
             });
 
             if (!user) {
                 return res.status(404).send('User not found');
             }
 
-            const userId = user._id;
-
-            const betNumber = await db.collection('bets').countDocuments({
-                userId
-            });
-
             const response: UserResponse = {
                 username: user.username,
+                email: user.email,
                 admin: user.admin,
-                betNumber
+                poolNumber: user.pools?.length || 0
             };
 
             res.status(200).send(response);
@@ -115,56 +121,88 @@ class UserController {
         }
     }
 
-    async changeUsername(req: Request, res: Response) {
-        const username = req.user.username;
-        const newUsername = req.body.username;
-
-        console.log('Changing username:', username, 'to', newUsername);
-
+    async updateUser(req: Request, res: Response) {
         try {
-            const existingUser = await db.collection<User>('users').findOne({
-                username: newUsername
-            });
-
-            if (existingUser) {
-                return res.status(400).send('Username already taken');
-            }
-
-            await db.collection<User>('users').updateOne({
-                username
-            }, {
-                $set: {
-                    username: newUsername
+            const userId = req.user._id;
+            const { username } = req.body;
+    
+            const updates: Partial<User> = {};
+            const firebaseUpdates: any = {};
+    
+            // Update username
+            if (username) {
+                const existingUser = await db.collection<User>('users').findOne({ username });
+                if (existingUser && existingUser._id.toString() !== userId) {
+                    return res.status(400).send('Username already taken');
                 }
+                updates.username = username;
+                firebaseUpdates.displayName = username;
+            }
+    
+            if (Object.keys(updates).length === 0) {
+                return res.status(400).send('No fields to update');
+            }
+    
+            updates.updatedAt = new Date();
+    
+            // Update MongoDB
+            await db.collection<User>('users').updateOne(
+                { _id: ObjectId.createFromHexString(userId) },
+                { $set: updates }
+            );
+    
+            // Update Firebase
+            const user = await db.collection<User>('users').findOne({ 
+                _id: ObjectId.createFromHexString(userId) 
             });
-
-            const newToken = jwt.sign({ username: newUsername, admin: req.user.admin }, process.env.JWT_SECRET || '', { expiresIn: '1h' });
-
-            res.status(200).send(newToken);
+            
+            if (user) {
+                const firebaseUser = await admin.auth().getUserByEmail(user.email);
+                await admin.auth().updateUser(firebaseUser.uid, firebaseUpdates);
+            }
+    
+            res.status(200).send('User updated successfully');
         } catch (error) {
-            console.error("Error changing username:", error);
+            console.error("Error updating user:", error);
             res.status(500).send('Internal Server Error');
         }
     }
 
-    async changePassword(req: Request, res: Response) {
-        const username = req.user.username;
-        const password = req.body.password;
+    async resetPassword(req: Request, res: Response) {
+        const { email, newPassword } = req.body;
 
         try {
-            const hashedPassword = await bcrypt.hash(password, 10);
+            const user = await db.collection<User>('users').findOne({
+                email
+            });
+
+            if (!user) {
+                return res.status(404).send('User not found');
+            }
+
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
 
             await db.collection<User>('users').updateOne({
-                username
+                email
             }, {
                 $set: {
                     password: hashedPassword
                 }
             });
 
+            try {
+                const firebaseUser = await admin.auth().getUserByEmail(email);
+                await admin.auth().updateUser(firebaseUser.uid, {
+                    password: newPassword
+                });
+            } catch (firebaseError) {
+                console.error('Error updating Firebase user:', firebaseError);
+                return res.status(500).send('Internal Server Error');
+            }
+
             res.status(200).send('Password updated');
         } catch (error) {
-            console.error("Error changing password:", error);
+            console.error("Error resetting password:", error);
             res.status(500).send('Internal Server Error');
         }
     }
