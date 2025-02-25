@@ -1,62 +1,107 @@
-# Oscar Winners' Pool 2024
+# Oscar Winners' Pool 2025
 
-Welcome to the Oscar Winners' Pool 2024! This web application allows you to participate in an exciting prediction game for the Academy Awards winners. Designed for both entertainment and competition, this platform offers a user-friendly interface to place your bets on Oscar categories, view winners, and check the leaderboard for standings among participants. Before you dive into the world of glam and predictions, please take a moment to familiarize yourself with our platform and guidelines.
+🏆 A modern, community-driven platform for predicting Oscar winners with friends, colleagues, or film enthusiasts.  
+🚀 **New in 2025**: Create pools, rank nominees strategically, and compete in customizable prediction leagues!
 
-## Technologies Used
+[Visit now!](https://academybolao.vercel.app)
 
-[![Technologies](https://skillicons.dev/icons?i=react,nodejs,express,mongo,ts,py,figma)](https://skillicons.dev)
-- **Frontend**: React
-- **Backend**: Node.js with Express
-- **Database**: MongoDB
-- **Main Language**: TypeScript, with additional algorithms in Python for extra database operations
-- **Design**: Figma
+---
 
-## Features
+## 🌟 Features
 
-- **Account Creation**: To create an account, an invite token is required.
-<p align="center">
-  <img src="screenshots/register.png" height="300" style="max-width: 100%; margin-right: 10px;" />
-  <img src="screenshots/registerMobile.png" height="300" style="max-width: 100%;" />
-</p>
+### **Core Features**
+- **🔓 Free Account Creation**  
+  Sign up instantly with an username and your email!
+- **🔑 Pool Invite Tokens**  
+  Use tokens to join private prediction pools (shared by pool admins).
+- **🎯 Ranked Betting System**  
+  Predict winners by ranking nominees (1st = 100 points, 2nd = 60 points, etc.).
+- **🏁 Multiple Pools**  
+  Create/join unlimited pools (e.g., "Work Friends", "Film Club", "Family League").
+- **⚖️ Customizable Categories**  
+  Pool creators choose which Oscar categories to include and assign weights (total = 1000 points).
+- **👑 Admin Controls**  
+  Register official winners post-deadline and manage pool settings.
 
-- **Make a Bet**: Choose your winners for each Oscar category. A category will turn red to indicate your bet has been successfully registered. Bets can be placed until Oscars night, 23:00 GMT.
-- **Category Weights**: The importance of each category is highlighted in red next to its name on the 'Bets' or 'Winners' page.
-- **Winner Announcement**: Once winners are registered, they will be highlighted in yellow.
-<p align="center">
-  <img src="screenshots/bets.png" height="300" style="max-width: 100%; margin-right: 10px;" />
-  <img src="screenshots/betsMobile.png" height="300" style="max-width: 100%;" />
-</p>
+---
 
-- **Leaderboard**: Check out the 'Leaderboard' to see where you stand among other participants.
-<p align="center">
-  <img src="screenshots/leaderboard.png" height="300" style="max-width: 100%; margin-right: 10px;" />
-  <img src="screenshots/leaderboardMobile.png" height="300" style="max-width: 100%;" />
-</p>
+## 🛠 Technical Highlights
+[![Tech Stack](https://skillicons.dev/icons?i=react,firebase,nodejs,express,mongodb,ts,tailwind)](https://skillicons.dev)
+- **Frontend**: React + DaisyUI (Tailwind CSS)  
+- **Backend**: Node.js/Express with Firebase Integration  
+- **Auth**: Google/Email login, password reset, email verification  
+- **Database**: MongoDB Atlas (cloud)  
 
-- **Admin Privileges**: After the betting deadline, only administrators will be able to register the official winners. If you are an admin, your status will be visible on the 'User' page.
-- **Betting Status**: On the 'User' page, track how many categories you've bet on (e.g., 3/19 if you've placed bets on 3 out of 19 categories).
-<p align="center">
-  <img src="screenshots/user.png" height="300" style="max-width: 100%; margin-right: 10px;" />
-  <img src="screenshots/userMobile.png" height="300" style="max-width: 100%;" />
-</p>
+---
 
-## Disclaimer
+## 🎬 Key Interfaces
 
-This application is solely for entertainment and is not affiliated with or endorsed by the Academy of Motion Picture Arts and Sciences. Predictions and results are speculative and based on personal opinions. The accuracy of information related to Oscar winners is not guaranteed, and any discrepancies with official Academy announcements are unintentional.
+### 1. Pool Creation & Management
+![image](https://github.com/user-attachments/assets/ea63992a-b28b-43e3-b8df-7149139fa33c)
 
-## Security
+![image](https://github.com/user-attachments/assets/16c4249c-c9cc-4bd0-8066-a591822266ce)
 
-- **Password**: Keep your password safe, as there is no way to change it without being logged in. If necessary, the only solution is to delete the user account.
-- **Invite Tokens**: Required for account creation; distributed by administrators.
+![image](https://github.com/user-attachments/assets/b6955992-26d9-4cc8-bcd4-353c0a2677a2)
 
-## Mobile and Desktop Compatibility
+- **Weight Assignment**: Allocate points to categories  
+- **Visibility**: Public (anyone can join) or Private (invite token required)
+- **Deadline**: Bets close March 2, 2025 @ 9PM BRT  
 
-The website is optimized for mobile devices, but for the best experience and to avoid display issues, accessing it on a desktop or modern mobile device is recommended.
+---
 
-## Access
+### 2. Ranked Betting Interface
+![image](https://github.com/user-attachments/assets/1b6ba32f-507c-4dc2-be0b-5afb39d1e098)
 
-Start your Oscar prediction journey now: [Oscar Winners' Pool 2024](https://oscars-pool.vercel.app/)
+- **▲/▼ Ranking**: Arrange nominees by predicted likelihood
 
-For questions or concerns, feel free to contact us at leandrochaju@hotmail.com.
+---
 
-Enjoy the Oscars and good luck with your predictions!
+### 3. Dynamic Leaderboards
+![image](https://github.com/user-attachments/assets/014eed11-7bda-48a4-9d24-705931d26fa2)
+
+- **Tiered Scoring**: Points based on prediction accuracy  
+- **Weight Impact**: Categories with higher weights affect rankings more
+
+---
+
+## 🔒 Security
+- **Firebase Authentication**: Passwords securely hashed & managed  
+- **Role-Based Access**:  
+  - Regular users: Bet & view pools  
+  - Pool admins: Register winners, manage members  
+  - System admins: Full platform control  
+- **HTTPS**: All data encrypted in transit  
+
+---
+
+## 🌍 Internationalization
+![image](https://github.com/user-attachments/assets/875a3fd3-a54b-4f17-b1f5-1be5a8808724)
+
+- **Multi-Language Support**: English/Portuguese (auto-detects system preference)
+- **Theme Toggling**: Light/dark mode  
+
+---
+
+## 🚀 Getting Started
+
+1. **Create Account**  
+   [Sign up here](https://academybolao.vercel.app/register)
+
+2. **Join/Create Pool**  
+   - Public pools: Browse and join freely  
+   - Private pools: Request token from pool admin  
+
+3. **Place Bets**  
+   Rank nominees before March 2 deadline!
+
+---
+
+## 📜 Disclaimer  
+*This platform is unofficial and not affiliated with The Academy of Motion Picture Arts and Sciences. Predictions are for entertainment purposes only.*
+
+---
+
+**Questions?** Contact leandrochaju@hotmail.com  
+**Found a bug?** Open an issue on [GitHub](https://github.com/LeandroRochAlg/Oscars-Pool/issues)  
+
+*May the best film buff win!* 🎥🍿
