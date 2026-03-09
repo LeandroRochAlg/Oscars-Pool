@@ -3,7 +3,7 @@ import { Bet } from "./bet";
 type UserPool = {
     user: string;
     admin: boolean;
-    bets?: Bet[];
+    bets?: { userBets: Bet[] };
 };
 
 type CategoryPool = {
@@ -15,10 +15,11 @@ export interface Pool {
     _id?: string;
     name: string;
     description?: string;
+    editionKey?: string;
     public: boolean;
     inviteToken?: string;
     categories: CategoryPool[];
     users: UserPool[];
     createdBy: string;
     createdAt: string;
-};
+}

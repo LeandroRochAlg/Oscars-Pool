@@ -2,6 +2,8 @@ import { useTranslation } from "react-i18next";
 
 const Footer = () => {
   const { t } = useTranslation();
+  const currentYear = new Date().getFullYear();
+  const copyrightYears = currentYear > 2025 ? `2025-${currentYear}` : '2025';
 
   return (
     <footer className="footer bg-primary text-black p-10 w-full bottom-0 mt-auto">
@@ -27,7 +29,7 @@ const Footer = () => {
         <p>
           AcademyBolao
           <br />
-          © 2025 Leandro Rocha.
+          © {copyrightYears} Leandro Rocha.
         </p>
       </aside>
       <nav>

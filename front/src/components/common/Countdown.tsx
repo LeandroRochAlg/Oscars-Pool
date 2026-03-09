@@ -1,11 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useEdition } from "../../hooks/useEdition";
 
 const Countdown = () => {
     const { t } = useTranslation();
+    const { selectedEdition } = useEdition();
 
-    // Oscar date: March 2, 2025, 9 PM (Brasília time)
-    const oscarDate = new Date("2025-03-02T21:00:00-03:00");
+    const oscarDate = useMemo(
+        () => new Date(selectedEdition?.ceremonyDate ?? "2026-03-15T20:00:00-03:00"),
+        [selectedEdition?.ceremonyDate]
+    );
 
     // State to store the remaining time
     const [timeLeft, setTimeLeft] = useState({
@@ -34,12 +38,14 @@ const Countdown = () => {
         }
         };
 
+        calculateTimeLeft();
+
         // Update the countdown every second
         const timer = setInterval(calculateTimeLeft, 1000);
 
         // Clear the interval when the component unmounts
         return () => clearInterval(timer);
-    }, []);
+    }, [oscarDate]);
 
     return (
         <div className="mx-auto my-4 w-fit flex flex-col md:flex-row">

@@ -98,7 +98,13 @@
     "pages": {
         "home": "Home",
         "profile": "Profile",
+        "admin": "Admin",
         "nominees": "Nominees"
+    },
+    "edition": {
+        "selectorLabel": "Edition",
+        "loading": "Loading editions",
+        "unavailable": "No editions"
     },
     "logout": "Logout",
     "nominees": {
@@ -198,7 +204,7 @@
     "homePage": {
         "nominees": {
             "title": "Nominees",
-            "subtitle": "Check out the 2025 Oscar nominees",
+            "subtitle": "Check out the nominees for {{edition}}",
             "viewAll": "View all"
         },
         "hero": {
@@ -214,6 +220,22 @@
             },
             "login": "Register or login now!"
         }
+    },
+    "adminPage": {
+        "title": "Admin panel",
+        "subtitle": "Manage active editions and review Oscar data.",
+        "active": "Active edition",
+        "activate": "Activate",
+        "activating": "Activating...",
+        "alreadyActive": "Active now",
+        "selected": "Selected",
+        "goToNominees": "Manage winners",
+        "winnerHint": "Winner toggles are still managed in the nominees page.",
+        "activationSuccess": "Edition activated successfully.",
+        "activationError": "Failed to activate edition.",
+        "loadError": "Failed to load editions.",
+        "ceremonyDate": "Ceremony",
+        "betDeadline": "Bet deadline"
     },
     "createPoolPage": {
         "title": "Create pool",

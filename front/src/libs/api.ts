@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
@@ -23,8 +22,7 @@ api.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('user');
-      const navigate = useNavigate();
-      navigate('/login?redirect=' + window.location.pathname);
+      window.location.href = '/login?redirect=' + window.location.pathname;
     }
     return Promise.reject(error);
   }

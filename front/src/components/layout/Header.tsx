@@ -1,14 +1,31 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEdition } from "../../hooks/useEdition";
 
 const Header = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const { editions, selectedEditionKey, setSelectedEditionKey, loading } = useEdition();
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const isAdmin = Boolean(user.admin);
 
     const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('user') !== null);
 
     useEffect(() => {
         setIsAuthenticated(localStorage.getItem('user') !== null);
+    }, [location.pathname]);
+
+    useEffect(() => {
+        const syncAuthentication = () => {
+            setIsAuthenticated(localStorage.getItem('user') !== null);
+        };
+
+        window.addEventListener('storage', syncAuthentication);
+
+        return () => {
+            window.removeEventListener('storage', syncAuthentication);
+        };
     }, []);
 
     // Handle Theme Change
@@ -38,9 +55,32 @@ const Header = () => {
         navigate("/login");
     };
 
+    const editionSelector = (
+        <div className="flex w-full max-w-xs items-center justify-between gap-3 rounded-box border border-base-300 bg-base-100/90 px-3 py-2 text-base-content shadow-sm">
+            <div className="min-w-0">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-base-content/60">{t('edition.selectorLabel')}</p>
+                <p className="truncate text-sm font-medium">{editions.find((edition) => edition.key === selectedEditionKey)?.label ?? t('edition.unavailable')}</p>
+            </div>
+            <select
+                className="select select-bordered select-sm w-32 bg-base-100 text-base-content"
+                value={selectedEditionKey ?? ''}
+                disabled={loading || editions.length === 0}
+                onChange={(event) => setSelectedEditionKey(event.target.value)}
+            >
+                {editions.length === 0 && (
+                    <option value="">{loading ? t('edition.loading') : t('edition.unavailable')}</option>
+                )}
+                {editions.map((edition) => (
+                    <option key={edition.key} value={edition.key}>{edition.label}</option>
+                ))}
+            </select>
+        </div>
+    );
+
     return (
-        <div className="navbar bg-primary text-black">
-            <div className="navbar-start">
+        <div className="navbar min-h-fit flex-col gap-3 bg-primary px-3 py-3 text-black lg:flex-row lg:flex-wrap lg:justify-between">
+            <div className="flex w-full flex-wrap items-center gap-3 lg:w-auto lg:flex-1">
+                <div className="navbar-start w-auto">
                 {isAuthenticated && (
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -68,21 +108,26 @@ const Header = () => {
                         </ul>
                     </div>
                 )}
+                </div>
+
+                <div className="flex flex-1 items-center justify-center gap-2 lg:justify-start">
+                    <img src="/assets/favicon/icon.svg" alt="icon" className="hidden h-6 w-6 md:block" style={{ filter: "brightness(0)" }} />
+                    <Link className="btn btn-ghost px-2 text-xl font-light" to="/">AcademyBolao</Link>
+                    <img src="/assets/favicon/icon.svg" alt="icon" className="hidden h-6 w-6 md:block" style={{ filter: "brightness(0)" }} />
+                </div>
             </div>
 
-            <div className="navbar-center">
-                <img src="/assets/favicon/icon.svg" alt="icon" className="h-6 w-6 mr-2 hidden md:block" style={{ filter: "brightness(0)" }} />
-                <a className="btn btn-ghost text-xl font-light" href="/">AcademyBolao</a>
-                <img src="/assets/favicon/icon.svg" alt="icon" className="h-6 w-6 ml-2 hidden md:block" style={{ filter: "brightness(0)" }} />
+            <div className="order-3 flex w-full justify-center lg:order-2 lg:w-auto lg:flex-1">
+                {editionSelector}
             </div>
 
-            <div className="navbar-end">
+            <div className="navbar-end order-2 ml-auto w-auto lg:order-3">
                 {isAuthenticated ? (
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
                             <img
-                                alt={t('images/alt/Flow')}
+                                alt={t('images.alt.Flow')}
                                 src="/assets/images/Flow.PNG" />
                             </div>
                         </div>
@@ -90,6 +135,7 @@ const Header = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><a onClick={() => navigate("/user")}>{t('pages.profile')}</a></li>
+                            {isAdmin && <li><a onClick={() => navigate('/admin')}>{t('pages.admin')}</a></li>}
                             
                             {/* Settings option */}
                             <li>

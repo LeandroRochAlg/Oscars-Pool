@@ -20,6 +20,7 @@ type Users = {
     admin: boolean;
 }
 type PoolInfoResponse = Pick<Pool, '_id' | 'name' | 'description' | 'public' | 'inviteToken' | 'categories' | 'createdBy' | 'createdAt'> & {
+    editionKey?: string;
     users: Users[];
     isUserInPool: boolean
     isAdmin: boolean;
@@ -107,6 +108,7 @@ const PoolInfo = () => {
             ) : (
                 <>
                     <Title>{title}</Title>
+                    {pool?.editionKey && <div className="badge badge-primary mb-4">{pool.editionKey}</div>}
 
                     <div className="card card-side shadow-xl md:mx-auto my-5 text-base-200 w-full">
                         <div role="tablist" className="tabs mx-auto w-full tabs-lifted tabs-sm overflow-x-auto">

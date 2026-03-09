@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-labelledby="title desc">
+  <title id="title">Oscar 2026 placeholder poster</title>
+  <desc id="desc">A decorative placeholder image for Oscar 2026 nominees.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#6b4f1d" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#bg)" rx="24" />
+  <circle cx="200" cy="170" r="68" fill="#f5d26a" opacity="0.18" />
+  <path d="M200 110c-20 0-36 16-36 36 0 13 7 24 17 30l-23 120h84l-23-120c10-6 17-17 17-30 0-20-16-36-36-36zm-18 222h36l10 42h-56l10-42z" fill="#f5d26a" />
+  <text x="200" y="430" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#f9fafb">Oscar 2026</text>
+  <text x="200" y="472" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#e5e7eb">Nominee poster coming soon</text>
+</svg>

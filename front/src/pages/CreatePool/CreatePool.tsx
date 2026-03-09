@@ -2,11 +2,12 @@ import { useTranslation } from "react-i18next";
 import { Pool } from "../../models/pool";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, Resolver } from 'react-hook-form';
 import { useState, useEffect } from "react";
 import api from "../../libs/api";
 import { AxiosError } from 'axios';
 import { useNavigate } from "react-router-dom";
+import { useEdition } from "../../hooks/useEdition";
 import Title from "../../components/ui/Title";
 import Button from "../../components/common/Button";
 import CategorySelector from "../../components/common/CategorySelector";
@@ -14,6 +15,7 @@ import WeightAssigner from "../../components/common/WeightAssigner";
 import ErrorMessage from "../../components/common/ErrorMessage";
 
 type PoolForm = Pick<Pool, 'name' | 'description' | 'public'> & {
+    editionKey?: string;
     categories: CategoryPool[];
 };
 
@@ -29,6 +31,7 @@ const CreatePool = () => {
     const [allCategories, setAllCategories] = useState<string[]>([]);
     const [loadingSubmit, setLoadingSubmit] = useState(false);
     const [submitError, setSubmitError] = useState<string>('');
+    const { selectedEdition, selectedEditionKey } = useEdition();
 
     const navigate = useNavigate();
 
@@ -64,7 +67,7 @@ const CreatePool = () => {
         watch,
         formState: { errors }
     } = useForm<PoolForm>({
-        resolver: yupResolver(schema) as any,
+        resolver: yupResolver(schema) as Resolver<PoolForm>,
         defaultValues: {
             name: '',
             description: '',
@@ -76,7 +79,11 @@ const CreatePool = () => {
     // Get all categories
     useEffect(() => {
         try {
-            api.get('/categories')
+            api.get('/categories', {
+                params: {
+                    edition: selectedEditionKey,
+                },
+            })
                 .then(response => {
                     setAllCategories(response.data);
                 })
@@ -87,7 +94,7 @@ const CreatePool = () => {
         } catch (error) {
             console.error('Error getting categories:', error);
         }
-    }, []);
+    }, [selectedEditionKey]);
 
     // Watch selected categories
     const categories = watch('categories');
@@ -113,8 +120,13 @@ const CreatePool = () => {
         try {
             setLoadingSubmit(true);
 
+            const payload: PoolForm = {
+                ...data,
+                editionKey: selectedEditionKey ?? undefined,
+            };
+
             // Create the pool
-            const response = await api.post('/pools/createPool', data);
+            const response = await api.post('/pools/createPool', payload);
 
             // Redirect to the pool page
             navigate(`/pool/${response.data}`);
@@ -131,6 +143,7 @@ const CreatePool = () => {
         document.title = t('createPoolPage.title'),
         <div className="mx-2 md:max-w-[700px] md:mx-auto my-4 text-base-200">
             <Title>{t('createPoolPage.title')}</Title>
+            {selectedEdition && <div className="badge badge-primary mb-4">{selectedEdition.label}</div>}
 
             {/* Breadcrumbs */}
             <div className="breadcrumbs text-md text-base-200 mb-6">

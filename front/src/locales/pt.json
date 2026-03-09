@@ -99,7 +99,13 @@
     "pages": {
         "home": "Início",
         "profile": "Perfil",
+        "admin": "Administração",
         "nominees": "Indicados"
+    },
+    "edition": {
+        "selectorLabel": "Edição",
+        "loading": "Carregando edições",
+        "unavailable": "Sem edições"
     },
     "logout": "Sair",
     "nominees": {
@@ -199,7 +205,7 @@
     "homePage": {
         "nominees": {
             "title": "Indicados",
-            "subtitle": "Confira os indicados ao Oscar 2025",
+            "subtitle": "Confira os indicados do {{edition}}",
             "viewAll": "Ver todos"
         },
         "hero": {
@@ -215,6 +221,22 @@
             },
             "login": "Registre-se ou entre agora!"
         }
+    },
+    "adminPage": {
+        "title": "Painel administrativo",
+        "subtitle": "Gerencie a edição ativa e revise os dados do Oscar.",
+        "active": "Edição ativa",
+        "activate": "Ativar",
+        "activating": "Ativando...",
+        "alreadyActive": "Ativa",
+        "selected": "Selecionada",
+        "goToNominees": "Gerenciar vencedores",
+        "winnerHint": "Os vencedores continuam sendo marcados na página de indicados.",
+        "activationSuccess": "Edição ativada com sucesso.",
+        "activationError": "Falha ao ativar a edição.",
+        "loadError": "Falha ao carregar as edições.",
+        "ceremonyDate": "Cerimônia",
+        "betDeadline": "Prazo das apostas"
     },
     "createPoolPage": {
         "title": "Criar bolão",
