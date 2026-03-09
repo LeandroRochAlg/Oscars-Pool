@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { User } from '../models/user';
-import admin from '../configs/firebase';
+import admin, { isFirebaseAdminAvailable } from '../configs/firebase';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -10,8 +10,21 @@ import { ObjectId } from 'mongodb';
 dotenv.config();
 
 class UserController {
+    private ensureFirebaseAdmin(res: Response) {
+        if (!isFirebaseAdminAvailable()) {
+            res.status(503).send('Firebase Admin is not configured');
+            return false;
+        }
+
+        return true;
+    }
+
     async register(req: Request, res: Response) {
         try {
+            if (!this.ensureFirebaseAdmin(res)) {
+                return;
+            }
+
             type UserRegister = Pick<User, 'username' | 'email' | 'password' | 'googleId'>;
 
             const user: UserRegister = req.body;
@@ -123,6 +136,10 @@ class UserController {
 
     async updateUser(req: Request, res: Response) {
         try {
+            if (!this.ensureFirebaseAdmin(res)) {
+                return;
+            }
+
             const userId = req.user._id;
             const { username } = req.body;
     
@@ -172,6 +189,10 @@ class UserController {
         const { email, newPassword } = req.body;
 
         try {
+            if (!this.ensureFirebaseAdmin(res)) {
+                return;
+            }
+
             const user = await db.collection<User>('users').findOne({
                 email
             });
