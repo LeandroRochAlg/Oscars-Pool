@@ -2,30 +2,48 @@ import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { ObjectId } from 'mongodb';
 import { Nominee } from '../models/nominee';
-import { Bet } from '../models/bet';
-import { User } from '../models/user';
+import { Bet, BetSelection } from '../models/bet';
 import { Category } from '../models/category';
 import NomineeService from '../services/nomineeService';
+import EditionService from '../services/editionService';
 
 class BetController {
     async createBet(req: Request, res: Response) {
         const user = req.user;
-        const bets = req.body as Bet[];
+        const incomingBets = req.body as BetSelection | Bet[];
         const poolId = req.params.poolId;
-
-        // Check the date to see if the user can update the bets
-        const currentDate = new Date();
-
-        // Oscar date: March 2, 2025, 9 PM (Brasília time)
-        const oscarDate = new Date("2025-03-02T21:00:00-03:00");
-
-        if (currentDate > oscarDate) {
-            res.status(400).send('Bets are closed');
-            return;
-        }
 
         try {
             const pools = db.collection('pools');
+
+            const pool = await pools.findOne(
+                {
+                    _id: ObjectId.createFromHexString(poolId),
+                    'users.user': user._id
+                },
+                {
+                    projection: {
+                        editionKey: 1,
+                    }
+                }
+            );
+
+            if (!pool) {
+                res.status(404).send('Pool not found');
+                return;
+            }
+
+            const currentDate = new Date();
+            const oscarDate = await EditionService.getBetDeadline(pool.editionKey);
+
+            if (currentDate > oscarDate) {
+                res.status(400).send('Bets are closed');
+                return;
+            }
+
+            const bets: BetSelection = Array.isArray(incomingBets)
+                ? { userBets: incomingBets }
+                : incomingBets;
 
             const userBets = await pools.findOne(
                 {
@@ -68,7 +86,6 @@ class BetController {
     
         try {
             const poolsCollection = db.collection('pools');
-            const winnersCollection = db.collection('winners');
     
             // Get user bets
             const pool = await poolsCollection.findOne(
@@ -78,6 +95,7 @@ class BetController {
                 },
                 {
                     projection: {
+                        editionKey: 1,
                         categories: 1,
                         'users.$': 1
                     }
@@ -90,17 +108,18 @@ class BetController {
             }
 
             // Get nominees
-            const nominees = await NomineeService.getNominees();
+            const editionKey = pool.editionKey;
+            const nominees = await NomineeService.getNominees(editionKey);
 
             // Filter by categories in pool
             const poolCategories = pool.categories.map((category: any) => category.category);
             const poolNominees = nominees.filter((category: Category) => poolCategories.includes(category.category));
 
             // Get winners
-            const winners = await winnersCollection.find().toArray();
+            const edition = await EditionService.resolveEdition(editionKey);
 
             // Get user bets
-            const userBets = pool.users[0].bets;
+            const userBets = pool.users[0].bets as BetSelection | undefined;
 
             type BetNominee = Nominee & { isWinner: boolean };
 
@@ -119,7 +138,7 @@ class BetController {
                                 name: nominee,
                                 detail: category.nominees.find((nomineeData: Nominee) => nomineeData.name === nominee)?.detail || '',
                                 movieImage: category.nominees.find((nomineeData: Nominee) => nomineeData.name === nominee)?.movieImage || '',
-                                isWinner: winners.some((winner) => winner.category === bet.category && winner.nominee === nominee)
+                                isWinner: edition.categories.find((entry) => entry.category === bet.category)?.winner === nominee
                             });
                         });
 
@@ -138,7 +157,7 @@ class BetController {
                     category.nominees.forEach((nominee: Nominee) => {
                         betNominees.push({
                             ...nominee,
-                            isWinner: winners.some((winner) => winner.category === category.category && winner.nominee === nominee.name)
+                            isWinner: edition.categories.find((entry) => entry.category === category.category)?.winner === nominee.name
                         });
                     });
 
@@ -150,11 +169,8 @@ class BetController {
                 });
             }
 
-            // Check the date to see if the user can update the bets
             const currentDate = new Date();
-
-            // Oscar date: March 2, 2025, 9 PM (Brasília time)
-            const oscarDate = new Date("2025-03-02T21:00:00-03:00");
+            const oscarDate = await EditionService.getBetDeadline(editionKey);
 
             const canUpdateBets = currentDate < oscarDate;
 

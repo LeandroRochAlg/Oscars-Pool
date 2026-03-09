@@ -1,10 +1,10 @@
 import { ObjectId } from "mongodb";
-import { Bet } from "./bet";
+import { BetSelection } from "./bet";
 
 type UserPool = {
     user: ObjectId;
     admin: boolean;
-    bets?: Bet[];
+    bets?: BetSelection;
 };
 
 type CategoryPool = {
@@ -16,6 +16,7 @@ export interface Pool {
     _id?: ObjectId;
     name: string;
     description?: string;
+    editionKey?: string;
     public: boolean;
     inviteToken?: string;
     categories: CategoryPool[];

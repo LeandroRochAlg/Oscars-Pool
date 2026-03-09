@@ -4,10 +4,119 @@ import { Pool } from '../models/pool';
 import { Bet } from '../models/bet';
 import { v4 as uuidv4 } from 'uuid';
 import { ObjectId } from 'mongodb';
+import EditionService, { DEFAULT_FALLBACK_EDITION_KEY } from '../services/editionService';
 
-type PoolCreation = Pick<Pool, 'name' | 'description' | 'public'  | 'categories'>;
+type PoolCreation = Pick<Pool, 'name' | 'description' | 'public'  | 'categories' | 'editionKey'>;
+
+type PoolCursor = {
+    users: number;
+    id: string;
+};
 
 class PoolController{
+    private encodeCursor(cursor: PoolCursor) {
+        return `${cursor.users}:${cursor.id}`;
+    }
+
+    private parseCursor(rawCursor?: string) {
+        if (!rawCursor) {
+            return null;
+        }
+
+        const separatorIndex = rawCursor.indexOf(':');
+
+        if (separatorIndex === -1) {
+            return null;
+        }
+
+        const users = Number(rawCursor.slice(0, separatorIndex));
+        const id = rawCursor.slice(separatorIndex + 1);
+
+        if (Number.isNaN(users) || !ObjectId.isValid(id)) {
+            return null;
+        }
+
+        return {
+            users,
+            id,
+        } satisfies PoolCursor;
+    }
+
+    private getEditionMatch(editionKey?: string) {
+        if (!editionKey) {
+            return null;
+        }
+
+        if (editionKey === DEFAULT_FALLBACK_EDITION_KEY) {
+            return {
+                $or: [
+                    { editionKey: DEFAULT_FALLBACK_EDITION_KEY },
+                    { editionKey: { $exists: false } },
+                ],
+            };
+        }
+
+        return { editionKey };
+    }
+
+    private buildPoolListPipeline(req: Request, baseMatch: Record<string, any>, limit: number, cursor?: string) {
+        const pipeline: Record<string, any>[] = [
+            { $match: baseMatch },
+            {
+                $addFields: {
+                    editionKey: { $ifNull: ['$editionKey', DEFAULT_FALLBACK_EDITION_KEY] },
+                    usersCount: { $size: '$users' },
+                    categoriesCount: { $size: '$categories' },
+                    isAdmin: {
+                        $cond: [
+                            { $in: [req.user._id, '$users.user'] },
+                            { $arrayElemAt: ['$users.admin', { $indexOfArray: ['$users.user', req.user._id] }] },
+                            false,
+                        ],
+                    },
+                    isCreator: { $eq: [req.user._id, '$createdBy'] },
+                    isMember: { $in: [req.user._id, '$users.user'] },
+                },
+            },
+        ];
+
+        const parsedCursor = this.parseCursor(cursor);
+
+        if (parsedCursor) {
+            pipeline.push({
+                $match: {
+                    $or: [
+                        { usersCount: { $lt: parsedCursor.users } },
+                        {
+                            usersCount: parsedCursor.users,
+                            _id: { $gt: ObjectId.createFromHexString(parsedCursor.id) },
+                        },
+                    ],
+                },
+            });
+        }
+
+        pipeline.push(
+            { $sort: { usersCount: -1, _id: 1 } },
+            { $limit: limit },
+            {
+                $project: {
+                    name: 1,
+                    description: 1,
+                    public: 1,
+                    editionKey: 1,
+                    categories: '$categoriesCount',
+                    users: '$usersCount',
+                    isAdmin: 1,
+                    isCreator: 1,
+                    isMember: 1,
+                },
+            },
+        );
+
+        return pipeline;
+    }
+
     async createPool(req: Request, res: Response) {
         try {
             const pool: PoolCreation = req.body;
@@ -17,8 +126,11 @@ class PoolController{
 
             const pools = db.collection('pools');
 
+            const edition = await EditionService.resolveEdition(pool.editionKey);
+
             const newPool: Pool = {
                 ...pool,
+                editionKey: edition.key,
                 inviteToken,
                 users: [{ user: userId, admin: true }],
                 createdBy: userId,
@@ -136,39 +248,21 @@ class PoolController{
 
             const limit = parseInt(req.query.limit as string) || 10;
             const cursor = req.query.cursor as string;
+            const editionKey = req.query.editionKey as string | undefined;
 
-            const query: any = {
+            const baseQuery: any = {
                 $or: [
                     { public: true },
                     { users: { $elemMatch: { user: req.user._id } } }
                 ]
             }
 
-            if (cursor) {
-                query['_id'] = { $gt: ObjectId.createFromHexString(cursor) };
-            }
+            const editionMatch = this.getEditionMatch(editionKey);
+            const query = editionMatch ? { $and: [baseQuery, editionMatch] } : baseQuery;
 
-            const result = await pools
-                .find(query, {
-                    projection: {
-                        name: 1,
-                        description: 1,
-                        public: 1,
-                        categories: { $size: "$categories" },
-                        users: { $size: "$users" },
-                        isAdmin: { $cond: [{ $in: [req.user._id, "$users.user"] }, { $arrayElemAt: ["$users.admin", { $indexOfArray: ["$users.user", req.user._id] }] }, false] },
-                        isCreator: { $eq: [req.user._id, "$createdBy"] },
-                        isMember: { $in: [req.user._id, "$users.user"] }
-                    }
-                })
-                .sort({
-                    users: -1,
-                    _id: 1
-                })
-                .limit(limit)
-                .toArray();
+            const result = await pools.aggregate(this.buildPoolListPipeline(req, query, limit, cursor)).toArray();
             
-            const lastCursor = result.length > 0 ? result[result.length - 1]._id : null;
+            const lastCursor = result.length > 0 ? this.encodeCursor({ users: result[result.length - 1].users, id: result[result.length - 1]._id.toString() }) : null;
 
             res.status(200).send({
                 pools: result,
@@ -187,36 +281,18 @@ class PoolController{
 
             const limit = parseInt(req.query.limit as string) || 10;
             const cursor = req.query.cursor as string;
+            const editionKey = req.query.editionKey as string | undefined;
 
-            const query: any = {
+            const baseQuery: any = {
                 users: { $elemMatch: { user: req.user._id } }
             };
 
-            if (cursor) {
-                query['_id'] = { $gt: ObjectId.createFromHexString(cursor) };
-            }
+            const editionMatch = this.getEditionMatch(editionKey);
+            const query = editionMatch ? { $and: [baseQuery, editionMatch] } : baseQuery;
 
-            const result = await pools
-                .find(query, {
-                    projection: {
-                        name: 1,
-                        description: 1,
-                        public: 1,
-                        categories: { $size: "$categories" },
-                        users: { $size: "$users" },
-                        isAdmin: { $cond: [{ $in: [req.user._id, "$users.user"] }, { $arrayElemAt: ["$users.admin", { $indexOfArray: ["$users.user", req.user._id] }] }, false] },
-                        isCreator: { $eq: [req.user._id, "$createdBy"] },
-                        isMember: { $in: [req.user._id, "$users.user"] }
-                    }
-                })
-                .sort({
-                    users: -1,
-                    _id: 1
-                })
-                .limit(limit)
-                .toArray();
+            const result = await pools.aggregate(this.buildPoolListPipeline(req, query, limit, cursor)).toArray();
 
-            const lastCursor = result.length > 0 ? result[result.length - 1]._id : null;
+            const lastCursor = result.length > 0 ? this.encodeCursor({ users: result[result.length - 1].users, id: result[result.length - 1]._id.toString() }) : null;
 
             res.status(200).send({
                 pools: result,
@@ -236,8 +312,9 @@ class PoolController{
             const limit = parseInt(req.query.limit as string) || 10;
             const cursor = req.query.cursor as string;
             const search = req.query.search as string;
+            const editionKey = req.query.editionKey as string | undefined;
 
-            const query: any = {
+            const baseQuery: any = {
                 $and: [
                     {
                         $or: [
@@ -254,31 +331,12 @@ class PoolController{
                 ]
             };
 
-            if (cursor) {
-                query['_id'] = { $gt: ObjectId.createFromHexString(cursor) };
-            }
+            const editionMatch = this.getEditionMatch(editionKey);
+            const query = editionMatch ? { $and: [baseQuery, editionMatch] } : baseQuery;
 
-            const result = await pools
-                .find(query, {
-                    projection: {
-                        name: 1,
-                        description: 1,
-                        public: 1,
-                        categories: { $size: "$categories" },
-                        users: { $size: "$users" },
-                        isAdmin: { $cond: [{ $in: [req.user._id, "$users.user"] }, { $arrayElemAt: ["$users.admin", { $indexOfArray: ["$users.user", req.user._id] }] }, false] },
-                        isCreator: { $eq: [req.user._id, "$createdBy"] },
-                        isMember: { $in: [req.user._id, "$users.user"] }
-                    }
-                })
-                .sort({
-                    users: -1,
-                    _id: 1
-                })
-                .limit(limit)
-                .toArray();
+            const result = await pools.aggregate(this.buildPoolListPipeline(req, query, limit, cursor)).toArray();
 
-            const lastCursor = result.length > 0 ? result[result.length - 1]._id : null;
+            const lastCursor = result.length > 0 ? this.encodeCursor({ users: result[result.length - 1].users, id: result[result.length - 1]._id.toString() }) : null;
 
             res.status(200).send({
                 pools: result,
@@ -303,6 +361,7 @@ class PoolController{
                     projection: {
                         name: 1,
                         description: 1,
+                        editionKey: { $ifNull: ['$editionKey', DEFAULT_FALLBACK_EDITION_KEY] },
                         public: 1,
                         categories: { $size: "$categories" },
                         users: { $size: "$users" },
@@ -337,6 +396,7 @@ class PoolController{
                     projection: {
                         name: 1,
                         description: 1,
+                        editionKey: { $ifNull: ['$editionKey', DEFAULT_FALLBACK_EDITION_KEY] },
                         public: 1,
                         inviteToken: 1,
                         categories: 1,
@@ -400,8 +460,6 @@ class PoolController{
         try {
             const poolId = req.params.poolId as string;
             const pools = db.collection('pools');
-            const winners = db.collection('winners');
-
             // Get the pool info
             const pool = await pools.findOne(
                 { _id: ObjectId.createFromHexString(poolId) },
@@ -409,6 +467,7 @@ class PoolController{
                     projection: {
                         name: 1,
                         description: 1,
+                        editionKey: 1,
                         public: 1,
                         categories: 1,
                         users: 1,
@@ -431,17 +490,12 @@ class PoolController{
                 return;
             }
 
-            // Get the winners from the categories of the pool
-            const poolCategories = Array.isArray(pool.categories) ? pool.categories.map((category: any) => category.category) : [pool.categories.category];
-
-            const categoryWinners = await winners.find({
-                category: { $in: poolCategories }
-            }).toArray();
-
-            // Map the winners to the categories
             const winnersMap = new Map<string, string>();
-            categoryWinners.forEach(winner => {
-                winnersMap.set(winner.category, winner.nominee);
+            const edition = await EditionService.resolveEdition(pool.editionKey);
+            edition.categories.forEach((category) => {
+                if (category.winner) {
+                    winnersMap.set(category.category, category.winner);
+                }
             });
 
             // Calculate the leaderboard
