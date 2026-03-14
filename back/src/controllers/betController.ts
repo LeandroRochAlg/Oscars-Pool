@@ -111,62 +111,90 @@ class BetController {
             const editionKey = pool.editionKey;
             const nominees = await NomineeService.getNominees(editionKey);
 
-            // Filter by categories in pool
+            // Filter by categories currently configured in the pool
             const poolCategories = pool.categories.map((category: any) => category.category);
             const poolNominees = nominees.filter((category: Category) => poolCategories.includes(category.category));
+            const poolCategoryWeights = new Map<string, number>(
+                pool.categories.map((category: any) => [category.category, category.weight])
+            );
+            const poolCategorySet = new Set(poolCategories);
 
             // Get winners
             const edition = await EditionService.resolveEdition(editionKey);
 
             // Get user bets
             const userBets = pool.users[0].bets as BetSelection | undefined;
+            const storedBets = userBets?.userBets ?? [];
 
             type BetNominee = Nominee & { isWinner: boolean };
 
             const userBetsInfo: { category: string; weight: number; nominees: (Nominee & { isWinner: boolean; })[]; }[] = [];
 
-            // Get user bets with isWinners
-            if (userBets) {
-                userBets.userBets.forEach((bet: Bet) => {
-                    const category = poolNominees.find((category: Category) => category.category === bet.category);
+            // Normalize stored bets: keep only categories and nominees still valid for current pool config.
+            const normalizedStoredBets: Bet[] = storedBets
+                .filter((bet) => poolCategorySet.has(bet.category))
+                .map((bet) => {
+                    const categoryData = poolNominees.find((entry) => entry.category === bet.category);
+                    const allowedNominees = new Set((categoryData?.nominees ?? []).map((nominee) => nominee.name));
 
-                    if (category) {
-                        const betNominees: BetNominee[] = [];
+                    return {
+                        category: bet.category,
+                        nominees: bet.nominees.filter((nominee) => allowedNominees.has(nominee)),
+                    };
+                });
 
-                        bet.nominees.forEach((nominee: string) => {
-                            betNominees.push({
-                                name: nominee,
-                                detail: category.nominees.find((nomineeData: Nominee) => nomineeData.name === nominee)?.detail || '',
-                                movieImage: category.nominees.find((nomineeData: Nominee) => nomineeData.name === nominee)?.movieImage || '',
-                                isWinner: edition.categories.find((entry) => entry.category === bet.category)?.winner === nominee
-                            });
-                        });
+            // Always return categories from the current pool config, even if the user has no stored ranking yet.
+            poolNominees.forEach((category: Category) => {
+                const betNominees: BetNominee[] = [];
+                const storedCategoryBet = normalizedStoredBets.find((bet) => bet.category === category.category);
+                const nomineeByName = new Map(category.nominees.map((nominee) => [nominee.name, nominee]));
+                const orderedNominees: Nominee[] = [];
+                const includedNominees = new Set<string>();
 
-                        userBetsInfo.push({
-                            category: bet.category,
-                            weight: pool.categories.find((categoryData: any) => categoryData.category === bet.category).weight,
-                            nominees: betNominees
-                        });
+                (storedCategoryBet?.nominees ?? []).forEach((nomineeName) => {
+                    const nomineeData = nomineeByName.get(nomineeName);
+
+                    if (nomineeData && !includedNominees.has(nomineeName)) {
+                        orderedNominees.push(nomineeData);
+                        includedNominees.add(nomineeName);
                     }
                 });
-            } else {
-                // If user has no bets, return all categories with nominees and winners
-                poolNominees.forEach((category: Category) => {
-                    const betNominees: BetNominee[] = [];
 
-                    category.nominees.forEach((nominee: Nominee) => {
-                        betNominees.push({
-                            ...nominee,
-                            isWinner: edition.categories.find((entry) => entry.category === category.category)?.winner === nominee.name
-                        });
-                    });
+                category.nominees.forEach((nominee) => {
+                    if (!includedNominees.has(nominee.name)) {
+                        orderedNominees.push(nominee);
+                    }
+                });
 
-                    userBetsInfo.push({
-                        category: category.category,
-                        weight: pool.categories.find((categoryData: any) => categoryData.category === category.category).weight,
-                        nominees: betNominees
+                orderedNominees.forEach((nominee) => {
+                    betNominees.push({
+                        ...nominee,
+                        isWinner: edition.categories.find((entry) => entry.category === category.category)?.winner === nominee.name
                     });
                 });
+
+                userBetsInfo.push({
+                    category: category.category,
+                    weight: poolCategoryWeights.get(category.category) ?? 0,
+                    nominees: betNominees
+                });
+            });
+
+            // Persist cleanup so stale categories are removed from stored bets over time.
+            if (userBets && JSON.stringify(normalizedStoredBets) !== JSON.stringify(storedBets)) {
+                await poolsCollection.updateOne(
+                    {
+                        _id: ObjectId.createFromHexString(poolId),
+                        'users.user': user._id
+                    },
+                    {
+                        $set: {
+                            'users.$.bets': {
+                                userBets: normalizedStoredBets,
+                            }
+                        }
+                    }
+                );
             }
 
             const currentDate = new Date();
