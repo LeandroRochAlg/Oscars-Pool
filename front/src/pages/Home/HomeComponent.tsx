@@ -2,11 +2,13 @@ import { useTranslation } from 'react-i18next';
 import Countdown from '../../components/common/Countdown';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useEdition } from '../../hooks/useEdition';
 
 const HomePage = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const { selectedEdition } = useEdition();
 
 	useEffect(() => {
 		const token = localStorage.getItem('user');
@@ -53,8 +55,8 @@ const HomePage = () => {
 
 			<div className="card card-side bg-base-100 shadow-xl mx-2 md:w-[700px] md:mx-auto border border-primary my-5 text-base-200">
 				<div className="card-body">
-					<h2 className="card-title">{t('homePage.nominees.title')}</h2>
-					<p>{t('homePage.nominees.subtitle')}</p>
+					<h2 className="card-title flex items-center gap-2">{t('homePage.nominees.title')} {selectedEdition && <span className="badge badge-primary">{selectedEdition.label}</span>}</h2>
+					<p>{t('homePage.nominees.subtitle', { edition: selectedEdition?.label ?? 'the Oscars' })}</p>
 					<div className="card-actions">
 						<button
 							className="btn btn-primary"
@@ -71,6 +73,25 @@ const HomePage = () => {
 						className='h-full'
 					/>
 				</figure>
+			</div>
+
+			<div className="card bg-base-100 shadow-xl mx-2 md:w-[700px] md:mx-auto border border-primary my-5 text-base-200">
+				<div className="card-body">
+					<h2 className="card-title text-xl">{t('homePage.scoring.title')}</h2>
+
+					<div className="space-y-2 text-left">
+						{(t('homePage.scoring.steps', { returnObjects: true }) as string[]).map((step, index) => (
+							<p key={step}>
+								<span className="font-semibold mr-2">{index + 1}.</span>
+								{step}
+							</p>
+						))}
+					</div>
+
+					<div className="mt-2 rounded-box border border-base-300 bg-base-200/40 p-3">
+						<p className="text-sm">{t('homePage.scoring.example')}</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	)

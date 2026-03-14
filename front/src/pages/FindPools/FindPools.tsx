@@ -5,11 +5,13 @@ import Title from "../../components/ui/Title";
 import PoolPreview from "../../components/common/PoolPreview";
 import ErrorMessage from "../../components/common/ErrorMessage";
 import { FaPaste, FaSearch } from "react-icons/fa";
+import { useEdition } from "../../hooks/useEdition";
 
 type Pool = {
     _id: string;
     name: string;
     description: string;
+    editionKey?: string;
     public: boolean;
     categories: number;
     users: number;
@@ -31,12 +33,26 @@ const FindPools = () => {
     const [showInviteModal, setShowInviteModal] = useState<boolean>(false);
     const [loadingJoinPool, setLoadingJoinPool] = useState<boolean>(false);
     const [joinPoolError, setJoinPoolError] = useState<string | null>(null);
+    const loadingRef = useRef(false);
     const observer = useRef<IntersectionObserver>();
+    const requestedCursorsRef = useRef<Set<string>>(new Set());
+    const requestVersionRef = useRef(0);
+    const { selectedEdition, selectedEditionKey } = useEdition();
+
+    const mergePools = (currentPools: Pool[], incomingPools: Pool[]) => {
+        const existingIds = new Set(currentPools.map((pool) => pool._id));
+        return [...currentPools, ...incomingPools.filter((pool) => !existingIds.has(pool._id))];
+    };
 
     // Function to fetch pools
     const fetchPools = useCallback(
-        async (search = "", cursor = "") => {
-            if (loading) return;
+        async (search = "", cursor = "", reset = false, requestVersion = requestVersionRef.current) => {
+            const requestKey = `${selectedEditionKey ?? 'active'}:${search}:${cursor}`;
+
+            if (loadingRef.current || requestedCursorsRef.current.has(requestKey)) return;
+
+            requestedCursorsRef.current.add(requestKey);
+            loadingRef.current = true;
 
             setLoading(true);
 
@@ -44,15 +60,19 @@ const FindPools = () => {
                 const params = new URLSearchParams();
                 if (search) params.append("search", search);
                 if (cursor) params.append("cursor", cursor);
+                if (selectedEditionKey) params.append("editionKey", selectedEditionKey);
 
                 const response = search ? await api.get(`/pools/getPoolsBySearch?${params.toString()}`) : await api.get(`/pools/getPoolsByUserNumber?${params.toString()}`);
                 const data = response.data;
 
-                // If it's a new search (empty cursor), replace the pool list
-                if (!cursor) {
+                if (requestVersion !== requestVersionRef.current) {
+                    return;
+                }
+
+                if (reset || !cursor) {
                     setPools(data.pools);
                 } else {
-                    setPools((prevPools) => [...prevPools, ...data.pools]);
+                    setPools((prevPools) => mergePools(prevPools, data.pools));
                 }
 
                 setNextCursor(data.nextCursor);
@@ -60,33 +80,27 @@ const FindPools = () => {
             } catch (error) {
                 console.error("Error fetching pools: ", error);
             } finally {
+                loadingRef.current = false;
                 setLoading(false);
             }
         },
-        [loading]
+        [selectedEditionKey]
     );
 
     // Effect to fetch pools when searchQuery changes
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
-            // Reset pagination states
+            requestVersionRef.current += 1;
+            requestedCursorsRef.current.clear();
             setPools([]);
             setNextCursor(null);
             setHasMore(true);
 
-            // Perform the search
-            fetchPools(searchQuery);
+            fetchPools(searchQuery, "", true, requestVersionRef.current);
         }, 500);
 
         return () => clearTimeout(delayDebounceFn);
-    }, [searchQuery]);
-
-    // Effect to load more pools when the cursor changes (infinite scroll)
-    useEffect(() => {
-        if (nextCursor) {
-            fetchPools(searchQuery, nextCursor);
-        }
-    }, []);
+    }, [searchQuery, fetchPools, selectedEditionKey]);
 
     // IntersectionObserver setup for infinite scroll
     const lastPoolElementRef = useCallback(
@@ -103,7 +117,7 @@ const FindPools = () => {
 
             if (node) observer.current.observe(node);
         },
-        [loading, hasMore, nextCursor]
+        [loading, hasMore, nextCursor, fetchPools, searchQuery]
     );
 
     // Handle invite token search
@@ -135,7 +149,7 @@ const FindPools = () => {
             const response = await api.post(`/pools/joinPool`, joinPool);
 
             if (response.status === 200) {
-                poolInvite!.isMember = true;
+                setPoolInvite((currentPoolInvite) => currentPoolInvite ? { ...currentPoolInvite, isMember: true } : currentPoolInvite);
             }
         } catch (error) {
             setJoinPoolError(t('pool.errors.joinPoolFailed'));
@@ -157,6 +171,7 @@ const FindPools = () => {
                     <div className="hero-overlay bg-opacity-20"></div>
                     <div className="hero-content flex-col">
                         <Title>{t("findPools.title")}</Title>
+                        {selectedEdition && <div className="badge badge-primary mb-2">{selectedEdition.label}</div>}
                         <div className="flex flex-col md:flex-row md:w-[750px] gap-2">
                             <label className="input flex items-center gap-2 md:w-2/3 text-base-200">
                                 <input
@@ -225,6 +240,11 @@ const FindPools = () => {
                             }
                         })}
                     </div>
+                    {!loading && pools.length === 0 && (
+                        <div className="alert mt-4">
+                            <span>{t("findPools.title")}: 0</span>
+                        </div>
+                    )}
                     {loading && <p className="text-center text-base-200"><span className="loading loading-dots loading-lg"></span></p>}
                 </div>
 

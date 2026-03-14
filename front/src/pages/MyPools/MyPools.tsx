@@ -3,11 +3,13 @@ import { useTranslation } from "react-i18next";
 import api from "../../libs/api";
 import Title from "../../components/ui/Title";
 import PoolPreview from "../../components/common/PoolPreview";
+import { useEdition } from "../../hooks/useEdition";
 
 type Pool = {
     _id: string;
     name: string;
     description: string;
+    editionKey?: string;
     public: boolean;
     categories: number;
     users: number;
@@ -22,27 +24,40 @@ const MyPools = () => {
     const [nextCursor, setNextCursor] = useState<string | null>(null);
     const [hasMore, setHasMore] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
+    const loadingRef = useRef(false);
     const observer = useRef<IntersectionObserver>();
+    const requestedCursorsRef = useRef<Set<string>>(new Set());
+    const { selectedEdition, selectedEditionKey } = useEdition();
+
+    const mergePools = (currentPools: Pool[], incomingPools: Pool[]) => {
+        const existingIds = new Set(currentPools.map((pool) => pool._id));
+        return [...currentPools, ...incomingPools.filter((pool) => !existingIds.has(pool._id))];
+    };
 
     // Function to fetch user's pools
     const fetchPools = useCallback(
-        async (cursor = "") => {
-            if (loading) return;
+        async (cursor = "", reset = false) => {
+            const requestKey = `${selectedEditionKey ?? 'active'}:${cursor}`;
+
+            if (loadingRef.current || requestedCursorsRef.current.has(requestKey)) return;
+
+            requestedCursorsRef.current.add(requestKey);
+            loadingRef.current = true;
 
             setLoading(true);
 
             try {
                 const params = new URLSearchParams();
                 if (cursor) params.append("cursor", cursor);
+                if (selectedEditionKey) params.append("editionKey", selectedEditionKey);
 
                 const response = await api.get(`/pools/getPoolsByUser?${params.toString()}`);
                 const data = response.data;
 
-                // If it's a new fetch (empty cursor), replace the pool list
-                if (!cursor) {
+                if (reset || !cursor) {
                     setPools(data.pools);
                 } else {
-                    setPools((prevPools) => [...prevPools, ...data.pools]);
+                    setPools((prevPools) => mergePools(prevPools, data.pools));
                 }
 
                 setNextCursor(data.nextCursor);
@@ -50,23 +65,21 @@ const MyPools = () => {
             } catch (error) {
                 console.error("Error fetching pools: ", error);
             } finally {
+                loadingRef.current = false;
                 setLoading(false);
             }
         },
-        [loading]
+        [selectedEditionKey]
     );
 
     // Effect to fetch pools when the component is mounted
     useEffect(() => {
-        fetchPools();
-    }, []);
-
-    // Effect to load more pools when the cursor changes (infinite scroll)
-    useEffect(() => {
-        if (nextCursor) {
-            fetchPools(nextCursor);
-        }
-    }, [nextCursor]);
+        requestedCursorsRef.current.clear();
+        setPools([]);
+        setNextCursor(null);
+        setHasMore(true);
+        fetchPools('', true);
+    }, [fetchPools, selectedEditionKey]);
 
     // IntersectionObserver setup for infinite scroll
     const lastPoolElementRef = useCallback(
@@ -83,7 +96,7 @@ const MyPools = () => {
 
             if (node) observer.current.observe(node);
         },
-        [loading, hasMore, nextCursor]
+        [loading, hasMore, nextCursor, fetchPools]
     );
 
     return (
@@ -92,6 +105,7 @@ const MyPools = () => {
             <>
                 <div className="py-5 mx-2 md:w-[700px] md:mx-auto">
                     <Title>{t("myPools.title")}</Title>
+                    {selectedEdition && <div className="badge badge-primary mb-4">{selectedEdition.label}</div>}
 
                     <div className="flex flex-col">
                         {pools.map((pool, index) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import api from "../../../libs/api";
@@ -10,6 +10,8 @@ import CategorySelector from "../../../components/common/CategorySelector";
 import WeightAssigner from "../../../components/common/WeightAssigner";
 import ErrorMessage from "../../../components/common/ErrorMessage";
 import AreYouSure from "../../../components/common/AreYouSure";
+import { useEdition } from "../../../hooks/useEdition";
+import { Pool } from "../../../models/pool";
 
 type PoolForm = {
     name: string;
@@ -18,7 +20,9 @@ type PoolForm = {
     categories: { category: string; weight: number }[];
 };
 
-const EditPool = ({ pool, fetchPool }: { pool: any, fetchPool: Function }) => {
+type EditablePool = Pick<Pool, '_id' | 'name' | 'description' | 'public' | 'categories' | 'editionKey'>;
+
+const EditPool = ({ pool, fetchPool }: { pool: EditablePool, fetchPool: () => void | Promise<void> }) => {
     const { t } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [loadingCategories, setLoadingCategories] = useState(true);
@@ -26,6 +30,7 @@ const EditPool = ({ pool, fetchPool }: { pool: any, fetchPool: Function }) => {
     const [fetchError, setFetchError] = useState("");
     const [allCategories, setAllCategories] = useState<string[]>([]);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const { selectedEditionKey } = useEdition();
 
     // Validation schema
     const schema = yup.object().shape({
@@ -59,7 +64,7 @@ const EditPool = ({ pool, fetchPool }: { pool: any, fetchPool: Function }) => {
         watch,
         formState: { errors },
     } = useForm<PoolForm>({
-        resolver: yupResolver(schema) as any,
+        resolver: yupResolver(schema) as Resolver<PoolForm>,
         defaultValues: {
             name: "",
             description: "",
@@ -74,25 +79,32 @@ const EditPool = ({ pool, fetchPool }: { pool: any, fetchPool: Function }) => {
         setFetchError("");
 
         const fetchCategories = async () => {
-            if (pool) {
-                setValue("name", pool.name);
-                setValue("description", pool.description);
-                setValue("public", pool.public);
-                setValue("categories", pool.categories);
+            if (!pool) {
+                return;
+            }
 
-                try {
-                    const categoriesResponse = await api.get("/categories");
-                    setAllCategories(categoriesResponse.data);
-                } catch (error) {
-                    setFetchError(t('pool.editPool.errors.fetchCategoriesFailed'));
-                }
+            setValue("name", pool.name);
+            setValue("description", pool.description || "");
+            setValue("public", pool.public);
+            setValue("categories", pool.categories);
+
+            try {
+                const categoriesResponse = await api.get("/categories", {
+                    params: {
+                        edition: pool.editionKey || selectedEditionKey,
+                    },
+                });
+                setAllCategories(categoriesResponse.data);
+            } catch (error) {
+                setFetchError(t('pool.editPool.errors.fetchCategoriesFailed'));
+            } finally {
+                setLoadingCategories(false);
+                setLoading(false);
             }
         };
 
         fetchCategories();
-        setLoadingCategories(false);
-        setLoading(false);
-    }, [pool]);
+    }, [pool, selectedEditionKey, setValue, t]);
 
     const onSubmit = async (data: PoolForm) => {
         setLoading(true);

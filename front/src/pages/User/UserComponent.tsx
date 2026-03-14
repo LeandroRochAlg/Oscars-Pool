@@ -23,6 +23,10 @@ type UserResponse = {
     poolNumber: number;
 }
 
+type UsernameForm = {
+    username: string;
+};
+
 const UserPage = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -34,7 +38,7 @@ const UserPage = () => {
         register: registerUsername, 
         handleSubmit: handleSubmitUsername,
         formState: { errors: errorsUsername }
-    } = useForm({
+    } = useForm<UsernameForm>({
         resolver: yupResolver(usernameSchema)
     });
 
@@ -50,7 +54,7 @@ const UserPage = () => {
         fetchUser();
     }, []);
 
-    const handleUpdateUsername = async (data: any) => {
+    const handleUpdateUsername = async (data: UsernameForm) => {
         try {
             await api.put("/user", { username: data.username });
             setMsg({ type: 'success', content: t('user.updateSuccess') });
@@ -74,6 +78,11 @@ const UserPage = () => {
                     <a className="text-center mx-auto hover:cursor-pointer border border-base-100 p-2 rounded-lg hover:border-primary" onClick={() => navigate('/myPools')}>
                         {user.poolNumber} {t('user.pools')}
                     </a>
+                    {user.admin && (
+                        <button className="btn btn-outline btn-primary mt-3" onClick={() => navigate('/admin')}>
+                            {t('pages.admin')}
+                        </button>
+                    )}
 
                     {/* Formulário de Username */}
                     <div className="w-full max-w-md bg-base-100 p-6 rounded-box">

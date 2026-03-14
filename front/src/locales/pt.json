@@ -99,7 +99,13 @@
     "pages": {
         "home": "Início",
         "profile": "Perfil",
+        "admin": "Administração",
         "nominees": "Indicados"
+    },
+    "edition": {
+        "selectorLabel": "Edição",
+        "loading": "Carregando edições",
+        "unavailable": "Sem edições"
     },
     "logout": "Sair",
     "nominees": {
@@ -199,8 +205,21 @@
     "homePage": {
         "nominees": {
             "title": "Indicados",
-            "subtitle": "Confira os indicados ao Oscar 2025",
+            "subtitle": "Confira os indicados do {{edition}}",
             "viewAll": "Ver todos"
+        },
+        "scoring": {
+            "title": "Como a Pontuacao Funciona",
+            "steps": [
+                "Ordene os indicados do mais provavel ao menos provavel de vencer.",
+                "A pontuacao depende da posicao em que seu palpite correto ficou.",
+                "Acerto na 1a posicao: 100% do peso da categoria.",
+                "Acerto na 2a posicao: 60% do peso da categoria.",
+                "Acerto na 3a posicao: 40% do peso da categoria.",
+                "Acerto na 4a posicao: 20% do peso da categoria."
+            ],
+            "example": "Exemplo: em Melhor Filme com peso 200, se o filme que voce colocou em 1o vencer voce ganha 200 pontos; se vencer o seu 2o, voce ganha 120 pontos.",
+            "button": "Guia Detalhado"
         },
         "hero": {
             "title": "Bem-vindo(a) ao AcademyBolao",
@@ -215,6 +234,22 @@
             },
             "login": "Registre-se ou entre agora!"
         }
+    },
+    "adminPage": {
+        "title": "Painel administrativo",
+        "subtitle": "Gerencie a edição ativa e revise os dados do Oscar.",
+        "active": "Edição ativa",
+        "activate": "Ativar",
+        "activating": "Ativando...",
+        "alreadyActive": "Ativa",
+        "selected": "Selecionada",
+        "goToNominees": "Gerenciar vencedores",
+        "winnerHint": "Os vencedores continuam sendo marcados na página de indicados.",
+        "activationSuccess": "Edição ativada com sucesso.",
+        "activationError": "Falha ao ativar a edição.",
+        "loadError": "Falha ao carregar as edições.",
+        "ceremonyDate": "Cerimônia",
+        "betDeadline": "Prazo das apostas"
     },
     "createPoolPage": {
         "title": "Criar bolão",

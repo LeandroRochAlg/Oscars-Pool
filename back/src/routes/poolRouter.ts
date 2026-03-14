@@ -14,13 +14,13 @@ poolRouter.put('/updatePool/:poolId', authMiddleware, PoolController.updatePool)
 poolRouter.delete('/deletePool/:poolId', authMiddleware, PoolController.deletePool);
 
 // Get pools info ordered by number of users in the pool
-poolRouter.get('/getPoolsByUserNumber', authMiddleware, PoolController.getPoolsByUserNumber);
+poolRouter.get('/getPoolsByUserNumber', authMiddleware, PoolController.getPoolsByUserNumber.bind(PoolController));
 
 // Get pools by user
-poolRouter.get('/getPoolsByUser', authMiddleware, PoolController.getPoolsByUser);
+poolRouter.get('/getPoolsByUser', authMiddleware, PoolController.getPoolsByUser.bind(PoolController));
 
 // Get pools by search
-poolRouter.get('/getPoolsBySearch', authMiddleware, PoolController.getPoolsBySearch);
+poolRouter.get('/getPoolsBySearch', authMiddleware, PoolController.getPoolsBySearch.bind(PoolController));
 
 // Get pool by token
 poolRouter.get('/getPoolByToken/:token', authMiddleware, PoolController.getPoolByToken);

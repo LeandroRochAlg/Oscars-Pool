@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
@@ -21,10 +20,15 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response?.status === 401) {
+    const requestUrl = String(error?.config?.url || '');
+    const isAuthRequest = /\/login\/?$/.test(requestUrl);
+    const isPublicAuthPath = ['/login', '/register', '/reset-password', '/action-handler'].some((path) =>
+      window.location.pathname.startsWith(path)
+    );
+
+    if (error.response?.status === 401 && !isAuthRequest && !isPublicAuthPath) {
       localStorage.removeItem('user');
-      const navigate = useNavigate();
-      navigate('/login?redirect=' + window.location.pathname);
+      window.location.href = '/login?redirect=' + window.location.pathname;
     }
     return Promise.reject(error);
   }

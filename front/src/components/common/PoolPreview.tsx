@@ -7,6 +7,7 @@ type Pool = {
     _id: string;
     name: string;
     description: string;
+    editionKey?: string;
     public: boolean;
     categories: number;
     users: number;
@@ -32,8 +33,9 @@ const PoolPreview = ({ pool }: { pool: Pool }) => {
         <div className="card hover:cursor-pointer border border-base-100 hover:border-primary text-base-200" onClick={() => navigate(`/pool/${pool._id}`)}>
             <div className="card-body">
                 <h2 className="card-title">{pool.name}</h2>
-                <p>{pool.description.length > 200 ? `${pool.description.substring(0, 200)}...` : pool.description}</p>
+                <p>{(pool.description || '').length > 200 ? `${pool.description?.substring(0, 200)}...` : pool.description}</p>
                 <div className="card-footer flex items-center gap-2">
+                    {pool.editionKey && <span className="badge badge-outline">{pool.editionKey}</span>}
                     <span className="flex items-center gap-1 text-sm">{pool.users} <FaUsers /></span>
                     <span className="flex items-center gap-1 text-sm">{pool.categories} <FaClipboardList /></span>
                     {badge()}

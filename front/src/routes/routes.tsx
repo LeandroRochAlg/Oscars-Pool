@@ -13,6 +13,7 @@ import CreatePool from "../pages/CreatePool/CreatePool";
 import PoolInfo from "../pages/PoolInfo/PoolInfo";
 import FindPools from "../pages/FindPools/FindPools";
 import MyPools from "../pages/MyPools/MyPools";
+import AdminPage from "../pages/Admin/AdminPage";
 
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
@@ -55,6 +56,11 @@ const AppRoutes: React.FC = () => {
                     <Route path="/myPools" element={
                         <PrivateRoute>
                             <MyPools />
+                        </PrivateRoute>
+                    } />
+                    <Route path="/admin" element={
+                        <PrivateRoute admin>
+                            <AdminPage />
                         </PrivateRoute>
                     } />
                     

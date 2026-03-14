@@ -98,7 +98,13 @@
     "pages": {
         "home": "Home",
         "profile": "Profile",
+        "admin": "Admin",
         "nominees": "Nominees"
+    },
+    "edition": {
+        "selectorLabel": "Edition",
+        "loading": "Loading editions",
+        "unavailable": "No editions"
     },
     "logout": "Logout",
     "nominees": {
@@ -198,8 +204,21 @@
     "homePage": {
         "nominees": {
             "title": "Nominees",
-            "subtitle": "Check out the 2025 Oscar nominees",
+            "subtitle": "Check out the nominees for {{edition}}",
             "viewAll": "View all"
+        },
+        "scoring": {
+            "title": "How Scoring Works",
+            "steps": [
+                "Rank nominees in order from most likely to least likely to win.",
+                "Points are based on where your correct pick was ranked.",
+                "1st place correct pick: 100% of the category weight.",
+                "2nd place correct pick: 60% of the category weight.",
+                "3rd place correct pick: 40% of the category weight.",
+                "4th place correct pick: 20% of the category weight."
+            ],
+            "example": "Example: in Best Picture with weight 200, if your 1st ranked movie wins you score 200 points; if your 2nd ranked movie wins you score 120 points.",
+            "button": "Detailed Guide"
         },
         "hero": {
             "title": "Welcome to the AcademyBolao!",
@@ -214,6 +233,22 @@
             },
             "login": "Register or login now!"
         }
+    },
+    "adminPage": {
+        "title": "Admin panel",
+        "subtitle": "Manage active editions and review Oscar data.",
+        "active": "Active edition",
+        "activate": "Activate",
+        "activating": "Activating...",
+        "alreadyActive": "Active now",
+        "selected": "Selected",
+        "goToNominees": "Manage winners",
+        "winnerHint": "Winner toggles are still managed in the nominees page.",
+        "activationSuccess": "Edition activated successfully.",
+        "activationError": "Failed to activate edition.",
+        "loadError": "Failed to load editions.",
+        "ceremonyDate": "Ceremony",
+        "betDeadline": "Bet deadline"
     },
     "createPoolPage": {
         "title": "Create pool",

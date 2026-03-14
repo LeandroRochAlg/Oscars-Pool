@@ -2,30 +2,48 @@ import { Request, Response } from 'express';
 import { db } from '../db/dbOperations';
 import { ObjectId } from 'mongodb';
 import { Nominee } from '../models/nominee';
-import { Bet } from '../models/bet';
-import { User } from '../models/user';
+import { Bet, BetSelection } from '../models/bet';
 import { Category } from '../models/category';
 import NomineeService from '../services/nomineeService';
+import EditionService from '../services/editionService';
 
 class BetController {
     async createBet(req: Request, res: Response) {
         const user = req.user;
-        const bets = req.body as Bet[];
+        const incomingBets = req.body as BetSelection | Bet[];
         const poolId = req.params.poolId;
-
-        // Check the date to see if the user can update the bets
-        const currentDate = new Date();
-
-        // Oscar date: March 2, 2025, 9 PM (Brasília time)
-        const oscarDate = new Date("2025-03-02T21:00:00-03:00");
-
-        if (currentDate > oscarDate) {
-            res.status(400).send('Bets are closed');
-            return;
-        }
 
         try {
             const pools = db.collection('pools');
+
+            const pool = await pools.findOne(
+                {
+                    _id: ObjectId.createFromHexString(poolId),
+                    'users.user': user._id
+                },
+                {
+                    projection: {
+                        editionKey: 1,
+                    }
+                }
+            );
+
+            if (!pool) {
+                res.status(404).send('Pool not found');
+                return;
+            }
+
+            const currentDate = new Date();
+            const oscarDate = await EditionService.getBetDeadline(pool.editionKey);
+
+            if (currentDate > oscarDate) {
+                res.status(400).send('Bets are closed');
+                return;
+            }
+
+            const bets: BetSelection = Array.isArray(incomingBets)
+                ? { userBets: incomingBets }
+                : incomingBets;
 
             const userBets = await pools.findOne(
                 {
@@ -68,7 +86,6 @@ class BetController {
     
         try {
             const poolsCollection = db.collection('pools');
-            const winnersCollection = db.collection('winners');
     
             // Get user bets
             const pool = await poolsCollection.findOne(
@@ -78,6 +95,7 @@ class BetController {
                 },
                 {
                     projection: {
+                        editionKey: 1,
                         categories: 1,
                         'users.$': 1
                     }
@@ -90,71 +108,97 @@ class BetController {
             }
 
             // Get nominees
-            const nominees = await NomineeService.getNominees();
+            const editionKey = pool.editionKey;
+            const nominees = await NomineeService.getNominees(editionKey);
 
-            // Filter by categories in pool
+            // Filter by categories currently configured in the pool
             const poolCategories = pool.categories.map((category: any) => category.category);
             const poolNominees = nominees.filter((category: Category) => poolCategories.includes(category.category));
+            const poolCategoryWeights = new Map<string, number>(
+                pool.categories.map((category: any) => [category.category, category.weight])
+            );
+            const poolCategorySet = new Set(poolCategories);
 
             // Get winners
-            const winners = await winnersCollection.find().toArray();
+            const edition = await EditionService.resolveEdition(editionKey);
 
             // Get user bets
-            const userBets = pool.users[0].bets;
+            const userBets = pool.users[0].bets as BetSelection | undefined;
+            const storedBets = userBets?.userBets ?? [];
 
             type BetNominee = Nominee & { isWinner: boolean };
 
             const userBetsInfo: { category: string; weight: number; nominees: (Nominee & { isWinner: boolean; })[]; }[] = [];
 
-            // Get user bets with isWinners
-            if (userBets) {
-                userBets.userBets.forEach((bet: Bet) => {
-                    const category = poolNominees.find((category: Category) => category.category === bet.category);
+            // Normalize stored bets: keep only categories and nominees still valid for current pool config.
+            const normalizedStoredBets: Bet[] = storedBets
+                .filter((bet) => poolCategorySet.has(bet.category))
+                .map((bet) => {
+                    const categoryData = poolNominees.find((entry) => entry.category === bet.category);
+                    const allowedNominees = new Set((categoryData?.nominees ?? []).map((nominee) => nominee.name));
 
-                    if (category) {
-                        const betNominees: BetNominee[] = [];
+                    return {
+                        category: bet.category,
+                        nominees: bet.nominees.filter((nominee) => allowedNominees.has(nominee)),
+                    };
+                });
 
-                        bet.nominees.forEach((nominee: string) => {
-                            betNominees.push({
-                                name: nominee,
-                                detail: category.nominees.find((nomineeData: Nominee) => nomineeData.name === nominee)?.detail || '',
-                                movieImage: category.nominees.find((nomineeData: Nominee) => nomineeData.name === nominee)?.movieImage || '',
-                                isWinner: winners.some((winner) => winner.category === bet.category && winner.nominee === nominee)
-                            });
-                        });
+            // Always return categories from the current pool config, even if the user has no stored ranking yet.
+            poolNominees.forEach((category: Category) => {
+                const betNominees: BetNominee[] = [];
+                const storedCategoryBet = normalizedStoredBets.find((bet) => bet.category === category.category);
+                const nomineeByName = new Map(category.nominees.map((nominee) => [nominee.name, nominee]));
+                const orderedNominees: Nominee[] = [];
+                const includedNominees = new Set<string>();
 
-                        userBetsInfo.push({
-                            category: bet.category,
-                            weight: pool.categories.find((categoryData: any) => categoryData.category === bet.category).weight,
-                            nominees: betNominees
-                        });
+                (storedCategoryBet?.nominees ?? []).forEach((nomineeName) => {
+                    const nomineeData = nomineeByName.get(nomineeName);
+
+                    if (nomineeData && !includedNominees.has(nomineeName)) {
+                        orderedNominees.push(nomineeData);
+                        includedNominees.add(nomineeName);
                     }
                 });
-            } else {
-                // If user has no bets, return all categories with nominees and winners
-                poolNominees.forEach((category: Category) => {
-                    const betNominees: BetNominee[] = [];
 
-                    category.nominees.forEach((nominee: Nominee) => {
-                        betNominees.push({
-                            ...nominee,
-                            isWinner: winners.some((winner) => winner.category === category.category && winner.nominee === nominee.name)
-                        });
-                    });
+                category.nominees.forEach((nominee) => {
+                    if (!includedNominees.has(nominee.name)) {
+                        orderedNominees.push(nominee);
+                    }
+                });
 
-                    userBetsInfo.push({
-                        category: category.category,
-                        weight: pool.categories.find((categoryData: any) => categoryData.category === category.category).weight,
-                        nominees: betNominees
+                orderedNominees.forEach((nominee) => {
+                    betNominees.push({
+                        ...nominee,
+                        isWinner: edition.categories.find((entry) => entry.category === category.category)?.winner === nominee.name
                     });
                 });
+
+                userBetsInfo.push({
+                    category: category.category,
+                    weight: poolCategoryWeights.get(category.category) ?? 0,
+                    nominees: betNominees
+                });
+            });
+
+            // Persist cleanup so stale categories are removed from stored bets over time.
+            if (userBets && JSON.stringify(normalizedStoredBets) !== JSON.stringify(storedBets)) {
+                await poolsCollection.updateOne(
+                    {
+                        _id: ObjectId.createFromHexString(poolId),
+                        'users.user': user._id
+                    },
+                    {
+                        $set: {
+                            'users.$.bets': {
+                                userBets: normalizedStoredBets,
+                            }
+                        }
+                    }
+                );
             }
 
-            // Check the date to see if the user can update the bets
             const currentDate = new Date();
-
-            // Oscar date: March 2, 2025, 9 PM (Brasília time)
-            const oscarDate = new Date("2025-03-02T21:00:00-03:00");
+            const oscarDate = await EditionService.getBetDeadline(editionKey);
 
             const canUpdateBets = currentDate < oscarDate;
 

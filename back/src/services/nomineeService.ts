@@ -1,14 +1,14 @@
-import path from 'path';
-import fs from 'fs';
 import { Category } from '../models/category';
+import EditionService from './editionService';
 
 class NomineeService {
-    async getNominees() {
-        const nomineesPath = path.join('src', 'data', 'nominees.json');
-        const nomineesData = fs.readFileSync(nomineesPath);
-        const nominees: Category[] = JSON.parse(nomineesData.toString());
+    async getNominees(editionKey?: string | null): Promise<Category[]> {
+        const edition = await EditionService.resolveEdition(editionKey);
 
-        return nominees;
+        return edition.categories.map(({ category, nominees }) => ({
+            category,
+            nominees,
+        }));
     }
 }
 

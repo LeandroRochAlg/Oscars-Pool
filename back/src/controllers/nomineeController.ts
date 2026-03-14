@@ -2,13 +2,14 @@ import { Request, Response } from 'express';
 import NomineeService from '../services/nomineeService';
 import { Category } from '../models/category';
 import { Nominee } from '../models/nominee';
-import { db } from '../db/dbOperations';
+import EditionService from '../services/editionService';
 
 class NomineeController {
-    async getCategories(_req: Request, res: Response) {
+    async getCategories(req: Request, res: Response) {
         try {
+            const editionKey = req.query.edition as string | undefined;
             // Get only the categories names from the json file
-            const nominees = await NomineeService.getNominees();
+            const nominees = await NomineeService.getNominees(editionKey);
 
             const categories: string[] = [];
 
@@ -25,8 +26,9 @@ class NomineeController {
     async getNominees(req: Request, res: Response) {
         try {
             const { category } = req.params;
+            const editionKey = req.query.edition as string | undefined;
             
-            const nominees = await NomineeService.getNominees();
+            const nominees = await NomineeService.getNominees(editionKey);
 
             const categoryData = nominees.find((categoryData: Category) => categoryData.category === category);
 
@@ -35,10 +37,10 @@ class NomineeController {
                 return;
             }
 
-            const categoryWinner = await db.collection('winners').findOne({ category });
+            const editionCategory = await EditionService.getCategory(editionKey, category);
 
             const nomineesData = categoryData.nominees.map((nominee: Nominee) => {
-                const isWinner = categoryWinner?.nominee === nominee.name;
+                const isWinner = editionCategory?.winner === nominee.name;
                 return { ...nominee, isWinner };
             });
 
@@ -55,27 +57,11 @@ class NomineeController {
         }
 
         const { category, nominee } = req.body as Winner;
+        const editionKey = (req.body.editionKey || req.query.edition) as string | undefined;
 
         try {
-            const winners = db.collection('winners');
-
-            const existingCategory = await winners.findOne({ category });
-
-            if (existingCategory) {
-                if (existingCategory.nominee === nominee) {
-                    winners.deleteOne({ category });
-                    return res.status(200).send('Winner removed');
-                }
-
-                await winners.updateOne({ category }, { $set: { nominee } });
-                return res.status(200).send('Winner updated');
-            }
-
-            const winner = { category, nominee };
-
-            await winners.insertOne(winner);
-
-            res.status(200).send('Winner registered');
+            const nextWinner = await EditionService.updateWinner(editionKey, category, nominee);
+            res.status(200).send(nextWinner ? 'Winner registered' : 'Winner removed');
         } catch (error) {
             res.status(500).send('Internal Server Error');
         }
