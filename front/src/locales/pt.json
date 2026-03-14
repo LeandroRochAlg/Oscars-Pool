@@ -208,6 +208,19 @@
             "subtitle": "Confira os indicados do {{edition}}",
             "viewAll": "Ver todos"
         },
+        "scoring": {
+            "title": "Como a Pontuacao Funciona",
+            "steps": [
+                "Ordene os indicados do mais provavel ao menos provavel de vencer.",
+                "A pontuacao depende da posicao em que seu palpite correto ficou.",
+                "Acerto na 1a posicao: 100% do peso da categoria.",
+                "Acerto na 2a posicao: 60% do peso da categoria.",
+                "Acerto na 3a posicao: 40% do peso da categoria.",
+                "Acerto na 4a posicao: 20% do peso da categoria."
+            ],
+            "example": "Exemplo: em Melhor Filme com peso 200, se o filme que voce colocou em 1o vencer voce ganha 200 pontos; se vencer o seu 2o, voce ganha 120 pontos.",
+            "button": "Guia Detalhado"
+        },
         "hero": {
             "title": "Bem-vindo(a) ao AcademyBolao",
             "description": {

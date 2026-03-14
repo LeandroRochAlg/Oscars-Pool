@@ -74,6 +74,25 @@ const HomePage = () => {
 					/>
 				</figure>
 			</div>
+
+			<div className="card bg-base-100 shadow-xl mx-2 md:w-[700px] md:mx-auto border border-primary my-5 text-base-200">
+				<div className="card-body">
+					<h2 className="card-title text-xl">{t('homePage.scoring.title')}</h2>
+
+					<div className="space-y-2 text-left">
+						{(t('homePage.scoring.steps', { returnObjects: true }) as string[]).map((step, index) => (
+							<p key={step}>
+								<span className="font-semibold mr-2">{index + 1}.</span>
+								{step}
+							</p>
+						))}
+					</div>
+
+					<div className="mt-2 rounded-box border border-base-300 bg-base-200/40 p-3">
+						<p className="text-sm">{t('homePage.scoring.example')}</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	)
 };
