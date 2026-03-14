@@ -6,7 +6,6 @@ import InputField from '../../components/common/InputField';
 import Button from '../../components/common/Button';
 import Account from '../../components/common/Account';
 import FormCard from '../../components/common/FormCard';
-import ErrorMessage from '../../components/common/ErrorMessage';
 import WarningMessage from '../../components/common/WarningMessage';
 import api from '../../libs/api';
 import { AxiosError } from 'axios';
@@ -32,6 +31,7 @@ const LoginPage: React.FC = () => {
     resolver: yupResolver(schema)
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     try {
       setLoading(true);
@@ -92,12 +92,17 @@ const LoginPage: React.FC = () => {
           <Button type="submit" loading={loading}>{t('login')}</Button>
         </div>
 
+        {msg && (
+          <div className='w-full text-center text-error text-sm mt-2'>
+            {msg}
+          </div>
+        )}
+
         <Account message={t('dontHaveAnAccount')} linkText={t('createAccount')} link='/register'/>
 
         {errors.emailOrUsername && <WarningMessage error={errors.emailOrUsername.message as string} />}
         {!errors.emailOrUsername && errors.password && <WarningMessage error={errors.password.message as string} />}
 
-        <ErrorMessage error={msg} />
       </FormCard>
     </div>
   );
