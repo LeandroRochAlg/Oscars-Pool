@@ -90,8 +90,9 @@ class EditionService {
 
     private async ensureEdition(seed: EditionSeed) {
         const now = new Date();
+        const editionsCollection = db.collection<Edition>('editions');
 
-        await db.collection<Edition>('editions').updateOne(
+        await editionsCollection.updateOne(
             { key: seed.key },
             {
                 $setOnInsert: {
@@ -101,6 +102,49 @@ class EditionService {
                 },
             },
             { upsert: true }
+        );
+
+        const persistedEdition = await editionsCollection.findOne({ key: seed.key });
+
+        if (!persistedEdition) {
+            return;
+        }
+
+        const persistedCategorySet = new Set(persistedEdition.categories.map((category) => category.category));
+        const missingCategories = seed.categories.filter((category) => !persistedCategorySet.has(category.category));
+
+        if (missingCategories.length === 0) {
+            if (seed.key !== DEFAULT_ACTIVE_EDITION_KEY) {
+                return;
+            }
+
+            const seededBestCast = seed.categories.find((category) => category.category === 'nominees.category.bestCast');
+
+            if (!seededBestCast) {
+                return;
+            }
+
+            await editionsCollection.updateOne(
+                { key: seed.key, 'categories.category': 'nominees.category.bestCast' },
+                {
+                    $set: {
+                        'categories.$.nominees': seededBestCast.nominees,
+                        updatedAt: now,
+                    },
+                }
+            );
+
+            return;
+        }
+
+        await editionsCollection.updateOne(
+            { key: seed.key },
+            {
+                $set: {
+                    categories: [...persistedEdition.categories, ...missingCategories],
+                    updatedAt: now,
+                },
+            }
         );
     }
 

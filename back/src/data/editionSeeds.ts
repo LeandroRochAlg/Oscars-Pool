@@ -203,6 +203,17 @@ export const OSCAR_2026_CATEGORIES: EditionCategory[] = [
         winner: null,
     },
     {
+        category: 'nominees.category.bestCast',
+        nominees: [
+            nominee('Hamnet', 'Nina Gold'),
+            nominee('Marty Supreme', 'Jennifer Venditti'),
+            nominee('One Battle after Another', 'Cassandra Kulukundis'),
+            nominee('The Secret Agent', 'Gabriel Domingues'),
+            nominee('Sinners', 'Francine Maisler'),
+        ],
+        winner: null,
+    },
+    {
         category: 'nominees.category.productionDesign',
         nominees: [
             nominee('Frankenstein', 'Tamara Deverell, Shane Vieau'),
