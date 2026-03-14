@@ -193,6 +193,10 @@ class UserController {
                 return;
             }
 
+            if (!email || !newPassword) {
+                return res.status(400).send('Email and newPassword are required');
+            }
+
             const user = await db.collection<User>('users').findOne({
                 email
             });
@@ -201,25 +205,35 @@ class UserController {
                 return res.status(404).send('User not found');
             }
 
+            try {
+                const firebaseUser = await admin.auth().getUserByEmail(email);
+                await admin.auth().updateUser(firebaseUser.uid, { password: newPassword });
+            } catch (firebaseError) {
+                const firebaseCode = (firebaseError as { code?: string })?.code;
+
+                if (firebaseCode === 'auth/user-not-found') {
+                    await admin.auth().createUser({
+                        email,
+                        password: newPassword,
+                        displayName: user.username,
+                        emailVerified: user.emailVerified ?? false,
+                    });
+                } else {
+                    console.error('Error updating Firebase user:', firebaseError);
+                    return res.status(500).send('Internal Server Error');
+                }
+            }
+
             const hashedPassword = await bcrypt.hash(newPassword, 10);
 
             await db.collection<User>('users').updateOne({
                 email
             }, {
                 $set: {
-                    password: hashedPassword
+                    password: hashedPassword,
+                    updatedAt: new Date(),
                 }
             });
-
-            try {
-                const firebaseUser = await admin.auth().getUserByEmail(email);
-                await admin.auth().updateUser(firebaseUser.uid, {
-                    password: newPassword
-                });
-            } catch (firebaseError) {
-                console.error('Error updating Firebase user:', firebaseError);
-                return res.status(500).send('Internal Server Error');
-            }
 
             res.status(200).send('Password updated');
         } catch (error) {
