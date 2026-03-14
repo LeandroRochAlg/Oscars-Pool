@@ -14,7 +14,7 @@ userRouter.post('/login', LoginController.login);
 userRouter.post('/login-google', LoginController.loginWithGoogle);
 
 // Register
-userRouter.post('/register', userController.register);
+userRouter.post('/register', userController.register.bind(userController));
 
 // Confirm email
 userRouter.patch('/confirm-email', userController.confirmEmail);
@@ -23,7 +23,7 @@ userRouter.patch('/confirm-email', userController.confirmEmail);
 userRouter.get('/user', authMiddleware, userController.getUser);
 
 // Update username
-userRouter.put('/user', authMiddleware, userController.updateUser);
+userRouter.put('/user', authMiddleware, userController.updateUser.bind(userController));
 
 // Reset password
-userRouter.put('/reset-password', userController.resetPassword);
+userRouter.put('/reset-password', userController.resetPassword.bind(userController));
